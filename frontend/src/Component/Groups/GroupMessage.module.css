@@ -1,0 +1,37 @@
+.profilePic{
+    width:85px;
+    height:85px;
+    padding-top:15px;
+    padding-left:30px;
+}
+
+.name{
+    font-size:28px;
+    font-weight: 600;
+    padding-top: 35px;
+    padding-left: 10px;
+}
+
+.extraInfo{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding-top:10px;
+}
+
+.body{
+    font-size: 19px;
+    font-weight: 400;
+    width:350px;
+    max-height: 70px;
+    position:relative;
+    left:126px;
+    bottom:16px;
+    padding-bottom: 30px;
+    /* border:2px solid black; */
+}
+
+.senderName{
+    color:#09CDF0;
+}
+

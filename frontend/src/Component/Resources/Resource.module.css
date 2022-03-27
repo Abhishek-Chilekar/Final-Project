@@ -1,0 +1,48 @@
+.resourceBox{
+    max-width:85%;
+    max-height: 200px;
+    background-color: white;
+    border-radius: 25px;
+    font-family: poppins;
+    margin:auto;
+    margin-left:60px;
+    margin-top:20px;
+    box-sizing: border-box;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.details{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.resourceLogo{
+    margin-left:20px;
+}
+
+.resourceDetails{
+    margin-left:20px;
+}
+
+.name{
+    font-size:24px;
+    font-weight:600;
+    max-width:350px;
+    margin:10px 0px;
+}
+
+.size{
+    font-size: 18px;
+    font-weight:400;
+    margin:5px 0px;
+}
+
+.download{
+    background-color: white;
+    border: 2px solid black;
+    border-radius:25px ;
+    padding: 5px;
+    margin-right: 20px;
+}

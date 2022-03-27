@@ -1,0 +1,89 @@
+.ResourceDisplay{
+    font-family: poppins;
+    overflow: auto;
+    height: 100%;
+    background-image: url('../../BackgroundImages/resourceBack.png');
+    border-radius:25px;
+}
+
+.resourceHeader{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background:  linear-gradient(179.39deg, #009CDF 33.28%, rgba(235, 235, 235, 0.117187) 91.52%, rgba(232, 235, 235, 0) 99.25%);
+    border-radius:25px 25px 0px 0px;
+    height:200px;
+}
+
+.image{
+    height:100px;
+    width:100px;
+    margin-left: 50px;
+    margin-bottom:30px;
+    border-radius: 50px 50px 50px 50px;
+}
+.title{
+    font-size: 24px;
+    font-weight: 600;
+    padding-left: 20px;
+    margin-bottom:30px;
+}
+
+.bookmark{
+   display: inline-flex;
+   justify-content: center;
+   align-items: center;
+   height:fit-content;
+   padding: 12px 13px;
+   border-radius: 25px;
+   background-color: white;
+   position: relative;
+   left:380px;
+   bottom: 60px;
+   box-shadow: 3px 1px 4px 2px rgba(0, 0, 0, 0.25);
+}
+
+.icon{
+    height: 5px;
+    width: 5px;
+}
+
+.data{
+    border-radius: 0px  0px 25px 25px;
+    position: relative;
+    top:-30px;
+}
+
+.label{
+    font-size: 20px;
+    font-weight: 600;
+    padding-top:10px;
+    padding-left: 50px;
+}
+
+.value{
+    font-size: 18px;
+    font-weight: 400;
+    padding-left:50px;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top:25px;
+    margin-bottom:10px;
+}
+
+.button{
+    border:none;
+    outline:none;
+    color:white;
+    background-color: #009CDF;
+    padding: 20px 30px;
+    font-size: 20px;
+    margin:20px;
+    border-radius: 30px;
+    font-weight: 600;
+    z-index:0;
+}

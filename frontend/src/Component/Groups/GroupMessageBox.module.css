@@ -1,0 +1,44 @@
+.ownerBox{
+    font-size: 18px;
+    font-weight: 400;
+    background-color: white;
+    margin-top: 20px;
+    margin-left:20px;
+    max-width: 200px;
+    min-width: 100px;
+    border-radius: 0px 25px 25px 25px;
+}
+
+.friendBox{
+    font-size: 18px;
+    font-weight: 400;
+    background-color: #09cdf0;
+    color: white;
+    margin-top: 20px;
+    margin-right:20px;
+    max-width: 200px;
+    min-width: 100px;
+    border-radius: 25px 0px 25px 25px;
+    align-self: flex-end;
+}
+
+.content{
+    font-size:20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+.time{
+    font-size:10px;
+    text-align: right;
+    padding-right: 15px;
+    padding-bottom: 5px;
+    font-weight: 500;
+}
+
+.name{
+    font-size: 12px;
+    padding-top: 5px;
+    padding-left: 10px;
+}

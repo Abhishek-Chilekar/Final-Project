@@ -1,0 +1,125 @@
+.chatDisplay{
+    font-family: Poppins;
+    border-radius:25px 25px 0px 0px;
+
+}
+
+.header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height:160px;
+    border-radius:25px 25px 0px 0px;
+    background: linear-gradient(179.39deg, #009CDF 33.28%, rgba(167, 212, 231, 0.37354) 73.99%);
+}
+
+.role{
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.roleIndicator{
+    height: 15px;
+    width:15px;
+    background-color: #009CDF;
+    border-radius: 25px;
+}
+
+.profile{
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left:30px;
+    margin-bottom:10px;
+}
+
+.profilepic{
+    height: 100px;
+    width:100px;
+}
+
+.name{
+    font-size:24px;
+    font-weight: 600;
+    padding-top:10px;
+    padding-left:10px;
+}
+
+.menu{
+    background-color: white;
+    border:none;
+    border-radius:25px;
+    padding: 2px 0px;
+    width:50px;
+    height:50px;
+    margin-right:40px;
+}
+.role{
+    font-size:18px;
+    font-weight:600;
+}
+
+/* Message Display Area */
+
+.mda{
+    height:430px;
+    overflow: auto;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background:linear-gradient(0deg, rgba(206, 225, 233, 0.2), rgba(206, 225, 233, 0.2)), url("../../BackgroundImages/mdapattern.png");
+}
+
+/* Typing Area */
+
+.typingArea{
+    border-radius:0px 0px 25px 25px;
+    height:77px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.plus{
+    background-color: #009CDF;
+    border-radius: 25px;
+    height:50px;
+    width:50px;
+    margin-right:10px;
+}
+
+.send{
+    height:35px;
+    width:35px;
+    padding:10px 8px;
+    padding-bottom: 5px;
+    background-color: #009CDF;
+    border-radius: 25px;
+    margin-left:10px;
+}
+
+.image{
+    height:30px;
+    width:30px;
+    padding:10px 10px;
+    padding-bottom: 10px;
+    background-color: #009CDF;
+    border-radius: 25px;
+    margin-right:10px;
+}
+
+
+.input{
+    height:50px;
+    width:220px;
+    padding-left:10px;
+    border:none;
+    outline:none;
+    background-color: #F0F0F0;
+    border-radius: 10px;
+}
+
+

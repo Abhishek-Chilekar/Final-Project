@@ -1,0 +1,186 @@
+.signup {
+    display: flex;
+    background-color: #454444;
+    /* border: 2px solid orange; */
+    box-sizing: border-box;
+    height: 95%;
+    margin: auto;
+  }
+  
+  .Content {
+    /* border: 2px solid green; */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 0.7em;
+    margin-left: 0.6em;
+    margin-right: 0.4em;
+  }
+  
+  .title {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #f5f5f5;
+    margin-left: 20px;
+    margin-bottom: 0.2em;
+  }
+  
+  .titleBlue {
+    color: #009cdf;
+  }
+  
+  .signupForm {
+    display: flex;
+    align-items: left;
+    margin-left: 20px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.4em;
+    color: #f5f5f5;
+  }
+  .section {
+    display: flex;
+    flex-direction: column;
+    margin-right: 2em;
+  }
+  
+  .span {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .box {
+    width: 12.5em;
+    height: 2.3em;
+    margin-top: 2px;
+    border:none;
+    border-radius: 2em;  
+    padding-left: 20px ;
+    outline: none;
+  }
+  
+  .teacherBox {
+    width: 22em;
+    height: 2.3em;
+    margin-top: 2px;
+    border: none;
+    border-radius: 2em;
+  }
+  
+  .dropBox {
+    width: 12.5em;
+    height: 2.3em;
+    margin-top: 2px;
+    border: none;
+    border-radius: 2em;
+    padding-left: 20px;
+  }
+  
+  .skillsetBox {
+    width: 10.5em;
+    height: 2.3em;
+    margin-top: 2px;
+    border: none;
+    border-radius: 2em;
+  }
+  
+  .plus {
+    border: none;
+    font-size: 1em;
+    border-radius: 2em;
+    background-color: #009cdf;
+    padding: 0 12px;
+    margin-left: 8px;
+  }
+  
+  .skillset {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .buttonSet {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .submit {
+    width: fit-content;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+    margin-left: 20px;
+    background-color: #009cdf;
+    border: none;
+    border-radius: 0.8em;
+    padding: 10px 40px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.4em;
+    color: #f5f5f5;
+  }
+  
+  .linkSet {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 39px;
+    margin-right: 15px;
+  }
+  
+  .link {
+    width: fit-content;
+    margin-left: 20px;
+    border: 2px solid #009cdf;
+    border-radius: 0.8em;
+    padding: 10px 40px;
+    font-family: Poppins;
+    font-style: normal;
+    font-size: 0.2em;
+    color: #009cdf;
+  }
+  
+  .text {
+    font-family: Poppins;
+    font-size: 0.3em;
+    font-weight: normal;
+    margin-left: 20px;
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+    text-decoration: none;
+    color: #f5f5f5;
+  }
+
+  .success{
+    height:min-content;
+    position:relative;
+    bottom:1em;
+    left:1.5em;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.27em;
+    max-width:25em;
+    color: rgb(13, 240, 13);
+  }
+  
+  .signupImage{
+    height:100%;
+  }
+  
+  .activeText{
+    width: fit-content;
+    margin-left: 20px;
+    background-color:  #009cdf;
+    border-radius: 0.8em;
+    padding: 10px 40px;
+    font-family: Poppins;
+    font-style: normal;
+    font-size: 0.2em;
+    color: #ffffff;
+  }
+  
