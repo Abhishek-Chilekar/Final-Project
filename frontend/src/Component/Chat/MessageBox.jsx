@@ -24,7 +24,7 @@ const MessageBox = (props) =>{
     return(
     <div className={msg.owner==user.id?style.ownerBox:style.friendBox}>
         {msg.owner!=user.id?<h1 className={style.name}>{name}</h1>:<h1 className={style.name}>You</h1>}
-        <p className={style.content}>{m.messageContent}</p>
+        {m.type = "text"?<p className={style.content}>{m.messageContent}</p>:<img src={m.messageContent} alt="message" className={style.image}/>}
         <h2 className={style.time}>{time}</h2>
     </div>)
 }

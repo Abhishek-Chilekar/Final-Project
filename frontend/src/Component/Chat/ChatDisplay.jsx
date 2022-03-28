@@ -6,7 +6,7 @@ const ChatDisplay = ({content}) =>{
     const {senderChat,receiverChat,receiver} = content;
     const user = JSON.parse(localStorage.getItem("User"));
     const date = new Date();
-
+    let [reload,setReload] = React.useState(false);
     const formatData = ()=>{
         return {
             photoUrl:receiver.photoUrl?receiver.photoUrl:"/Images/avatardefault.png",
@@ -17,7 +17,10 @@ const ChatDisplay = ({content}) =>{
     }
 
     const current = formatData();
+    React.useEffect(() => {
+    },[reload])
     let [text,setText] = React.useState("");
+    let [file,setFile] = React.useState();
 
     const handleSend = async()=>{
         const message = {
@@ -40,6 +43,7 @@ const ChatDisplay = ({content}) =>{
         console.log(res.data.msg);
         res = await axios.patch("http://localhost:5000/PrivateChat/"+receiverChat.senderId+receiverChat.receiverId,receiverChat);
         console.log(res.data.msg);
+        setReload(!reload);
     }
     
     // const current = {
@@ -79,7 +83,8 @@ const ChatDisplay = ({content}) =>{
             {current.messages.map((m)=><MessageBox message={m}/>)}
         </div>  
         <div className={style.typingArea}>
-            <span className={style.imageBack}><img className={style.image} src="/Images/image.png" alt="image"/></span>
+            <label className={style.imageBack} for="select"><img className={style.image} src="/Images/image.png" alt="image"/></label>
+            <input type="file" name="file" id="select" onChange={(e)=>setFile(e.target.files[0])}/>
             <input className={style.input} type="text" id="text" name="text" placeholder='Type Here...'  onChange={(e)=>{setText(e.target.value)}}/>
             <span className={style.sendBack}><img className={style.send} src="/Images/send icon.png" alt="send icon" onClick={()=>handleSend()}/></span>
         </div> 
