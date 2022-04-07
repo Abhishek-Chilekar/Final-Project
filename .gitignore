@@ -3,4 +3,7 @@
 # dependencies
 frontend/node_modules
 development/node_modules
+frontend/src/Component/firebaseConfig
+development/config
+development/dummyDatabaseConfig
 

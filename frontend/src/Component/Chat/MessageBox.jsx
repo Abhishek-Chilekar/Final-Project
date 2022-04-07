@@ -5,7 +5,7 @@ import style from './MessageBox.module.css';
 const MessageBox = (props) =>{
     const user = JSON.parse(localStorage.getItem("User"));
     let [name,setName] = React.useState("");
-    console.log(props.message)
+    let [hover,setHover] = React.useState(false);
     const msg = props.message;
     const m = msg.message;
     const time = m.timeline.split(",")[1];
@@ -23,9 +23,13 @@ const MessageBox = (props) =>{
     }, [])
     return(
     <div className={msg.owner==user.id?style.ownerBox:style.friendBox}>
-        {msg.owner!=user.id?<h1 className={style.name}>{name}</h1>:<h1 className={style.name}>You</h1>}
-        <p className={style.content}>{m.messageContent}</p>
-        <h2 className={style.time}>{time}</h2>
+        <div className={style.header}>
+            {msg.owner!=user.id?<h1 className={style.name}>{name}</h1>:<h1 className={style.name}>You</h1>}
+            {msg.owner==user.id&&<img className={style.menu} src="/Images/deleteBlack.png" alt="menu icon" onClick={()=>props.delete(m.messageId)}/>}
+        </div>
+        {m.type == "text"&&<p className={msg.owner==user.id?style.content:style.contentRight}>{m.messageContent}</p>}
+        {m.type == "image"&&<img src={m.messageContent} alt="shared image" className={style.sharedImg}/>}
+        <h2 className={style.time}>{m.timeline.split(",")[1]}</h2>
     </div>)
 }
 

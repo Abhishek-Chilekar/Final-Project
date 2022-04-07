@@ -15,7 +15,6 @@ const app = express();
 app.use(express.json());
 app.use(expressFileUpload());
 app.use(cors());
-app.use('/Images',express.static('downloads'));
 
 app.use('/Resources',resourceRoute);
 app.use('/Events',eventRoute);

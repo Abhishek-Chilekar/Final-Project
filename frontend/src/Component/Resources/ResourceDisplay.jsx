@@ -31,8 +31,8 @@ const ResoureDisplay = ({content}) =>{
         try{
             console.log(user);
             const res = await axios.patch("http://localhost:5000/UserDetails/"+user.id,user);
-            // localStorage.setItem("User",user);
-            // dispatch(login(user));
+            localStorage.setItem("User",JSON.stringify(user));
+            dispatch(login(user));
             console.log(res.data.msg);
         }
         catch(e){

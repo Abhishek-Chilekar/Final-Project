@@ -1,6 +1,8 @@
 import React from 'react';
 import style from '../Resources/ResourceDisplay.module.css';
 import axios from 'axios';
+import {storage} from '../firebaseConfig';
+import {ref,deleteObject} from "@firebase/storage";
 
 /*
     [{
@@ -16,12 +18,13 @@ import axios from 'axios';
 */
 
 const EventDisplay = ({content}) =>{
+    const currentUser = JSON.parse(localStorage.getItem("User"));
     const current = content;
     console.log(current);
     const handleOnClick = async()=>{
         try{
-            const delres = await axios.delete(current.image);
-            console.log(delres.data.msg); 
+            const storageRef = ref(storage,current.image);
+            await deleteObject(storageRef);
             const res = await axios.delete("http://localhost:5000/Events/"+current.id);
             console.log(res.data.msg);
         }
@@ -48,7 +51,7 @@ const EventDisplay = ({content}) =>{
                 <h3 className={style.label}> Description :  </h3>
                 <p className={style.value}> {current.description} </p>
                 <div className={style.buttonContainer}>
-                    <button className={style.button} onClick={()=>handleOnClick()}> Delete </button>
+                   {content.owner.senderId == currentUser.id &&<button className={style.button} onClick={()=>handleOnClick()}> Delete </button>}
                     <button className={style.button}> Register </button>
                 </div>
             </div>

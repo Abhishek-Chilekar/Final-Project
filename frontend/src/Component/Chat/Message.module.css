@@ -19,6 +19,7 @@
 .senderProfile{
     display:flex;
     justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .name{
@@ -34,7 +35,7 @@
 }
 
 .timeline{
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 400;
     padding-right: 20px;
 }
@@ -61,11 +62,41 @@
     padding-bottom: 30px;
 }
 
+.imgIndicator{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 90px;
+    margin-top:15px;
+    margin-bottom:20px;
+    position: relative;
+    bottom: 10px;
+}
+
+.imgIndicator img{
+    height: 20px;
+    width:20px;
+}
+
+.imgIndicator p{
+    font-size: 14px;
+    font-weight: 400;
+    margin-left:10px;
+}
+
 .profilePic{
     width:75px;
     height:75px;
-    padding-top:15px;
-    padding-left: 10px;
+    margin-top:15px;
+    margin-left: 10px;
+    border-radius: 50%;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .indicator{
@@ -80,6 +111,7 @@
     display:flex;
     justify-content: center;
     align-items: center;
+    margin-left: 10px;
 }
 
 .extraInfo{

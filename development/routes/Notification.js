@@ -55,6 +55,7 @@ router.get("/",async (req,res)=>{
             data.image = textDecrypt(data.image);
             return {id:doc.id,...data}
         });
+        console.log(data);
         res.send(data);
     }
     catch(err){

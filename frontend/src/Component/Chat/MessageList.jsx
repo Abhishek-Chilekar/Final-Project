@@ -31,21 +31,59 @@ import GroupMessage from '../Groups/GroupMessage';
 import Request from './RequestMessage';
 import axios from 'axios';
 
-const MessageList = () =>{
+const MessageList = ({select}) =>{
     const currentUser = JSON.parse(localStorage.getItem("User"));
     const requests = currentUser.request;
+    const [gchat,setGchat] = React.useState([]);
+    const [pchat,setPchat] = React.useState([]);
+    const getPrivateChats = async()=>{
+        setPchat([]);
+        let {data} = await axios.get("http://localhost:5000/PrivateChat");
+        data = data.filter((d)=>{return d.senderId == currentUser.id});
+        data.map(async(chat)=>{
+            const ruser = await axios.get("http://localhost:5000/UserDetails/"+chat.receiverId);
+            const user = ruser.data[0];
+            let receiverChat = await axios.get("http://localhost:5000/PrivateChat/"+chat.receiverId+chat.senderId);
+            setPchat([...pchat,{
+                id:chat.id,
+                photoUrl:user.photoUrl?user.photoUrl:"/Images/avatardefault.png",
+                name:user.FullName,
+                role:user.role,
+                timeline:chat.chats[chat.chats.length-1].message.timeline,
+                type:chat.chats[chat.chats.length-1].message.type,
+                text:chat.chats[chat.chats.length-1].message.type == "text"?chat.chats[chat.chats.length-1].message.messageContent:"",
+                allDetails:{
+                    senderChat:chat,
+                    receiver:user,
+                    receiverChat:receiverChat.data
+                }
+            }])
+        });
+    }
 
+    const getGroupChats =()=>{
+        setGchat([]);
+        const user = JSON.parse(localStorage.getItem("User"));
+        user.groupId.map(async(id)=>{
+            const res = await axios.get("http://localhost:5000/GroupChat/"+id);
+            console.log(res)
+            setGchat([...gchat,res.data[0]]);
+        });
+    }
+
+    React.useEffect(()=>{getPrivateChats();getGroupChats();},[])
+    console.log(gchat);
     const contentList = {
-            private_chat:[],
-            group_chat:[],
+            private_chat:pchat,
+            group_chat:gchat,
             request:requests
     }
 
     return(
     <div className={style.messageList}>
-        {contentList.private_chat.map((m)=><Message content={m}/>)}
-        {contentList.group_chat.map((m)=><GroupMessage content={m}/>)}
-        {contentList.request.map((m)=><Request content={m}/>)}
+        {(select=="All"||select=="private_chat")&&contentList.private_chat.map((m)=><Message content={m}/>)}
+        {(select=="All"||select=="group_chat")&&contentList.group_chat.map((m)=><GroupMessage content={m}/>)}
+        {(select=="All"||select=="requests")&&contentList.request.map((m)=><Request content={m}/>)}
     </div>
     )
     // return <Message />

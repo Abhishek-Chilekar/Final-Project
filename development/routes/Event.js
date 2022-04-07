@@ -25,7 +25,7 @@ router.post("/", async (req,res)=>{
     }]
     */ 
     if(data.eventName != null && data.till != null && data.owner != null && data.description != null && data.from != null && data.image != null && data.branch != null && data.url != null){
-        if                          (data.owner.senderId != null && data.owner.role != null){
+        if(data.owner.senderId != null && data.owner.role != null){
             data.eventName = textencrypt(data.eventName);
             data.branch = textencrypt(data.branch);
             data.url = textencrypt(data.url);
@@ -69,8 +69,6 @@ router.get("/", async (req,res)=>{
         });
     const d = snapshot.docs.map((doc)=>{
         const data = doc.data();
-
-        console.log(data)
         data.eventName = textdecrypt(data.eventName);
         data.till = textdecrypt(data.till);
         data.from = textdecrypt(data.from);

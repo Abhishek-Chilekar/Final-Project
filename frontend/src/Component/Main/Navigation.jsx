@@ -64,7 +64,7 @@ const Navigation = () => {
     }
     return (<div className={style.container}>
         <div className={style.container1} onClick={()=>handleClick()}>
-            <img className={style.avatar} src="/Images/avatardefault.png" alt="profile" />
+            <img className={style.avatar} src={user.photoUrl?user.photoUrl:"/Images/avatardefault.png"} alt="profile" />
             <label className={style.name} htmlFor="">{user?user.FullName:"ABCD"}</label>
         </div>
 

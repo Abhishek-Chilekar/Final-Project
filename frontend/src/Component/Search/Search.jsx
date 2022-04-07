@@ -4,28 +4,30 @@ import style from './Search.module.css';
 import {useDispatch} from 'react-redux';
 import { chats } from '../../Actions/thirdScreenAction';
 
-const Search = ()=>{
+const Search = ({getText})=>{
+    const name = getText();
     let [search,setSearch] = useState({
         role:"All",
         skill:"All",
         profession:"All",
         year:"All",
         branch:"All",
-        name:""
+        name:name,
     });
+    useEffect(()=>{
+        setSearch({...search,name:name});
+    },[name])
     const dispatch = useDispatch();
     const skill = ['html','css','javascript'];
     const profession = ['data analyst','web developer','UI/UX designer']
     let [data,setData] = useState([]);
     let [contain,setContain] = useState(false);
     const currentUser = JSON.parse(localStorage.getItem("User"));
-    console.log(currentUser)
     const getData = async()=>{
         const res = await axios.get("http://localhost:5000/UserDetails");
         setData(res.data);
     }
     
-    console.log(data);
 
     const handleOnChange = (target)=>{
         switch(target.name){
@@ -133,9 +135,9 @@ const Search = ()=>{
         <div className={style.filter}>
             <select className={style.select} name='role' onChange={(e)=>handleOnChange(e.target)}>
                 <option value="All">Role</option>
-                <option value="student">Student</option>
-                <option vlaue="teacher">Teacher</option>
-                <option value="alumini">Alumini</option>
+                <option value="Student">Student</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Alumini">Alumini</option>
             </select>
             <select className={style.select} name='skill' onChange={(e)=>handleOnChange(e.target)}>
                 <option value="All">Skill</option>
@@ -163,7 +165,7 @@ const Search = ()=>{
             </select>
         </div>
         <div>
-           {data.map((user)=>(user.id != currentUser.id&&(search.role == "All"||user.role == search.role)&&(search.skill == "All"||user.skillset.includes(search.skill))&&(search.profession == "All"||user.role != "alumini"||user.profession == search.profession)&&(search.year == "All"||user.year == search.year)&&(search.branch == "All"||user.branch == search.branch))&&(
+           {data.map((user)=>(user.id != currentUser.id&&(search.name==""||(user.FullName+"").includes(search.name))&&(search.role == "All"||user.role == search.role)&&(search.skill == "All"||user.skillset.includes(search.skill))&&(search.profession == "All"||user.role != "alumini"||user.profession == search.profession)&&(search.year == "All"||user.year == search.year)&&(search.branch == "All"||user.branch == search.branch))&&(
             <div className={style.list}>
                 <div className={style.details}>
                     <img className={style.image} src={user.photoUrl?user.photoUrl:"/Images/avatardefault.png"} alt="profilepic"/>

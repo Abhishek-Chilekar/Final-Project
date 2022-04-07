@@ -23,17 +23,10 @@ const AddEvent = ({popupstate}) => {
         try
         {
             console.log("Ikde 2");
-            // const res = await axios.post('http://localhost:5000/Storage/images',formData,{
-            //     headers:{
-            //         'Content-type':'multipart/form-data'
-            //     }
-            // });
             const storageRef = ref(storage,"/Events/"+file.name);
             console.log(file.name);
         
             const uploadTask = uploadBytesResumable(storageRef,file);
-            // (await uploadTask).state("")
-            //event,UploadTask,Error,Complete
             uploadTask.on("state_changed",(snapshot) => {
                 console.log("Image uploading");
             },(err) => {
@@ -58,7 +51,6 @@ const AddEvent = ({popupstate}) => {
                             }
                             const {data} = await axios.post("http://localhost:5000/Events",event);
                             const res = data;
-                            console.log(res);
                             if(res.msg == "Event Added"){
                                 setSuccess(res.msg);
                                 const notification = {
@@ -69,7 +61,7 @@ const AddEvent = ({popupstate}) => {
                                     url:event.url,
                                     branch:event.branch
                                 }
-                
+                                console.log(notification);
                                 const {data} = await axios.post("http://localhost:5000/Notification",notification);
                                 const notiRes = data;
                                 if(notiRes.id){
@@ -108,8 +100,8 @@ const AddEvent = ({popupstate}) => {
         <span className={style.success}> {success != "" && success} </span>
         <span className={style.error}> {error!=""&& error} </span>
         <form onSubmit={handleSubmit(async(data)=>{
-        await upload(data);
-    })}>
+                            await upload(data);
+                        })}>
             <div className={style.outerdiv}>
                 <div className={style.leftside}>
                     <label className={style.lab1} for="name" >Name:</label>

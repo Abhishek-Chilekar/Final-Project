@@ -5,20 +5,28 @@ import axios from 'axios';
 
 const NotificationList = (props) =>{
     const [content,setContent] = useState([]);
-
-    const handleDelete = ()=>{
-    }
+    const [reload,setReload] = useState(false);
+    
+    useEffect(()=>{
+        const getNotificationList = async()=>{
+            const res = await axios.get("http://localhost:5000/Notification");
+            console.log(res.data)
+            setContent(res.data);
+        }
+        getNotificationList();
+    },[reload])
 
     useEffect(()=>{
         const getNotificationList = async()=>{
             const res = await axios.get("http://localhost:5000/Notification");
+            console.log(res.data)
             setContent(res.data);
         }
         getNotificationList();
     },[])
     return(
     <div className={style.navList}>
-        {content.map((n)=><Notification content={n}/>)}
+        {content.map((n)=><Notification content={n} reload={[reload,setReload]}/>)}
     </div>
     );
 }

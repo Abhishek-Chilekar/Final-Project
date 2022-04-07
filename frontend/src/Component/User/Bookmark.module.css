@@ -1,16 +1,28 @@
-.document{
-    font-size: 10px;
-    padding: 15px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+.document {
+  font-size: 10px;
+  padding: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.docName{
-    padding-left: 15px; 
-    font-weight: 600;   
+.docName {
+  padding-left: 15px;
+  font-weight: 600;
 }
 
-.document img{
-    padding-left: 10px;
+.document img {
+  padding-left: 10px;
+}
+
+.outer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cross {
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 20px;
 }

@@ -67,6 +67,7 @@ const Signup = ()=>{
                                 delete data.password
                                 delete data.cpassword
                                 data.id = userCred.user.uid;
+                                data.photoUrl = "/Images/avatardefault.png";
                                 const s = await axios.post(url+"/UserDetails",data);
                                 console.log(s);
                                 setSuccess("Your Verification mail is sent !");
@@ -87,11 +88,11 @@ const Signup = ()=>{
                             <input {...register("prn",{required:"PRN is required",pattern:{value:/^([0-9]){8}[A-Z]$/,message:"Invalid PRN"}})} className={teacher ? style.teacherBox :style.box} type="text"  id="PRN" />
                            {student && (<span className={style.span}><label for="Branch" className={loginStyle.label}>Branch</label>
                             <select className={style.dropBox}  {...register("branch",{required:"branch is required"})}>
-                                <option  value="all">All</option>
                                 <option  value="computer">Computer</option>
                                 <option  value="information_technology">Information Technology</option>
                                 <option  value="mechanical">Mechanical</option>
                                 <option  value="electrical">Electrical</option>
+                                <option value="electronics">Electronics</option>
                             </select></span>)}
                             {teacher && <span className={style.span}>
                                 <label for="qualification" className={loginStyle.label}>Qualification</label>

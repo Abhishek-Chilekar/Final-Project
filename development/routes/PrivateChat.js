@@ -46,7 +46,6 @@ route.patch('/:id',async(req,res)=>{
         if(data && data.chats && data.senderId && data.receiverId){
             data.chats.map((r)=>{
                 if(r.owner && r.message.messageId && r.messageContent && r.type && r.timeline){
-                    console.log(r)
                     r.owner = data.owner;
                     r.message.messageId = textencrypt(r.message.messageId);
                     r.message.messageContent = textencrypt(r.message.messageContent);
@@ -92,6 +91,30 @@ route.get('/:id',async(req,res)=>{
         console.log(e.message);
     }
 })
+
+route.get("/",async (req,res)=>{
+    try
+    {
+        const snapshot = await privateChat.get();
+        const data = snapshot.docs.map((doc)=>{
+            const data = doc.data();
+            data.chats.map((r)=>{
+                if(r.owner && r.message.messageId && r.messageContent && r.type && r.timeline){
+                    r.owner = data.owner;
+                    r.message.messageId = textdecrypt(r.message.messageId);
+                    r.message.messageContent = textdecrypt(r.message.messageContent);
+                    r.message.type = textdecrypt(r.message.type);
+                    r.message.timeline = textdecrypt(r.message.timeline);
+                }
+            })
+            return {id:doc.id,...data}
+        });
+        res.send(data);
+    }
+    catch(e){
+        console.log(e.message);
+    }
+});
 
 
 
