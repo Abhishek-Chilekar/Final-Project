@@ -24,8 +24,32 @@ router.post("/", async (req,res)=>{
         registeredUser:[userId]
     }]
     */ 
+    
     if(data.eventName != null && data.till != null && data.owner != null && data.description != null && data.from != null && data.image != null && data.branch != null && data.url != null){
-        if(data.owner.senderId != null && data.owner.role != null){
+        if                          (data.owner.senderId != null && data.owner.role != null){
+
+            const snapshot = await events.get().catch((err)=>{
+                res.send({
+                    msg:err.message
+                    });
+                });
+                let isDuplicate = false;
+                snapshot.docs.map((doc) =>{
+                    const dat = doc.data();
+                    if(textdecrypt(dat.eventName).toLowerCase() == data.eventName.toLowerCase())
+                    {
+                        console.log(textdecrypt(dat.eventName)+"\tDuplicate Detected\t"+data.eventName);
+                        isDuplicate = true;
+                        return;
+                    }
+                });
+                if(isDuplicate)
+                {
+                    res.send({
+                        msg:"Event Already Exists"
+                    });
+                    return;
+                }
             data.eventName = textencrypt(data.eventName);
             data.branch = textencrypt(data.branch);
             data.url = textencrypt(data.url);
@@ -134,5 +158,6 @@ router.delete("/:eventId", async (req,res)=>{
        res.send(err.message)
    }
 });
+
 
 module.exports = router;

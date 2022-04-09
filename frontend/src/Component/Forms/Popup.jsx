@@ -52,6 +52,12 @@ const Popup = ({popupstate,reload}) =>{
                                 requests:[]
                             }
                             const res = await axios.post("http://localhost:5000/GroupChat/",group);
+                            if(res.data.msg === "Group Already Exists")
+                            {
+                                console.log("Group Already Exists");
+                                setError("Group Already Exists");
+                                return;
+                            }
                             console.log(res);
                             const re = await axios.patch("http://localhost:5000/UserDetails/"+user.id,user);
                             console.log(re)
@@ -113,6 +119,12 @@ const Popup = ({popupstate,reload}) =>{
                     requests:[]
                 }
                 const res = await axios.post("http://localhost:5000/GroupChat/",group);
+                if(res.data.msg === "Group Already Exists")
+                {
+                    console.log("Group Already Exists");
+                    setError("Group Already Exists");
+                    return;
+                }
                 console.log(res);
                 user.groupId = [...user.groupId,res.data.id];
                 console.log(user);

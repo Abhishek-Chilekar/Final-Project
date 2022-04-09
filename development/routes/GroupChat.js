@@ -252,6 +252,28 @@ router.patch("/:groupId",async(req,res)=>{
 router.post("/",async (req,res)=>{
     const data = req.body;
     if(data.groupName != null && data.groupDescription != null && data.member != null){
+        const snapshot = await groupchat.get().catch((err)=>{
+            res.send({
+                msg:err.message
+                });
+            });;
+            let isDuplicate = false;
+            snapshot.docs.map((doc) => {
+                const dat = doc.data();
+                if(textdecrypt(dat.groupName).toLowerCase() == data.groupName.toLowerCase())
+                {
+                    console.log(textdecrypt(dat.groupName).toLowerCase() +"\tDuplicate Detected\t"+ data.groupName.toLowerCase());
+                    isDuplicate = true;
+                    return;
+                }
+            });
+            if(isDuplicate)
+            {
+                res.send({
+                    msg:"Group Already Exists"
+                });
+                return;
+            }
         data.groupName = textencrypt(data.groupName);
         data.groupDescription = textencrypt(data.groupDescription);
         data.photoUrl = textencrypt(data.photoUrl);

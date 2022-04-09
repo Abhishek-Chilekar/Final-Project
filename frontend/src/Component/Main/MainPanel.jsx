@@ -8,8 +8,11 @@ import NotificationList from '../Notification/NotificationList';
 import AddEvent from '../Forms/AddEvent';
 import UploadResource from '../Forms/UploadResource';
 import Search from '../Search/Search';
-import { searchAction } from '../../Actions/navActions';
 import Popup from '../Forms/Popup';
+import { searchAction,searchActionResource,searchActionEvent } from '../../Actions/navActions';
+import SearchResource from '../Search/SearchResource';
+import SearchEvent from '../Search/SearchEvent';
+import AboutUs from './About/AboutUs';
 
 const MainPanel = () =>{
     const Nav = useSelector(state => state.Nav);
@@ -21,12 +24,23 @@ const MainPanel = () =>{
 
     useEffect(()=>{},[reload]);
 
-    const getText=()=>{
-        console.log("text "+text);
-        return text;
-    }
 
+    let [searchText,setSearchText] = useState("");
+
+    const getText = () => {
+        return searchText;
+    }
     const handleOnClick=()=>{
+        // if(Nav.active === "Resources")
+        // {
+        //     dispatch(resources({
+        //         popupstate:true
+        //     }))
+        // }
+        // else if(Nav.active === "Events")
+        // {
+        //     dispatch(events);
+        // }
         setPopup(!popup);
     }
 
@@ -36,7 +50,18 @@ const MainPanel = () =>{
     }
 
     const handleSearch = ()=>{
-        dispatch(searchAction())
+        if(Nav.active === "Chats")
+        {
+            dispatch(searchAction())
+        }
+        else if(Nav.active === "Resources")
+        {
+            dispatch(searchActionResource())
+        }
+        else if(Nav.active === "Events")
+        {
+            dispatch(searchActionEvent());
+        }
     }
     return(
         <div className={(Nav.active == "Notification" || Nav.active == "About")? style.mainLarge:style.main}>
@@ -64,10 +89,10 @@ const MainPanel = () =>{
                {(Nav.active != 'Notification' && Nav.active != 'About')&&<span className={style.button} onClick={()=>{handleOnClick()}}><span className={style.plus}>+</span>{Nav.active == "Chats"?"Create a Group":Nav.active == "Resources"?"Add a Resource":Nav.active == "Events"&&"Add a Events" }</span>}
             </div>
             {(Nav.active != "Notification" && Nav.active != "About")&&<div className={style.search} onClick={()=>handleSearch()}>
-                <input type="text" placeholder="Search...." id="searchbar" className={style.searchBar} onChange={(e)=>{setText(e.target.value);}}/>
+                <input type="text" placeholder="Search...." id="searchbar" className={style.searchBar} onChange={e=> { setSearchText(e.target.value)}} />
                 <div className={style.searchIcon}><img src="/Images/Search icon.png" alt="Search" className={style.icon}/></div>
             </div>}
-            {(Nav.active == "Chats"?<MessageList select={select} reload={reload} setReload={()=>setReload(!reload)}/>:Nav.active == "Resources"?<ResourceList select={select} reload={reload}/>:Nav.active == "Events"?<EventList reload={reload} setReload={()=>setReload(!reload)}/>:Nav.active == "Notification"?<NotificationList />:Nav.active == "Search"&&<Search getText={getText}/>)}
+            {(Nav.active == "Chats"?<MessageList select={select} reload={reload} setReload={()=>setReload(!reload)}/>:Nav.active == "Resources"?<ResourceList select={select} reload={reload}/>:Nav.active == "Events"?<EventList reload={reload} setReload={()=>setReload(!reload)}/>:Nav.active == "Notification"?<NotificationList />:Nav.active == "Search Chat"?<Search getText= {getText}/>:Nav.active === "Search Resource" ? <SearchResource getText={getText}/>:Nav.active == "Search Event" ?<SearchEvent getText={getText}/>:<AboutUs/>)}
         </div>
     );
 }

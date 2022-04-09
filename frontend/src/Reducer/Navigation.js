@@ -27,9 +27,17 @@ const navReducer = (state = initialState,action)=>{
             return{
                 active:"Profile"
             }
-        case "SEARCH":
+        case "SEARCH CHAT":
             return{
-                active:"Search"
+                active:"Search Chat"
+            }
+        case "SEARCH RESOURCE":
+            return{
+                active:"Search Resource"
+            }
+        case "SEARCH EVENT":
+            return{
+                active:"Search Event"
             }
         default:
             return state;
