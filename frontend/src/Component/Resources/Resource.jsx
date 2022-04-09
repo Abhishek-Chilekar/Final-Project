@@ -47,7 +47,7 @@ const Resource = ({content}) =>{
     return(
     <div className={style.resourceBox} onClick={()=>handleOnClick()}>
         <div className={style.details}>
-            <img className={style.resourceLogo} src={content.type == "pdf" ? "/Images/pdf.png" : content.type == "word" ? "/Images/word.png" : content.type == "xlsx" && "/Images/xlsx.png" } alt="type logo"/>
+            <img className={style.resourceLogo} src={content.type == "pdf" ? "/Images/pdf.png" : content.type == "docx" ? "/Images/docx.png" : content.type == "xlsx" && "/Images/xlsx.png" } alt="type logo"/>
             <div className={style.resourceDetails}>
                 <h1 className={style.name}>{content.resourceName}</h1>
                 <p className={style.size}>{content.size}</p>

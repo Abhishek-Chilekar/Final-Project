@@ -1,0 +1,38 @@
+.pollContainer{
+    margin-top:5px;
+    margin-left:15px;
+    font-size:14px;
+}
+
+.text{
+    text-transform: capitalize;
+    margin-right:5px;
+    font-size: 14px;
+}
+
+.percentText{
+    font-size: 12px;
+}
+
+.optionContainer{
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top:10px;
+}
+
+.perContainer{
+    margin-left:15px;
+}
+
+.pro{
+    margin-right:10px;
+}
+
+.optionContainer1{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top:10px;
+}

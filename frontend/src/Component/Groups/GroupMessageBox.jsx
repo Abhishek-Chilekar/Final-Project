@@ -1,13 +1,20 @@
 import React from 'react';
 import style from './GroupMessageBox.module.css';
+import Poll from '../poll/poll';
 
 const GroupMessageBox = (props) =>{
+    const user = JSON.parse(localStorage.getItem("User"));
     const m = props.message;
     return(
-    <div className={m.senderName=="me"?style.ownerBox:style.friendBox}>
-        {m.senderName!="me"?<h1 className={style.name}>{m.senderName}</h1>:<h1 className={style.name}>You</h1>}
-        <p className={style.content}>{m.content}</p>
-        <h2 className={style.time}>{m.timeline}</h2>
+    <div className={m.senderId==user.id?style.ownerBox:style.friendBox}>
+        <div className={style.header}>
+            {m.senderId!=user.id?<h1 className={style.name}>{m.senderName}</h1>:<h1 className={style.name}>You</h1>}
+            {m.senderId==user.id&&<img className={style.menu} src="/Images/deleteBlack.png" alt="menu icon" onClick={()=>props.delete(m.messageId)}/>}
+        </div>
+        {m.type == "text"&&<p className={m.senderId==user.id?style.content:style.contentRight}>{m.content}</p>}
+        {m.type == "image"&&<img src={m.content} alt="shared image" className={style.sharedImg}/>}
+        {m.type == "poll" &&<Poll id={m.content} groupDetails={props.groupDetails}/>}
+        <h2 className={style.time}>{m.timeline.split(",")[1]}</h2>
     </div>
     )
 }

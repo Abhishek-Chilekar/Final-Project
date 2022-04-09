@@ -13,6 +13,7 @@ router.get("/",async (req,res)=>{
     {
         common :
         UserId:
+        photoUrl:
         FullName:
         email:
         skillset:[]
@@ -42,6 +43,12 @@ router.get("/",async (req,res)=>{
             const data = doc.data();
             data.FullName = textdecrypt(data.FullName);
             data.email = textdecrypt(data.email);
+            if(!data.photoUrl){
+                data.photoUrl = "/Images/avatardefault.png"
+            }
+            else{
+                data.photoUrl = textdecrypt(data.photoUrl);
+            }
             if(data.skillset != null){
                 data.skillset = data.skillset.map((skill)=>{
                     return textdecrypt(skill);
@@ -118,6 +125,12 @@ router.get("/:userId",async (req,res)=>{
             const data = doc.data();
             data.FullName = textdecrypt(data.FullName);
             data.email = textdecrypt(data.email);
+            if(!data.photoUrl){
+                data.photoUrl = "/Images/avatardefault.png"
+            }
+            else{
+                data.photoUrl = textdecrypt(data.photoUrl);
+            }
             if(data.skillset != null){
                 data.skillset = data.skillset.map((skill)=>{
                     return textdecrypt(skill);
@@ -214,12 +227,13 @@ router.get("/:userId",async (req,res)=>{
 router.post("/",async (req,res)=>{
     try{
         const data = req.body;
-        if(data.FullName != null && data.email != null){
+        if(data.FullName != null && data.email != null && data.photoUrl != null){
             if(validator.isEmail(data.email)){
                 if(data.role == 'Student'){
                     if(data.prn != null && data.branch != null && data.year != null){
                         data.FullName = textencrypt(data.FullName);
                         data.email = textencrypt(data.email);
+                        data.photoUrl = textencrypt(data.photoUrl);
                         if(data.skillset != null){
                             data.skillset = data.skillset.map((skill)=>{
                                 return textencrypt(skill);
@@ -284,6 +298,7 @@ router.post("/",async (req,res)=>{
                     if(data.qualification != null){
                         data.FullName = textencrypt(data.FullName);
                         data.email = textencrypt(data.email);
+                        data.photoUrl = textencrypt(data.photoUrl)
                         if(data.skillset != null){
                             data.skillset = data.skillset.map((skill)=>{
                                 return textencrypt(skill);
@@ -341,6 +356,7 @@ router.post("/",async (req,res)=>{
                     if(data.jobTitle != null && data.passout_year != null){
                         data.FullName = textencrypt(data.FullName);
                         data.email = textencrypt(data.email);
+                        data.photoUrl = textencrypt(data.photoUrl);
                         if(data.skillset != null){
                             data.skillset = data.skillset.map((skill)=>{
                                 return textencrypt(skill);
@@ -413,12 +429,13 @@ router.post("/",async (req,res)=>{
 router.patch('/:userId', async(req,res)=>{
     try{
     const data = req.body;
-    if(data.FullName != null && data.email != null){
+    if(data.FullName != null && data.email != null && data.photoUrl != null){
         if(validator.isEmail(data.email)){
             if(data.role == 'Student'){
                 if(data.prn != null && data.branch != null && data.year != null){
                     data.FullName = textencrypt(data.FullName);
                     data.email = textencrypt(data.email);
+                    data.photoUrl = textencrypt(data.photoUrl);
                     if(data.skillset != null){
                         data.skillset = data.skillset.map((skill)=>{
                             return textencrypt(skill);
@@ -482,6 +499,7 @@ router.patch('/:userId', async(req,res)=>{
                 if(data.qualification != null){
                     data.FullName = textencrypt(data.FullName);
                     data.email = textencrypt(data.email);
+                    data.photoUrl = textencrypt(data.photoUrl)
                     if(data.skillset != null){
                         data.skillset = data.skillset.map((skill)=>{
                             return textencrypt(skill);
@@ -537,6 +555,7 @@ router.patch('/:userId', async(req,res)=>{
                 if(data.jobTitle != null && data.passout_year != null){
                     data.FullName = textencrypt(data.FullName);
                     data.email = textencrypt(data.email);
+                    data.photoUrl = textencrypt(data.photoUrl);
                     if(data.skillset != null){
                         data.skillset = data.skillset.map((skill)=>{
                             return textencrypt(skill);

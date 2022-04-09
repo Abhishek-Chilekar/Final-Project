@@ -8,8 +8,15 @@ const ResoureDisplay = ({content}) =>{
 
     const user = JSON.parse(localStorage.getItem("User"));
     const dispatch = useDispatch();
+    const [reload,setReload] = React.useState();
+    const [disabled,setDisabled] = React.useState();
+    const [downloadStatus,setDownloadStatus] = React.useState("Download");
+
+    React.useEffect(()=>{},[reload]);
 
     const handleDownload=()=>{
+        setDisabled(true);
+        setDownloadStatus("Downloading");
         axios({
             //The link 
             url:`http://localhost:5000/Storage/documents/${content.url}`,
@@ -19,24 +26,31 @@ const ResoureDisplay = ({content}) =>{
             const fileDownload = require('js-file-download');
             //Give the Requested File name here
             fileDownload(res.data,`${content.url}`);
+            setDownloadStatus("Download");
+            setDisabled(false);
         }).catch(err=>{
             console.log(err);
+            setDownloadStatus("Error");
+            setDisabled(false);
         });
     }
 
     const handleBookmark = async () =>{
-        
+        setDisabled(true);
         user.myDoc.includes(content.id)?console.log("Already Bookmarked") :user.myDoc = [...user.myDoc,content.id];
 
         try{
             console.log(user);
             const res = await axios.patch("http://localhost:5000/UserDetails/"+user.id,user);
-            // localStorage.setItem("User",user);
-            // dispatch(login(user));
+            localStorage.setItem("User",JSON.stringify(user));
+            dispatch(login(user));
             console.log(res.data.msg);
+            setDisabled(false);
+            setReload(!reload);
         }
         catch(e){
             console.log(e.message)
+            setDisabled(false);
         }
 
     }
@@ -60,8 +74,8 @@ const ResoureDisplay = ({content}) =>{
             <h3 className={style.label}> Description :  </h3>
             <p className={style.value}> {current.description} </p>
             <div className={style.buttonContainer}>
-               {(!user.myDoc.includes(content.id))&&<button className={style.button} onClick={()=>handleBookmark()}> Bookmark </button>}
-                <button className={style.button} onClick={()=>handleDownload()}> Download </button>
+               {(!user.myDoc.includes(content.id))&&<button className={style.button} onClick={()=>handleBookmark()} disabled={disabled}> Bookmark </button>}
+                <button className={style.button} onClick={()=>handleDownload()} disabled={disabled}> {downloadStatus} </button>
             </div>
         </div>
        

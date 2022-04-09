@@ -34,9 +34,10 @@ router.post("/", async (req,res)=>{
             data.url = textencrypt(data.url);
             data.timeline = textencrypt(data.timeline);
 
-            await resources.add(req.body).then(()=>{
+            await resources.add(req.body).then(({id})=>{
                 res.send({
-                    msg:"Resource added"
+                    msg:"Resource added",
+                    id:id
                 });
             })
             .catch((err)=>{

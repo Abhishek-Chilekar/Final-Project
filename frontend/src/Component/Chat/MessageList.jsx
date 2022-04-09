@@ -31,25 +31,29 @@ import GroupMessage from '../Groups/GroupMessage';
 import Request from './RequestMessage';
 import axios from 'axios';
 
-const MessageList = () =>{
+const MessageList = ({select,reload,setReload}) =>{
     const currentUser = JSON.parse(localStorage.getItem("User"));
     const requests = currentUser.request;
-
-    const contentList = {
-            private_chat:[],
-            group_chat:[],
-            request:requests
+    const [pdata,setPdata] = React.useState([]);
+    const [user,setUser] = React.useState({groupId:[],request:[]});
+    const getPrivateChats = async()=>{
+        setPdata([]);
+        let {data} = await axios.get("http://localhost:5000/PrivateChat");
+        setPdata(data.filter((d)=>{return d.senderId == currentUser.id}));
+        const res = await axios.get("http://localhost:5000/UserDetails/"+currentUser.id);
+        setUser(res.data[0]);
     }
+
+    React.useEffect(()=>{getPrivateChats();},[])
+    React.useEffect(()=>{getPrivateChats();},[reload])
 
     return(
     <div className={style.messageList}>
-        {contentList.private_chat.map((m)=><Message content={m}/>)}
-        {contentList.group_chat.map((m)=><GroupMessage content={m}/>)}
-        {contentList.request.map((m)=><Request content={m}/>)}
+        {(select=="All"||select=="private_chat")&&pdata.map((m)=><Message chat={m} reload={[reload,setReload]}/>)}
+        {(select=="All"||select=="group_chat")&&user.groupId.map((id)=><GroupMessage id={id} reload={[reload,setReload]}/>)}
+        {(select=="All"||select=="requests")&&user.request.map((m)=><Request content={m} reload={setReload}/>)}
     </div>
     )
-    // return <Message />
-
 }
 
 export default MessageList;

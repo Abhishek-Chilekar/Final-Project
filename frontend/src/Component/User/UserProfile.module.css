@@ -19,6 +19,7 @@
 .profilePic{
     height:200px;
     width:200px;
+    border-radius: 170px;
 }
 
 .name{
@@ -60,6 +61,24 @@
     display: flex;
     justify-content:space-between;
     align-items: center;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.update{
+    border:none;
+    outline:none;
+    background-color: #09cdf0;
+    color:white;
+    font-size: 24px;
+    font-weight: 600;
+    padding:20px 30px;
+    border-radius: 25px;
+    margin-bottom:20px;
 }
 
 .add{

@@ -4,17 +4,18 @@ import {useForm} from 'react-hook-form';
 import axios from "axios";
 import {storage} from '../firebaseConfig';
 import {ref,uploadBytesResumable,getDownloadURL} from "@firebase/storage";
-const AddEvent = ({popupstate}) => {
+const AddEvent = ({popupstate,reload}) => {
 
     const {register,handleSubmit,formState:{errors}} = useForm();
     const user = JSON.parse(localStorage.getItem("User"));
     const [success,setSuccess] = useState("");
     const [error,setError] = useState("");
     const [file,setFile] = useState(null);
-    let [url,setUrl] = useState("");
+    let [disabled,setDisabled] = useState(false);
 
 
     const upload = async (props) => {
+        setDisabled(true);
         const formData = new FormData();
         formData.append('file',file);
         formData.append('user',props.name);
@@ -22,25 +23,18 @@ const AddEvent = ({popupstate}) => {
         console.log("Here");
         try
         {
-            console.log("Ikde 2");
-            // const res = await axios.post('http://localhost:5000/Storage/images',formData,{
-            //     headers:{
-            //         'Content-type':'multipart/form-data'
-            //     }
-            // });
             const storageRef = ref(storage,"/Events/"+file.name);
             console.log(file.name);
         
             const uploadTask = uploadBytesResumable(storageRef,file);
-            // (await uploadTask).state("")
-            //event,UploadTask,Error,Complete
             uploadTask.on("state_changed",(snapshot) => {
-                console.log("Image uploading");
+                setSuccess("Image uploading");
             },(err) => {
-                console.log(err.message);
+                setSuccess("");
+                setError(err.message);
             },() => {
                 try{
-                    console.log("Image uploaded");
+                    setSuccess("Image uploaded");
                         getDownloadURL(uploadTask.snapshot.ref).then(async(link)=>{
                             const event = {
                                 eventName:props.name,
@@ -58,29 +52,34 @@ const AddEvent = ({popupstate}) => {
                             }
                             const {data} = await axios.post("http://localhost:5000/Events",event);
                             const res = data;
-                            console.log(res);
                             if(res.msg == "Event Added"){
                                 setSuccess(res.msg);
                                 const notification = {
                                     image:event.image,
                                     purpose:"event",
+                                    type:"All",
                                     heading:event.eventName,
                                     content:event.description,
+                                    contentId:res.id,
                                     url:event.url,
                                     branch:event.branch
                                 }
-                
+                                console.log(notification);
                                 const {data} = await axios.post("http://localhost:5000/Notification",notification);
                                 const notiRes = data;
                                 if(notiRes.id){
                                     setSuccess("notification generated");
+                                    reload();
+                                    popupstate(false);
                                 }
                                 else{
-                                    setError(notiRes.msg)
+                                    setError(notiRes.msg);
+                                    setDisabled(false);
                                 }
                             }
                             else{
                                 setError(res.msg);
+                                setDisabled(false);
                             }
                     });
                     
@@ -108,8 +107,8 @@ const AddEvent = ({popupstate}) => {
         <span className={style.success}> {success != "" && success} </span>
         <span className={style.error}> {error!=""&& error} </span>
         <form onSubmit={handleSubmit(async(data)=>{
-        await upload(data);
-    })}>
+                            await upload(data);
+                        })}>
             <div className={style.outerdiv}>
                 <div className={style.leftside}>
                     <label className={style.lab1} for="name" >Name:</label>
@@ -139,7 +138,7 @@ const AddEvent = ({popupstate}) => {
                     <input {...register("description")} className={style.inp1} type="text" name="description" id="description" required/>
                 </div>
             </div>
-            <button className={style.butto} type="submit">Add Event</button>
+            <button className={style.butto} type="submit" disabled={disabled}>Add Event</button>
         </form>
         </div>
     </div>)

@@ -1,0 +1,170 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.success {
+  height: min-content;
+  position: relative;
+  bottom: 5px;
+  left: 300px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  max-width: 200px;
+  color: rgb(13, 240, 13);
+}
+
+.error {
+  height: min-content;
+  position: relative;
+  bottom: 5px;
+  left: 300px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  max-width: 200px;
+  color: red;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: 200ms ease-in-out;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 10;
+  background-image: url("../../BackgroundImages/popup_pattern.png");
+  width: 500px;
+  max-width: 80vw;
+  color: white;
+  font-size: 16px;
+}
+.file {
+  display: none;
+}
+.edit {
+  position: relative;
+  bottom: 23px;
+  left: 22px;
+  width: 32px;
+  height: 32px;
+
+  background-color: #0067df;
+
+  border: none;
+  border-radius: 49%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.titleImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  background-color: black;
+  border-radius: 50%;
+}
+.close {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  margin-left: 96%;
+  margin-top: 0;
+  background-color: #0067df;
+  padding: 5px 10px 3px 10px;
+  border-radius: 25px;
+  transform: scale(2);
+  color: white;
+}
+.butto {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  background: #009cdf;
+  border-radius: 21px;
+  border: none;
+  font-size: large;
+  color: white;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.outerdiv {
+  max-width: 60%;
+  margin: auto;
+}
+.branchContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: auto;
+}
+.optiondiv {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+.lab {
+  display: flex;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.submitbtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.inp {
+  display: flex;
+  height: 30px;
+  width: 100%;
+
+  border: none;
+
+  background: #ffffff;
+  border-radius: 14px;
+}
+.branchopt {
+  display: flex;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.branch {
+  background: #ffffff;
+  border-radius: 14px;
+  border: none;
+  height: 30px;
+  margin: 0;
+  width: 100%;
+}
+.innerdivstyle {
+  margin-right: 20px;
+  height: 30px;
+  background: #ffffff;
+  border-radius: 14px;
+  border: none;
+  width: 90%;
+}

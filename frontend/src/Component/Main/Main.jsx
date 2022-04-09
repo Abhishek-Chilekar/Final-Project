@@ -7,6 +7,7 @@ import {useSelector,useDispatch} from 'react-redux';
 import { updateWindow } from '../../Actions/windowAction';
 
 const Chat = () =>{
+    //localStorage.removeItem("User");
     const Nav = useSelector(state => state.Nav);
     const {width} = useSelector(state => state.UpdateWindow)
     const dispatch = useDispatch();

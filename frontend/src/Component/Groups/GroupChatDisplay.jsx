@@ -1,32 +1,165 @@
-import React from 'react';
+import React,{useState} from 'react';
 import style from '../Chat/ChatDisplay.module.css';
+import gstyle from './GroupChatDisplay.module.css';
 import GroupMessageBox from './GroupMessageBox';
+import {storage} from '../firebaseConfig';
+import {ref,uploadBytesResumable,getDownloadURL,deleteObject} from "@firebase/storage";
+import axios from 'axios';
+import GroupOptionsList from '../Forms/GroupOptionsList';
+import SearchMember from "../Forms/SearchMembers";
+import RemoveMembers from '../Forms/RemoveMembers';
+import MakeAdmin from '../Forms/MakeAdmin';
+import Poll from '../Forms/Poll';
+import { useDispatch } from 'react-redux';
+import { group_profiles } from '../../Actions/thirdScreenAction';
 
 const GroupChatDisplay = (props)=>{
-    const current = {
-        photoUrl:"/Images/avatardefault.png",
-        groupId:"1",
-        groupName:"BE DIV 2",
-        groupDescription:"",
-        member:[],
-        poll:[],
-        requests:[],
-        chat:[
-            {
-                messageId:"1",
-                senderName:"me",
-                content:"how are youww",
-                timeline:"9:00pm"
-            },
-            {
-                messageId:"2",
-                senderName:"Hari",
-                content:"how are you",
-                timeline:"9:10pm"
-            },
-        ]
+    const user = JSON.parse(localStorage.getItem("User"));
+    const dispatch = useDispatch();
+    const current = props.content.content;
+    const reloadList = props.content.reloadList;
+    const [text,setText] = useState("");
+    const [file,setFile] = useState(null);
+    const [click,setClick] = useState(false);
+    const [reload,setReload] = useState(false);
+    const [admin,setAdmin] = useState("");
+    const [add,setAdd] = useState(false);
+    const [remove,setRemove] = useState(false);
+    const [poll,setPoll] = useState(false);
+    const [makeAdmin,setMakeAdmin] = useState(false);
+    const [disabled,setDisabled] = useState(false);
+    const [disableButton,setDisableButton] = useState(false);
+    const [sendingStatus,setSendingStatus] = useState("");
+
+    const date = new Date();
+
+    const getAdmin = ()=>{
+        const adminUser = current.member.filter((u)=>u.isAdmin == "true");
+        console.log(adminUser);
+        setAdmin(adminUser[0].senderId);
     }
-/*
+
+    React.useEffect(()=>{
+        getAdmin();
+    },[]);
+
+    const handleClick=()=>{
+        dispatch(group_profiles(current));
+    }
+
+    const handleDelete = async(id)=>{
+        try{
+
+            if(!disabled){
+                console.log(id)
+                setDisabled(true);
+                console.log(current.chat)
+                const message = current.chat.filter((m)=>{return m.messageId == id})[0]
+                console.log(message)
+                if(message.type == "text"){
+                    current.chat = current.chat.filter((m)=>{return m.messageId != id});
+                    const res = await axios.patch("http://localhost:5000/GroupChat/"+current.id,current);
+                    console.log(res.data.msg);
+                    setDisabled(false);
+                    reloadList();
+                    setReload(!reload);
+                }
+                else if(message.type =="image"){
+                    const storageRef = ref(storage,message.content);
+                    await deleteObject(storageRef);
+                    current.chat = current.chat.filter((m)=>{return m.messageId != id});
+                    const res = await axios.patch("http://localhost:5000/GroupChat/"+current.id,current);
+                    console.log(res.data.msg);
+                    setDisabled(false);
+                    reloadList();
+                    setReload(!reload);
+                }
+                else{
+                    current.chat = current.chat.filter((m)=>{return m.messageId != id});
+                    current.poll = current.poll.filter((p)=>{return p.pollId != id});
+                    const res = await axios.patch("http://localhost:5000/GroupChat/"+current.id,current);
+                    console.log(res.data.msg);
+                    setDisabled(false);
+                    reloadList();
+                    setReload(!reload);
+                }
+            }
+
+        }
+        catch(e){
+            console.log(e.message)
+            setDisabled(false);
+        }
+    }
+
+
+    const handleSend = async()=>{
+        if(!disableButton){
+            setDisableButton(true);
+        if(!file){
+            //{messageId,senderName,content,timeline}
+            setSendingStatus("Sending");
+            const message = {
+                messageId : current.id+date.toLocaleString(),
+                senderId:user.id,
+                senderName: user.FullName,
+                type:"text",
+                content:text,
+                timeline:date.toLocaleString()
+            }
+
+            current.chat = [...current.chat,message];
+            const res = await axios.patch("http://localhost:5000/GroupChat/"+current.id,current);
+            console.log(res.data.msg);
+            setDisableButton(false);
+            setSendingStatus("");
+            reloadList();
+            setReload(!reload);
+            setText("");
+        }
+        else{
+            setSendingStatus("Sending")
+            const storageRef = ref(storage,"/GroupChat/"+current.id+"/"+file.name);
+            console.log(file.name);
+        
+            const uploadTask = uploadBytesResumable(storageRef,file);
+            uploadTask.on("state_changed",(snapshot) => {
+                setSendingStatus("Uploading")
+            },(err) => {
+                console.log(err.message);
+                setDisableButton(false);
+            },() => {
+                try{
+                    setSendingStatus("Uploaded")
+                        getDownloadURL(uploadTask.snapshot.ref).then(async(link)=>{
+                            const message = {
+                                messageId : current.id+date.toLocaleString(),
+                                senderId:user.id,
+                                senderName: user.FullName,
+                                type:"image",
+                                content:link,
+                                timeline:date.toLocaleString()
+                            }
+                
+                            current.chat = [...current.chat,message];
+                            const res = await axios.patch("http://localhost:5000/GroupChat/"+current.id,current);
+                            console.log(res.data.msg);
+                            setSendingStatus("");
+                            setDisableButton(false);
+                            reloadList();
+                            setReload(!reload);
+                            setFile(null);
+                        })
+                }
+                catch(e){
+                    console.log(e.message);
+                    setDisableButton(false);
+                }
+            });
+        }
+      }
+    }
+    /*
 {
     groupId:
     groupName:
@@ -38,21 +171,31 @@ const GroupChatDisplay = (props)=>{
 }
 */
     return(
-        <div className={style.groupChatDisplay}>
-            <div className={style.header}>
-                <div className={style.profile}>
+        <div className={style.chatDisplay}>
+            <div className={style.header} >
+                <div className={style.profile} onClick={()=>handleClick()}>
                     <img className={style.profilepic} src={current.photoUrl} alt="profile pic"/>
-                    <h1 className={style.name}>{current.groupName}</h1>
+                    <div>
+                        <h1 className={style.name}>{current.groupName}</h1>
+                        <h2 className={gstyle.text}>Click here to view the details</h2>
+                    </div>
                 </div>
-                <img className={style.menu} src="/Images/menu icon.png" alt="menu" />
+                <img className={style.menu} src="/Images/micon.png" alt="menu" onClick={()=>setClick(!click)}/>
+                {click && <GroupOptionsList reload={reloadList} action={click} check = {admin} add={setAdd} remove={setRemove} makeAdmin={setMakeAdmin} poll={setPoll} groupDetails={current}/>}
+                
             </div> 
             <div className={style.mda}>
-                {current.chat.map((m)=><GroupMessageBox message={m}/>)}
-            </div>  
+                {current.chat.map((m)=><GroupMessageBox message={m} groupDetails = {current} delete={(id)=>handleDelete(id)}/>)}
+            </div>
+            {add && <SearchMember popupstate={setAdd} groupDetails = {current}/>}
+            {remove && <RemoveMembers popupstate={setRemove} groupDetails={current}/>} 
+            {makeAdmin && <MakeAdmin popupstate={setMakeAdmin} groupDetails={current}/>} 
+            {poll && <Poll  popupstate={setPoll} reload={()=>setReload(!reload)} reloadList = {reloadList} groupDetails={current}/>} 
             <div className={style.typingArea}>
-                <span className={style.imageBack}><img className={style.image} src="/Images/image.png" alt="image"/></span>
-                <input className={style.input} type="text" id="text" name="text" placeholder='Type Here...'/>
-                <span className={style.sendBack}><img className={style.send} src="/Images/send icon.png" alt="send icon"/></span>
+                <label className={style.imageBack} for="select"><img className={style.image} src="/Images/image.png" alt="image"/></label>
+                <input type="file" name="select" id="select" className={style.select} onChange={(e)=>setFile(e.target.files[0])}/>
+                <input className={style.input} type="text" id="text" name="text" placeholder='Type Here...' value={text} onChange={(e)=>{setFile(null);setText(e.target.value);}}/>
+                <span className={style.sendBack}><img className={style.send} src="/Images/send icon.png" alt="send icon" onClick={()=>handleSend()}/><span>{sendingStatus}</span></span>
             </div>
         </div>
     );

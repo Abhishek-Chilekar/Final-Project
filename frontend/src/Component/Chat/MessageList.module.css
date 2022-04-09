@@ -1,6 +1,6 @@
 .messageList{
     margin-top:10px;
-    height: 73vh;
+    height: 500px;
     overflow: auto;
 }
 
@@ -9,5 +9,5 @@
 }
 
 ::-webkit-scrollbar-thumb{
-    background: #ff0000;
+    
 }

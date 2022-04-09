@@ -33,7 +33,8 @@ const Event = (props) =>{
             from:content.from,
             description:content.description,
             image:content.image,
-            registeredUser:content.registeredUser
+            registeredUser:content.registeredUser,
+            reload:props.reload
         }))
     }
 

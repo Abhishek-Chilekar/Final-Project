@@ -45,9 +45,8 @@ route.patch('/:id',async(req,res)=>{
     try{
         if(data && data.chats && data.senderId && data.receiverId){
             data.chats.map((r)=>{
-                if(r.owner && r.message.messageId && r.messageContent && r.type && r.timeline){
-                    console.log(r)
-                    r.owner = data.owner;
+                if(r.owner && r.message.messageId && r.message.messageContent && r.message.type && r.message.timeline){
+                    r.owner = r.owner;
                     r.message.messageId = textencrypt(r.message.messageId);
                     r.message.messageContent = textencrypt(r.message.messageContent);
                     r.message.type = textencrypt(r.message.type);
@@ -55,6 +54,7 @@ route.patch('/:id',async(req,res)=>{
                 }
 
             })
+            console.log(data);
             await privateChat.doc(req.params.id).update(data);
             return res.json({msg:"Document Updated"});
         }
@@ -73,8 +73,8 @@ route.get('/:id',async(req,res)=>{
             const data = doc.data();
             if(data && data.chats && data.senderId && data.receiverId){
                 data.chats.map((r)=>{
-                    if(r.owner && r.message.messageId && r.messageContent && r.type && r.timeline){
-                        r.owner = data.owner;
+                    if(r.owner && r.message.messageId && r.message.messageContent && r.message.type && r.message.timeline){
+                        r.owner = r.owner;
                         r.message.messageId = textdecrypt(r.message.messageId);
                         r.message.messageContent = textdecrypt(r.message.messageContent);
                         r.message.type = textdecrypt(r.message.type);
@@ -92,6 +92,30 @@ route.get('/:id',async(req,res)=>{
         console.log(e.message);
     }
 })
+
+route.get("/",async (req,res)=>{
+    try
+    {
+        const snapshot = await privateChat.get();
+        const data = snapshot.docs.map((doc)=>{
+            const data = doc.data();
+            data.chats.map((r)=>{
+                if(r.owner && r.message.messageId && r.message.messageContent && r.message.type && r.message.timeline){
+                    r.owner = r.owner;
+                    r.message.messageId = textdecrypt(r.message.messageId);
+                    r.message.messageContent = textdecrypt(r.message.messageContent);
+                    r.message.type = textdecrypt(r.message.type);
+                    r.message.timeline = textdecrypt(r.message.timeline);
+                }
+            })
+            return {id:doc.id,...data}
+        });
+        res.send(data);
+    }
+    catch(e){
+        console.log(e.message);
+    }
+});
 
 
 

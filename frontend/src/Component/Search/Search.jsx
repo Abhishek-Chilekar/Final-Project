@@ -4,28 +4,32 @@ import style from './Search.module.css';
 import {useDispatch} from 'react-redux';
 import { chats } from '../../Actions/thirdScreenAction';
 
-const Search = ()=>{
+const Search = ({getText})=>{
+    const name = getText();
     let [search,setSearch] = useState({
         role:"All",
         skill:"All",
         profession:"All",
         year:"All",
         branch:"All",
-        name:""
+        name:name,
     });
+    useEffect(()=>{
+        setSearch({...search,name:name});
+    },[name])
     const dispatch = useDispatch();
     const skill = ['html','css','javascript'];
     const profession = ['data analyst','web developer','UI/UX designer']
     let [data,setData] = useState([]);
-    let [contain,setContain] = useState(false);
+    const [reload,setReload] = useState(false);
+    const [disabled,setDisabled] = useState(false);
     const currentUser = JSON.parse(localStorage.getItem("User"));
-    console.log(currentUser)
+    console.log(currentUser);
     const getData = async()=>{
         const res = await axios.get("http://localhost:5000/UserDetails");
         setData(res.data);
     }
-    
-    console.log(data);
+    useEffect(()=>{},[reload]);
 
     const handleOnChange = (target)=>{
         switch(target.name){
@@ -50,6 +54,7 @@ const Search = ()=>{
     }
 
     const handleClick = async(user)=>{
+        setDisabled(true);
         try{
             user.request = [...user.request,{
                 requestId:currentUser.id,
@@ -59,9 +64,12 @@ const Search = ()=>{
             console.log(user);
             const res = await axios.patch("http://localhost:5000/UserDetails/"+user.id,user);
             console.log(res.data.msg);
+            setDisabled(false);
+            setReload(!reload);
         }
         catch(e){
             console.log(e.message);
+            setDisabled(false);
         }
     }
 
@@ -133,9 +141,9 @@ const Search = ()=>{
         <div className={style.filter}>
             <select className={style.select} name='role' onChange={(e)=>handleOnChange(e.target)}>
                 <option value="All">Role</option>
-                <option value="student">Student</option>
-                <option vlaue="teacher">Teacher</option>
-                <option value="alumini">Alumini</option>
+                <option value="Student">Student</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Alumini">Alumini</option>
             </select>
             <select className={style.select} name='skill' onChange={(e)=>handleOnChange(e.target)}>
                 <option value="All">Skill</option>
@@ -163,7 +171,7 @@ const Search = ()=>{
             </select>
         </div>
         <div>
-           {data.map((user)=>(user.id != currentUser.id&&(search.role == "All"||user.role == search.role)&&(search.skill == "All"||user.skillset.includes(search.skill))&&(search.profession == "All"||user.role != "alumini"||user.profession == search.profession)&&(search.year == "All"||user.year == search.year)&&(search.branch == "All"||user.branch == search.branch))&&(
+           {data.map((user)=>(user.id != currentUser.id && (search.name==""||(user.FullName+"").includes(search.name))&&(search.role == "All"||user.role == search.role)&&(search.skill == "All"||user.skillset.includes(search.skill))&&(search.profession == "All"||user.role != "alumini"||user.profession == search.profession)&&(search.year == "All"||user.year == search.year)&&(search.branch == "All"||user.branch == search.branch))&&(
             <div className={style.list}>
                 <div className={style.details}>
                     <img className={style.image} src={user.photoUrl?user.photoUrl:"/Images/avatardefault.png"} alt="profilepic"/>
@@ -173,13 +181,14 @@ const Search = ()=>{
                             <div className={style.student}></div>
                             <h2 className={style.roleName}>{user.role}</h2>
                         </div>
-                        {(user.skillset&&user.skillset.length > 0)?<div className={style.skillset}>
+                        {(user.skillset&&user.skillset.length > 0)&&<div className={style.skillset}>
                             <h2 className={style.skill}>{user.skillset[0]}</h2>
                             {user.skillset.length > 1&&<h2 className={style.skill}>{user.skillset[1]}</h2>}
-                        </div>:<div className={style.skillset}><h2 className={style.skill}>Html</h2><h2 className={style.skill}>CSS</h2></div>}
+                        </div>}
                     </div>
                 </div>
-               {((checkIfRequestMade(user))&&(!user.requestAccepted.includes(currentUser.id)))&&<button className={style.request} onClick={()=>handleClick(user)}>Request</button>}
+               {((checkIfRequestMade(user))&&(!user.requestAccepted.includes(currentUser.id)))&&<button className={style.request} disabled={disabled} onClick={()=>handleClick(user)}>Request</button>}
+               {((!checkIfRequestMade(user))&&(!user.requestAccepted.includes(currentUser.id)))&&<button className={style.request}>Waiting</button>}
                {user.requestAccepted.includes(currentUser.id)&&<button className={style.request} onClick={()=>handleMessage(user)}>Message</button>}
             </div>
            ))}

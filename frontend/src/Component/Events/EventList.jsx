@@ -14,7 +14,7 @@ import axios from 'axios';
         registeredUser:[userId]
     }]
     */ 
-const EventList = () =>{
+const EventList = ({reload,setReload}) =>{
     let [list,setList] = useState([]);
 
     useEffect(() => {
@@ -30,7 +30,21 @@ const EventList = () =>{
        }
        fetchData();
     }, [])
-    return(<div className={Rstyle.resourceList}>{list.map((c)=><Event content={c}/>)}</div>)
+    useEffect(() => {
+        const fetchData = async()=>{
+         try{
+             const contentList = await axios.get("http://localhost:5000/Events");
+             console.log(contentList.data);
+             setList(contentList.data);
+          }
+          catch(e){
+              console.log(e.message);
+          }
+        }
+        fetchData();
+     }, [reload])
+    
+    return(<div className={Rstyle.resourceList}>{list.map((c)=><Event content={c} reload={setReload}/>)}</div>)
 }
 
 export default React.memo(EventList);

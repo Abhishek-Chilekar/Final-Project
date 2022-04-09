@@ -2,17 +2,20 @@ import React,{useState} from "react";
 import style from "./uploadresource.module.css";
 import {useForm} from 'react-hook-form';
 import axios from "axios";
+import { reload } from "firebase/auth";
 
-const UploadResource = ({popupstate}) => {
+const UploadResource = ({popupstate,reload}) => {
     const {register,handleSubmit,formState:{errors}} = useForm();
     const user = JSON.parse(localStorage.getItem("User"));
     const [success,setSuccess] = useState("");
     const [error,setError] = useState("");
     const [file,setFile] = useState(null);
+    const [disabled,setDisabled] = useState(false);
 
     const upload =async(data)=>{
         setError("");
         setSuccess("");
+        setDisabled(true);
         const formData = new FormData();
         formData.append('file',file);
         formData.append('user',data.name);
@@ -51,8 +54,10 @@ const UploadResource = ({popupstate}) => {
                     const notification = {
                         image:"/Images/"+resource.type+".png",
                         purpose:"resource",
+                        type:"All",
                         heading:resource.resourceName,
                         content:resource.description,
+                        contentId:res.id,
                         url:resource.url,
                         branch:resource.branch
                     }
@@ -61,13 +66,17 @@ const UploadResource = ({popupstate}) => {
                     const notiRes = data;
                     if(notiRes.id){
                         setSuccess("notification generated");
+                        reload();
+                        popupstate(false);
                     }
                     else{
-                        setError(notiRes.msg)
+                        setError(notiRes.msg);
+                        setDisabled(false);
                     }
                 }
                 else{
                     setError(res.msg);
+                    setDisabled(false);
                 }
             }
             catch(e){
@@ -116,7 +125,7 @@ const UploadResource = ({popupstate}) => {
                     </select>
                </div>
             </div>
-            <button className = {style.butto}type="submit">Add</button>
+            <button className = {style.butto}type="submit" disabled={disabled}>Add</button>
         </form>
         </div>
     </div>

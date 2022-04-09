@@ -3,7 +3,7 @@ import Resource from './Resource';
 import style from './ResourceList.module.css';
 import axios from 'axios';
 
-const ResourceList = ({select}) =>{
+const ResourceList = ({select,reload}) =>{
     let [list,setList] = useState([]);
 
     useEffect(() => {
@@ -19,6 +19,20 @@ const ResourceList = ({select}) =>{
        }
        fetchData();
     }, [])
+
+    useEffect(() => {
+        const fetchData = async()=>{
+         try{
+             const contentList = await axios.get("http://localhost:5000/Resources");
+             console.log(contentList.data);
+             setList(contentList.data);
+          }
+          catch(e){
+              console.log(e.message);
+          }
+        }
+        fetchData();
+     }, [reload])
 
     return(<div className={style.resourceList}>{list.map((c)=>{
         return (select == "All" || select == c.type) && <Resource content={c}/>

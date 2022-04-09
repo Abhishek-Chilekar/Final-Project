@@ -2,9 +2,27 @@ import React,{useState} from 'react';
 import style from './Bookmark.module.css';
 import axios from 'axios';
 
-const Bookmark = ({id}) =>{
+const Bookmark = ({id,content,reload}) =>{
     const user = JSON.parse(localStorage.getItem("User"));
     const [doc,setDoc] = useState({});
+
+    const remove = async()=>{
+        user.myDoc = user.myDoc.filter((doc)=>{
+            return doc != id;
+        })
+
+        try{
+            const res = await axios.patch("http://localhost:5000/UserDetails/"+user.id,user);
+            console.log(res.data.msg);
+            if(res.data.msg == "data updated"){
+                localStorage.setItem("User",JSON.stringify(user));
+                reload();
+            }
+        }
+        catch(e){
+            console.log(e.message)
+        }
+    }
     const getData =async(id)=>{
         try{
             const res = await axios.get("http://localhost:5000/Resources/"+id);
@@ -34,8 +52,13 @@ const Bookmark = ({id}) =>{
     checkData();
     return(
     <div>
-       {doc&&<div className={style.document}><img src={"/Images/"+doc.type+".png"} alt="document type"/>
-        <h1 className={style.docName}>{doc.resourceName}</h1></div>}
+       {doc&&<div className={style.outer}>
+            <div className={style.document}>
+                <img src={"/Images/"+doc.type+".png"} alt="document type"/>
+                <h1 className={style.docName}>{doc.resourceName}</h1>
+            </div>
+            {content.id == user.id && <span className={style.cross} onClick={()=>remove()}>x</span>}
+        </div>}
     </div>
     )
 }
