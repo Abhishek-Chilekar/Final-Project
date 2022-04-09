@@ -5,6 +5,7 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.5);
+    z-index: 3;
 }
 
 .success{
@@ -45,7 +46,7 @@
     transition: 200ms ease-in-out;
     border: 1px solid black;
     border-radius: 10px;
-    z-index: 2;
+    z-index: 9;
     background-color: rgb(41,41,41);
     width:700px;
     max-width: 80%;

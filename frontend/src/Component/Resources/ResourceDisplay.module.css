@@ -4,6 +4,7 @@
     height: 100%;
     background-image: url('../../BackgroundImages/resourceBack.png');
     border-radius:25px;
+    z-index: -1;
 }
 
 .resourceHeader{

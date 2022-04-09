@@ -38,6 +38,16 @@ export const profileAction = () =>{
 
 export const searchAction = () =>{
     return {
-        type:"SEARCH"
+        type:"SEARCH CHAT"
+    }
+}
+export const searchActionResource = () =>{
+    return {
+        type:"SEARCH RESOURCE"
+    }
+}
+export const searchActionEvent = () =>{
+    return{
+        type:"SEARCH EVENT"
     }
 }

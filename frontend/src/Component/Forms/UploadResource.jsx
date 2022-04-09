@@ -88,13 +88,13 @@ const UploadResource = ({popupstate}) => {
             <h1>Resources</h1>
         </div>
         <span className={style.success}> {success != "" && success} </span>
-        <span className={style.error}> {error!=""&& error} </span>
+        <span className={style.error}> {error!=""?error:errors.name?errors.name.message:""} </span>
         <form onSubmit={handleSubmit(async(data)=>{
            await upload(data)
         })}>
             <div className={style.upperdiv}>
                 <label className={style.lab1} for="name">Name: </label>
-                <input {...register("name")}className={style.inp1} type="text" name="name" id="name" required />
+                <input {...register("name",{required:"Name is required",pattern:{value:/^([a-zA-Z]*){2,}$/,message:"Invalid Name"}})} className={style.inp1} type="text" name="name" id="name" required />
 
                 <label className={style.lab1} for="description">Description: </label>
                 <input {...register("description")}className={style.desc} type="text" name="description" id="description" required />

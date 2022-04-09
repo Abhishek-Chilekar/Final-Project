@@ -5,11 +5,14 @@ import MainPanel from './MainPanel';
 import ThirdScreen from './ThirdScreen';
 import {useSelector,useDispatch} from 'react-redux';
 import { updateWindow } from '../../Actions/windowAction';
+import { useState } from 'react';
+import UploadResource from '../Forms/UploadResource';
 
 const Chat = () =>{
     const Nav = useSelector(state => state.Nav);
     const {width} = useSelector(state => state.UpdateWindow)
     const dispatch = useDispatch();
+    let [popup,setPopup] = useState(true);
     const handleResize =()=>{
         dispatch(updateWindow());
     }
@@ -19,9 +22,11 @@ const Chat = () =>{
     // }, [])
     return(
         <div className={style.chat}>
+            {/* <UploadResource popupstate={setPopup}/> */}
             {/* {width > 1400 && <Navigation/>}
             <MainPanel/>
            {(Nav.active != "Notification" && Nav.active != "About" && width > 1100) && <ThirdScreen/>} */}
+           {/* {(popupForm.type == "Resource"?<UploadResource popupstate={setPopup(popupForm.popupstate)}/>:<></>)} */}
            {<Navigation/>}
             <MainPanel/>
            {(Nav.active != "Notification" && Nav.active != "About") && <ThirdScreen/>}
