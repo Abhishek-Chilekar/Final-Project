@@ -5,7 +5,7 @@ import { login } from '../../Actions/userAction';
 import axios from 'axios';
 
 const ResoureDisplay = ({ content }) => {
-
+    console.log(content);
     const user = JSON.parse(localStorage.getItem("User"));
     const dispatch = useDispatch();
     const [reload,setReload] = React.useState();

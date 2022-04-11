@@ -3,10 +3,17 @@
     width: 580px;
 }
 
+@media all and (max-width: 1400px) {
+    .main{
+      width:30%;
+      height:720px;
+    }
+  }
+
 .ThirdScreen{
     height:670px;
     width: 464px;
-    margin: 4% 10%;
+    margin: 40px 80px;
     background-color: #FFFBFB;
     border-radius: 25px;
     box-shadow: 0px 4px 7px 3px rgba(0,0,0,0.2);

@@ -68,6 +68,8 @@
     margin-top: 2px;
     border: none;
     border-radius: 2em;
+    padding-left: 20px ;
+    outline: none;
   }
   
   .dropBox {

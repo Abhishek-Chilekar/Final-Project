@@ -4,8 +4,8 @@
   background-color: rgb(215, 240, 247);
   margin-top: 20px;
   margin-left: 20px;
-  max-width: 200px;
-  min-width: 100px;
+  /* max-width: 200px;
+  min-width: 100px; */
   border-radius: 0px 20px 20px 20px;
   margin-bottom:10px;
 }
@@ -30,17 +30,27 @@
   color: white;
   margin-top: 20px;
   margin-right: 20px;
-  max-width: 200px;
-  min-width: 100px;
+  /* max-width: 200px;
+  min-width: 100px; */
   border-radius: 20px 0px 20px 20px;
   align-self: flex-end;
   margin-bottom:10px;
 }
 
+.imageBox{
+  width:150px;
+  height:150px;
+  object-fit: contain;
+  overflow: hidden;
+  margin-right:20px
+}
+
 .sharedImg {
-  width: 150px;
-  height: 150px;
+  max-width:250px;
+  max-height:250px;
+  object-fit: scale-down;
   margin: 10px 20px;
+  overflow: auto;
 }
 
 .content {

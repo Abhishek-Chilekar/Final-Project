@@ -10,6 +10,7 @@ import {ref,uploadBytesResumable,getDownloadURL,deleteObject} from "@firebase/st
 const ChatDisplay = ({content}) =>{
     const {senderChat,receiverChat,receiver,reloadList} = content;
     const user = JSON.parse(localStorage.getItem("User"));
+    console.log(content);
     const date = new Date();
     let [reload,setReload] = React.useState(false);
     const [disabled,setDisabled] = React.useState(false);
@@ -30,9 +31,6 @@ const ChatDisplay = ({content}) =>{
     let [text,setText] = React.useState("");
     let [file,setFile] = React.useState(null);
     const dispatch = useDispatch();
-
-
-    React.useEffect(()=>{},[reload]);
 
     const handleClear=async()=>{
         senderChat.chats = []
@@ -114,7 +112,7 @@ const ChatDisplay = ({content}) =>{
             console.log(res.data.msg);
             setText("");
             setSendingStatus("");
-            reloadList();
+           {reloadList && reloadList();}
             setDisabledButton(false);
             setReload(!reload);
         }
@@ -191,14 +189,14 @@ const ChatDisplay = ({content}) =>{
     //  ]
     // }
     return (
-    <div className={style.chatDisplay}>
+    <div className={content.receiver.role == "Student"?style.studentChatDisplay:content.receiver.role == "Teacher"?style.teacherChatDisplay:style.aluminiChatDisplay}>
         <div className={style.header} >
             <div className={style.profile} onClick={()=>show()}>
                 <img className={style.profilepic} src={current.photoUrl} alt="profile pic"/>
                 <div>
                     <h1 className={style.name}>{current.name}</h1>
                     <div className={style.role}>
-                        <div className={style.roleIndicator}></div>
+                        <div className={content.receiver.role == "Student"?style.studentIndicator:content.receiver.role == "Teacher"?style.teacherIndicator:style.aluminiIndicator}></div>
                         <h2 className={style.role}> {current.role} </h2>
                     </div>
                 </div>
@@ -209,10 +207,10 @@ const ChatDisplay = ({content}) =>{
             {current.messages.map((m)=><MessageBox message={m} delete={handleDelete}/>)}
         </div>  
         <div className={style.typingArea}>
-            <label className={style.imageBack} for="select"><img className={style.image} src="/Images/image.png" alt="image"/></label>
+            <label for="select"><img className={content.receiver.role == "Student"?style.studentImage:content.receiver.role == "Teacher"?style.teacherImage:content.receiver.role == "Alumini"&&style.aluminiImage} src="/Images/image.png" alt="image"/></label>
             <input type="file" name="select" id="select" className={style.select} onChange={(e)=>setFile(e.target.files[0])}/>
             <input className={style.input} type="text" id="text" name="text" placeholder='Type Here...' value={text} onChange={(e)=>{setText(e.target.value)}}/>
-            <span className={style.sendBack}><img className={style.send} src="/Images/send icon.png" alt="send icon" onClick={()=>handleSend()}/><span>{sendingStatus}</span></span>
+            <span className={content.receiver.role == "Student"?style.studentSendBack:content.receiver.role == "Teacher"?style.teacherSendBack:style.aluminiSendBack}><img className={style.send} src="/Images/send icon.png" alt="send icon" onClick={()=>handleSend()}/><span>{sendingStatus}</span></span>
         </div> 
     </div>);
 }

@@ -15,7 +15,7 @@ const SearchResource = ({ getText }) => {
         branch: "All",
         name: ""
     });
-
+    let [username,setUsername] = useState("");
     useEffect(() => {
         setSearch({ ...search, name: name });
     }, [name]);
@@ -39,14 +39,21 @@ const SearchResource = ({ getText }) => {
                 setSearch(search);
         }
     }
+    const getUser = async(id) => {
+        const res = await axios.get("http://localhost:5000/UserDetails/"+id);
+        console.log(res);
+        setUsername(res.data[0].FullName);
+    }
     const handleOnClick = (resource) => {
+        getUser(resource.owner.senderId);
+        console.log(username);
         dispatch(resources({
             id: resource.id,
             resourceName: resource.resourceName,
             owner: {
                 senderId: resource.owner.senderId,
                 role: resource.owner.role,
-                senderName: resource.owner.name
+                senderName: username
             },
             type: resource.type,
             timeline: resource.timeline,

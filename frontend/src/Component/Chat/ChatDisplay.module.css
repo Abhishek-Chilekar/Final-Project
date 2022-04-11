@@ -1,5 +1,19 @@
-.chatDisplay{
+.studentChatDisplay{
     background:  linear-gradient(179.39deg, #24afeb 33.28%, rgba(235, 235, 235, 0.117187) 91.52%, rgba(232, 235, 235, 0) 99.25%);
+    border-radius:25px 25px 0px 0px;
+    height:176px;
+    font-family: poppins;
+}
+
+.teacherChatDisplay{
+    background: linear-gradient(179.39deg, #2ACD1C 33.28%, rgba(75, 196, 65, 0.117187) 91.52%, rgba(232, 235, 232, 0) 99.25%);
+    border-radius:25px 25px 0px 0px;
+    height:176px;
+    font-family: poppins;
+}
+
+.aluminiChatDisplay{
+    background: linear-gradient(179.39deg, #DC5407 33.28%, rgba(209, 100, 38,  0.117187) 91.52%, rgba(201, 201, 201, 0) 99.25%);
     border-radius:25px 25px 0px 0px;
     height:176px;
     font-family: poppins;
@@ -19,11 +33,28 @@
     padding-left: 10px;
 }
 
-.roleIndicator{
-    height: 15px;
+.studentIndicator{
+    height:15px;
     width:15px;
     background-color: #009CDF;
-    border-radius: 25px;
+    border-radius:25px;
+    margin-right: 5px;
+}
+
+.teacherIndicator{
+    height:15px;
+    width:15px;
+    background-color: #2ACD1C;
+    border-radius:25px;
+    margin-right: 5px;
+}
+
+.aluminiIndicator{
+    height:15px;
+    width:15px;
+    background-color: #DC5407;
+    border-radius:25px;
+    margin-right: 5px;
 }
 
 .profile{
@@ -100,11 +131,9 @@
 .send{
     height:35px;
     width:35px;
-    background-color: #009CDF;
-    border-radius: 25px;
 }
 
-.sendBack{
+.studentSendBack{
     font-size: 16px;
     font-weight: 600;
     display: flex;
@@ -118,16 +147,72 @@
     padding-bottom: 5px;
 }
 
-.sendBack span{
+.teacherSendBack{
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2ACD1C;
+    color:white;
+    border-radius: 50px;
+    margin-left:10px;
+    padding:10px 8px;
     padding-bottom: 5px;
 }
 
-.image{
+.aluminiSendBack{
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #DC5407;
+    color:white;
+    border-radius: 50px;
+    margin-left:10px;
+    padding:10px 8px;
+    padding-bottom: 5px;
+}
+
+.studentSendBack span{
+    padding-bottom: 5px;
+}
+
+.teacherSendBack span{
+    padding-bottom: 5px;
+}
+
+.aluminiSendBack span{
+    padding-bottom: 5px;
+}
+
+.studentImage{
     height:30px;
     width:30px;
     padding:10px 10px;
     padding-bottom: 10px;
     background-color: #009CDF;
+    border-radius: 25px;
+    margin-right:10px;
+}
+
+.teacherImage{
+    height:30px;
+    width:30px;
+    padding:10px 10px;
+    padding-bottom: 10px;
+    background-color: #2ACD1C;
+    border-radius: 25px;
+    margin-right:10px;
+}
+
+.aluminiImage{
+    height:30px;
+    width:30px;
+    padding:10px 10px;
+    padding-bottom: 10px;
+    background-color: #DC5407;
     border-radius: 25px;
     margin-right:10px;
 }

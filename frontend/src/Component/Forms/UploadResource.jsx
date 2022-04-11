@@ -103,7 +103,7 @@ const UploadResource = ({popupstate,reload}) => {
         })}>
             <div className={style.upperdiv}>
                 <label className={style.lab1} for="name">Name: </label>
-                <input {...register("name",{required:"Name is required",pattern:{value:/^([a-zA-Z]*){2,}$/,message:"Invalid Name"}})} className={style.inp1} type="text" name="name" id="name" required />
+                <input {...register("name",{required:"Name is required",pattern:{value:/^([a-zA-Z1-9 ]*){2,}$/,message:"Invalid Name"}})} className={style.inp1} type="text" name="name" id="name" required />
 
                 <label className={style.lab1} for="description">Description: </label>
                 <input {...register("description")}className={style.desc} type="text" name="description" id="description" required />

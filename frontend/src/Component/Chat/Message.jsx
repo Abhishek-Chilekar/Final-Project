@@ -22,14 +22,14 @@ const Message = (props) =>{
                 senderChat:props.chat,
                 receiver:user,
                 receiverChat:receiverChat.data,
-                reloadList:props.reload[1]
+                reloadList:props.setReload
             }
         })
         content.text = content.text ?(content.text.length > 200 ? content.text.slice(0,200)+'...': content.text):"";
     }
 
-    React.useEffect(()=>getContent(),[]);
-    React.useEffect(()=>getContent(),[props.reload[0]]);
+    React.useEffect(()=>{getContent()},[]);
+    React.useEffect(()=>getContent(),[props.reload]);
     
     const dispatch = useDispatch();
     return (
@@ -40,7 +40,7 @@ const Message = (props) =>{
                     <div className={style.details}>
                         <h1 className={style.name}>{content.name}</h1>
                         <div className={style.roleIndicator}>
-                            <div className={style.indicator}></div>
+                            <div className={content.role == "Student"?style.studentIndicator:content.role == "Teacher"?style.teacherIndicator:style.aluminiIndicator}></div>
                             <h2 className={style.role}>{content.role}</h2>
                         </div>
                     </div>

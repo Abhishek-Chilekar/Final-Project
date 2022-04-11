@@ -36,7 +36,7 @@ const ResourceList = ({select,reload}) =>{
      }, [reload])
 
     return(<div className={style.resourceList}>{list.map((c)=>{
-        return (select == "All" || select == c.type) && (c.branch.toLowerCase() == user.branch.toLowerCase()) && <Resource content={c}/>
+        return (select == "All" || select == c.type) && (c.branch.toLowerCase() == "all" ||c.branch.toLowerCase() == user.branch.toLowerCase()) && <Resource content={c}/>
     })}</div>)
 }
 

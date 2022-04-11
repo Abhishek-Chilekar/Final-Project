@@ -74,6 +74,7 @@ const Search = ({getText})=>{
     }
 
     const handleMessage=async(user)=>{
+        const func = ()=>{};
         try{
             let obj= {};
             const res = await axios.get("http://localhost:5000/PrivateChat/"+currentUser.id+user.id);
@@ -104,7 +105,8 @@ const Search = ({getText})=>{
                         senderId:user.id,
                         chats:[]
                     },
-                    receiver:user
+                    receiver:user,
+                    reloadList :func
                 }
             }
             else{
@@ -112,7 +114,8 @@ const Search = ({getText})=>{
                 obj = {
                     senderChat:res.data,
                     receiverChat:receiverChat.data,
-                    receiver:user
+                    receiver:user,
+                    reloadList : func
                 }
             }
             dispatch(chats(obj))
@@ -171,14 +174,14 @@ const Search = ({getText})=>{
             </select>
         </div>
         <div>
-           {data.map((user)=>(user.id != currentUser.id && (search.name==""||(user.FullName+"").includes(search.name))&&(search.role == "All"||user.role == search.role)&&(search.skill == "All"||user.skillset.includes(search.skill))&&(search.profession == "All"||user.role != "alumini"||user.profession == search.profession)&&(search.year == "All"||user.year == search.year)&&(search.branch == "All"||user.branch == search.branch))&&(
+           {data.map((user)=>(user.id != currentUser.id && (search.name==""||(user.FullName+"").includes(search.name))&&(search.role == "All"||user.role == search.role)&&(search.skill == "All"||user.skillset.includes(search.skill))&&(search.profession == "All"||user.role != "alumini"||user.jobRole == search.profession)&&(search.year == "All"||user.year == search.year)&&(search.branch == "All"||user.branch == search.branch))&&(
             <div className={style.list}>
                 <div className={style.details}>
                     <img className={style.image} src={user.photoUrl?user.photoUrl:"/Images/avatardefault.png"} alt="profilepic"/>
                     <div className={style.inner}>
                         <h1>{user.FullName}</h1>
                         <div className={style.role}>
-                            <div className={style.student}></div>
+                            <div className={user.role == "Student"?style.studentIndicator:user.role == "Teacher"?style.teacherIndicator:style.aluminiIndicator}></div>
                             <h2 className={style.roleName}>{user.role}</h2>
                         </div>
                         {(user.skillset&&user.skillset.length > 0)&&<div className={style.skillset}>
@@ -187,9 +190,9 @@ const Search = ({getText})=>{
                         </div>}
                     </div>
                 </div>
-               {((checkIfRequestMade(user))&&(!user.requestAccepted.includes(currentUser.id)))&&<button className={style.request} disabled={disabled} onClick={()=>handleClick(user)}>Request</button>}
-               {((!checkIfRequestMade(user))&&(!user.requestAccepted.includes(currentUser.id)))&&<button className={style.request}>Waiting</button>}
-               {user.requestAccepted.includes(currentUser.id)&&<button className={style.request} onClick={()=>handleMessage(user)}>Message</button>}
+               {((currentUser.role == "Student")&&(checkIfRequestMade(user))&&(!user.requestAccepted.includes(currentUser.id)))&&<button className={style.request} disabled={disabled} onClick={()=>handleClick(user)}>Request</button>}
+               {((currentUser.role == "Student")&&(!checkIfRequestMade(user))&&(!user.requestAccepted.includes(currentUser.id)))&&<button className={style.request}>Waiting</button>}
+               {(currentUser.role != "Student" || user.requestAccepted.includes(currentUser.id))&&<button className={style.request} onClick={()=>handleMessage(user)}>Message</button>}
             </div>
            ))}
         </div>

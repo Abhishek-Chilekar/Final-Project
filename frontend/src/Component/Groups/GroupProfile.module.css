@@ -104,6 +104,20 @@
     border-radius: 25px;
 }
 
+.teacherRole{
+    background-color: #2ACD1C;
+    color:white;
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+
+.aluminiRole{
+    background-color: #DC5407;
+    color:white;
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+
 .buttons{
     display: flex;
     justify-content: space-between;

@@ -33,12 +33,28 @@
   align-items: center;
 }
 
-.student{
-  width:15px;
+.studentIndicator{
   height:15px;
-  background-color: #09cdf0;
+  width:15px;
+  background-color: #009CDF;
   border-radius:25px;
-  margin-right:5px;
+  margin-right: 5px;
+}
+
+.teacherIndicator{
+  height:15px;
+  width:15px;
+  background-color: #2ACD1C;
+  border-radius:25px;
+  margin-right: 5px;
+}
+
+.aluminiIndicator{
+  height:15px;
+  width:15px;
+  background-color: #DC5407;
+  border-radius:25px;
+  margin-right: 5px;
 }
 
 .roleName{

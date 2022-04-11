@@ -171,7 +171,7 @@ const GroupChatDisplay = (props)=>{
 }
 */
     return(
-        <div className={style.chatDisplay}>
+        <div className={style.studentChatDisplay}>
             <div className={style.header} >
                 <div className={style.profile} onClick={()=>handleClick()}>
                     <img className={style.profilepic} src={current.photoUrl} alt="profile pic"/>
@@ -192,10 +192,10 @@ const GroupChatDisplay = (props)=>{
             {makeAdmin && <MakeAdmin popupstate={setMakeAdmin} groupDetails={current}/>} 
             {poll && <Poll  popupstate={setPoll} reload={()=>setReload(!reload)} reloadList = {reloadList} groupDetails={current}/>} 
             <div className={style.typingArea}>
-                <label className={style.imageBack} for="select"><img className={style.image} src="/Images/image.png" alt="image"/></label>
+                <label className={style.imageBack} for="select"><img className={style.studentImage} src="/Images/image.png" alt="image"/></label>
                 <input type="file" name="select" id="select" className={style.select} onChange={(e)=>setFile(e.target.files[0])}/>
                 <input className={style.input} type="text" id="text" name="text" placeholder='Type Here...' value={text} onChange={(e)=>{setFile(null);setText(e.target.value);}}/>
-                <span className={style.sendBack}><img className={style.send} src="/Images/send icon.png" alt="send icon" onClick={()=>handleSend()}/><span>{sendingStatus}</span></span>
+                <span className={style.studentSendBack}><img className={style.send} src="/Images/send icon.png" alt="send icon" onClick={()=>handleSend()}/><span>{sendingStatus}</span></span>
             </div>
         </div>
     );

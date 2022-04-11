@@ -57,21 +57,43 @@ const UserProfile = ({content})=>{
     useEffect(()=>{},[reload]);
     return(
     <div className={style.outerContainer}>
-        <div className={style.header}>
+       {content.role == "Student" && <div><div className={style.header}>
             <img className={style.profilePic} src={content.photoUrl?content.photoUrl:"/Images/avatardefault.png"} alt="profile pic"/>
             <h1 className={style.name}>{content.FullName}</h1>
             <h2 className={style.prn}>{"PRN Number : "+content.prn}</h2>
         </div>
-        {addSkill && <AddSkill popupstate={setAddSkill} reload={()=>setReload(!reload)}/>}
         <div className={style.basicInfo}>
             <span className={style.label}>Email : </span><span className={style.value}>{content.email}</span>
             <span className={style.label}>Year : </span><span className={style.value}>{content.year}</span>
             <span className={style.label}>Branch : </span><span className={style.value}>{content.branch}</span>
+        </div></div>}
+
+        {content.role == "Teacher" && <div><div className={style.header}>
+            <img className={style.profilePic} src={content.photoUrl?content.photoUrl:"/Images/avatardefault.png"} alt="profile pic"/>
+            <h1 className={style.name}>{content.FullName}</h1>
+            <h2 className={style.prn}>{"Employee Code : "+content.empCode}</h2>
         </div>
+        <div className={style.basicInfo}>
+            <span className={style.label}>Email : </span><span className={style.value}>{content.email}</span>
+            <span className={style.label}>Qualification : </span><span className={style.value}>{content.qualification}</span>
+        </div></div>}
+
+        {content.role == "Alumini" && <div><div className={style.header}>
+            <img className={style.profilePic} src={content.photoUrl?content.photoUrl:"/Images/avatardefault.png"} alt="profile pic"/>
+            <h1 className={style.name}>{content.FullName}</h1>
+            <h2 className={style.prn}>{"PRN Number : "+content.prn}</h2>
+        </div>
+        <div className={style.basicInfo}>
+            <span className={style.label}>Job Role : </span><span className={style.value}>{content.jobRole}</span>
+            <span className={style.label}>Passout Year : </span><span className={style.value}>{content.passout_year}</span>
+            <span className={style.label}>Organisation : </span><span className={style.value}>{content.org}</span>
+        </div></div>}
+
+        {addSkill && <AddSkill popupstate={setAddSkill} reload={()=>setReload(!reload)}/>}
         <div className={style.skillSet}>
             <div className={style.skillHeader}>
                 <span className={style.skillLabel}>Skills : </span>
-                <span className={style.add} onClick={()=>setAddSkill(true)}> Add</span>
+                {content.id == user.id && <span className={style.add} onClick={()=>setAddSkill(true)}> Add</span>}
             </div>
             <div className={style.skillContainer}>
                { content.skillset.map((skill)=><div className={style.skill}>{skill} {content.id == user.id && <span onClick={()=>remove(skill)}>x</span>}</div>)}

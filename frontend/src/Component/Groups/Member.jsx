@@ -33,7 +33,7 @@ const Member=({details})=>{
             <img className={style.image} src={m.photoUrl} alt="Profile pic"/>
             <h1 className={style.memberName}>{m.name}</h1>
         </div>
-        <span className={m.isAdmin == "true"?style.role:style.studentRole}>{m.isAdmin=="true"?"Admin":m.role}</span>
+        <span className={m.isAdmin == "true"?style.role:m.role == "Student"?style.studentRole:m.role == "Teacher"?style.teacherRole:style.aluminiRole}>{m.isAdmin=="true"?"Admin":m.role}</span>
     </div>
     );
 }

@@ -17,20 +17,15 @@ const Chat = () =>{
     const handleResize =()=>{
         dispatch(updateWindow());
     }
-    // useEffect(() => {
-    //     const r = window.addEventListener('resize',handleResize);
-    //     return window.removeEventListener('resize',r);
-    // }, [])
+    useEffect(() => {
+        const r = window.addEventListener('resize',handleResize);
+        return window.removeEventListener('resize',r);
+    }, [])
     return(
         <div className={style.chat}>
-            {/* <UploadResource popupstate={setPopup}/> */}
-            {/* {width > 1400 && <Navigation/>}
+            {width > 1400 && <Navigation/>}
             <MainPanel/>
-           {(Nav.active != "Notification" && Nav.active != "About" && width > 1100) && <ThirdScreen/>} */}
-           {/* {(popupForm.type == "Resource"?<UploadResource popupstate={setPopup(popupForm.popupstate)}/>:<></>)} */}
-           {<Navigation/>}
-            <MainPanel/>
-           {(Nav.active != "Notification" && Nav.active != "About") && <ThirdScreen/>}
+           {(Nav.active != "Notification" && Nav.active != "About" && width > 1040) && <ThirdScreen/>}
         </div>
     )
 }

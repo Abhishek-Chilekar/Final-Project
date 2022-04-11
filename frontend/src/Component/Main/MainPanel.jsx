@@ -86,7 +86,7 @@ const MainPanel = () =>{
                     </select>}
                    </div>
                </div>
-               {(Nav.active != 'Notification' && Nav.active != 'About')&&<span className={style.button} onClick={()=>{handleOnClick()}}><span className={style.plus}>+</span>{Nav.active == "Chats"?"Create a Group":Nav.active == "Resources"?"Add a Resource":Nav.active == "Events"&&"Add a Events" }</span>}
+               {(Nav.active != 'Notification' && Nav.active != 'About'&& Nav.active != "Search Chat" && Nav.active != "Search Resource" && Nav.active != "Search Event")&&<span className={style.button} onClick={()=>{handleOnClick()}}><span className={style.plus}>+</span>{Nav.active == "Chats"?"Create Group":Nav.active == "Resources"?"Add Resource":Nav.active == "Events"&&"Add Events" }</span>}
             </div>
             {(Nav.active != "Notification" && Nav.active != "About")&&<div className={style.search} onClick={()=>handleSearch()}>
                 <input type="text" placeholder="Search...." id="searchbar" className={style.searchBar} onChange={e=> { setSearchText(e.target.value)}} />

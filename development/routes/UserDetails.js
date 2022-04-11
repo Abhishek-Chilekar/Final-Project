@@ -31,9 +31,12 @@ router.get("/",async (req,res)=>{
         -----------------
         teacher:
         qualification:
+        empCode:
         -----------------
         alumin:
         jobTitle:
+        prn
+        org
         passout_year:
     }
     */
@@ -102,11 +105,14 @@ router.get("/",async (req,res)=>{
                 data.prn = textdecrypt(data.prn);
                 data.branch = textdecrypt(data.branch);
             }
-            else if(data.qualification != null){
+            else if(data.qualification != null && data.empCode != null){
                 data.qualification = textdecrypt(data.qualification);
+                data.empCode = textdecrypt(data.empCode);
             }
             else{
-                data.jobTitle = textdecrypt(data.jobTitle);
+                data.jobRole = textdecrypt(data.jobRole);
+                data.org = textdecrypt(data.org);
+                data.prn = textdecrypt(data.prn);
                 data.passout_year = textdecrypt(data.passout_year);
             }
            return {id:doc.id,...data}
@@ -185,11 +191,14 @@ router.get("/:userId",async (req,res)=>{
                 data.prn = textdecrypt(data.prn);
                 data.branch = textdecrypt(data.branch);
             }
-            else if(data.qualification != null){
+            else if(data.qualification != null && data.empCode != null){
                 data.qualification = textdecrypt(data.qualification);
+                data.empCode = textdecrypt(data.empCode);
             }
             else{
-                data.jobTitle = textdecrypt(data.jobTitle);
+                data.jobRole = textdecrypt(data.jobRole);
+                data.org = textdecrypt(data.org);
+                data.prn = textdecrypt(data.prn);
                 data.passout_year = textdecrypt(data.passout_year);
             }
            return {id:doc.id,...data}
@@ -295,7 +304,7 @@ router.post("/",async (req,res)=>{
                     }
                 }
                 else if(data.role == 'Teacher'){
-                    if(data.qualification != null){
+                    if(data.qualification != null && data.empCode != null){
                         data.FullName = textencrypt(data.FullName);
                         data.email = textencrypt(data.email);
                         data.photoUrl = textencrypt(data.photoUrl)
@@ -309,7 +318,11 @@ router.post("/",async (req,res)=>{
                         }
                         if(data.request != null){
                             data.request = data.request.map((req)=>{
-                                return textencrypt(req);
+                                return {
+                                    requestId:req.requestId,
+                                    senderId:req.senderId,
+                                    requestMessage:textencrypt(req.requestMessage)
+                                };
                             });
                         }
                         else{
@@ -343,6 +356,7 @@ router.post("/",async (req,res)=>{
                             data.chatId = textencrypt(chatId)
                         }
                         data.qualification = textencrypt(data.qualification);
+                        data.empCode = textencrypt(data.empCode);
                         const id = data.id;
                         delete data.id;
                         await userDetails.doc(id).set(data);
@@ -353,7 +367,7 @@ router.post("/",async (req,res)=>{
                     }
                 }
                 else{
-                    if(data.jobTitle != null && data.passout_year != null){
+                    if(data.jobRole != null && data.org != null && data.prn != null && data.passout_year != null){
                         data.FullName = textencrypt(data.FullName);
                         data.email = textencrypt(data.email);
                         data.photoUrl = textencrypt(data.photoUrl);
@@ -367,7 +381,11 @@ router.post("/",async (req,res)=>{
                         }
                         if(data.request != null){
                             data.request = data.request.map((req)=>{
-                                return textencrypt(req);
+                                return {
+                                    requestId:req.requestId,
+                                    senderId:req.senderId,
+                                    requestMessage:textencrypt(req.requestMessage)
+                                };
                             });
                         }
                         else{
@@ -400,8 +418,10 @@ router.post("/",async (req,res)=>{
                         if(data.chatId != null){
                             data.chatId = textencrypt(chatId)
                         }
-                        data.jobTitle = textencrypt(data.jobTitle);
+                        data.jobRole = textencrypt(data.jobRole);
+                        data.prn = textencrypt(data.prn);
                         data.passout_year = textencrypt(data.passout_year);
+                        data.org = textencrypt(data.org);
                         const id = data.id;
                         delete data.id; 
                         await userDetails.doc(id).set(data);
@@ -496,7 +516,8 @@ router.patch('/:userId', async(req,res)=>{
                 }
             }
             else if(data.role == 'Teacher'){
-                if(data.qualification != null){
+                if(data.qualification != null && data.empCode != null){
+                    
                     data.FullName = textencrypt(data.FullName);
                     data.email = textencrypt(data.email);
                     data.photoUrl = textencrypt(data.photoUrl)
@@ -508,9 +529,15 @@ router.patch('/:userId', async(req,res)=>{
                     else{
                         data.skillset = []
                     }
+                    
                     if(data.request != null){
+                        console.log(data.request)
                         data.request = data.request.map((req)=>{
-                            return textencrypt(req);
+                            return {
+                                requestId:req.requestId,
+                                senderId:req.senderId,
+                                requestMessage:textencrypt(req.requestMessage)
+                            };
                         });
                     }
                     else{
@@ -544,6 +571,7 @@ router.patch('/:userId', async(req,res)=>{
                         data.chatId = textencrypt(chatId)
                     }
                     data.qualification = textencrypt(data.qualification);
+                    data.empCode = textencrypt(data.empCode);
                     await userDetails.doc(req.params.userId).update(data);
                     res.send({msg:"data updated"});
                 }
@@ -552,7 +580,7 @@ router.patch('/:userId', async(req,res)=>{
                 }
             }
             else{
-                if(data.jobTitle != null && data.passout_year != null){
+                if(data.jobRole != null && data.org != null && data.prn != null &&data.passout_year != null){
                     data.FullName = textencrypt(data.FullName);
                     data.email = textencrypt(data.email);
                     data.photoUrl = textencrypt(data.photoUrl);
@@ -566,7 +594,11 @@ router.patch('/:userId', async(req,res)=>{
                     }
                     if(data.request != null){
                         data.request = data.request.map((req)=>{
-                            return textencrypt(req);
+                            return {
+                                requestId:req.requestId,
+                                senderId:req.senderId,
+                                requestMessage:textencrypt(req.requestMessage)
+                            };
                         });
                     }
                     else{
@@ -599,7 +631,9 @@ router.patch('/:userId', async(req,res)=>{
                     if(data.chatId != null){
                         data.chatId = textencrypt(chatId)
                     }
-                    data.jobTitle = textencrypt(data.jobTitle);
+                    data.jobRole = textencrypt(data.jobRole);
+                    data.prn = textencrypt(data.prn);
+                    data.org = textencrypt(data.org);
                     data.passout_year = textencrypt(data.passout_year);
                     await userDetails.doc(req.params.userId).update(data);
                     res.send({msg:"data updated"});
@@ -619,7 +653,7 @@ router.patch('/:userId', async(req,res)=>{
   
     }
     catch(err){
-       res.send({msg:err}); 
+       res.send({msg:err.message}); 
     }
    
 });

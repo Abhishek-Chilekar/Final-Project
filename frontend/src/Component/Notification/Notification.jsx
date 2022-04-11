@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React,{useState} from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { eventAction, resourceAction } from '../../Actions/navActions';
 import { events, resources } from '../../Actions/thirdScreenAction';
 import style from './Notification.module.css';
 
@@ -19,6 +21,7 @@ import style from './Notification.module.css';
 const Notification = (props) =>{
     const content = props.content;
     const [reload,setReload] = props.reload;
+    const [username,setUsername] = React.useState("");
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem("User"));
 
@@ -42,6 +45,7 @@ const Notification = (props) =>{
         }
     }
 
+
     const handleView =async()=>{
         
         switch(content.purpose){
@@ -58,11 +62,29 @@ const Notification = (props) =>{
                 break;
             case "resource":
                 const re = await axios.get("http://localhost:5000/Resources/"+content.contentId);
-                dispatch(resources(re.data[0]));
+                const user = await axios.get("http://localhost:5000/UserDetails/"+re.data[0].owner.senderId);
+                const resource = re.data[0];
+                const obj={
+                    id:resource.id,
+                    resourceName:resource.resourceName,
+                    owner:{
+                        senderId:resource.owner.senderId,
+                        role:resource.owner.role,
+                        senderName:user.data[0].FullName,
+                    },
+                    type:resource.type,
+                    size:resource.size,
+                    description:resource.description,
+                    url:resource.url
+                }
+                dispatch(resources(obj));
+                dispatch(resourceAction());
                 break;
             case "event":
                 const r = await axios.get("http://localhost:5000/Events/"+content.contentId);
-                dispatch(events(r.data[0]));
+                const u = await axios.get("http://localhost:5000/UserDetails/"+r.data[0].owner.senderId);
+                dispatch(events({...r.data[0],owner:{...r.data[0].owner,senderName:u.data[0].FullName}}));
+                dispatch(eventAction());
                 break;
             default:
                 break;
@@ -79,7 +101,7 @@ const Notification = (props) =>{
                 <h2 className={style.description}>{content.content}</h2>
             </div>
         </div>
-        <div>
+        <div className={style.buttonContainer}>
             {content.type == "All"&&<span className={style.button} onClick={()=>handleView()}>{(content.purpose == "group")?"Join":(content.purpose=="resource"||content.purpose=="event")&&"View"}</span>}
             {content.type != "All"&&<span className={style.button} onClick={()=>handleDelete()}>Delete</span>}
             {content.type == "All"&&<span className={style.button} onClick={()=>handleIgnore()}>Ignore</span>}

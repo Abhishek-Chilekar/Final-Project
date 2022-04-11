@@ -47,7 +47,7 @@ const EventList = ({ reload, setReload }) => {
         }
         fetchData();
     }, [reload]);
-    return (<div className={Rstyle.resourceList}>{list.map((c) => (c.branch.toLowerCase() == "All".toLowerCase() || c.branch.toLowerCase() == user.branch.toLowerCase()) && <Event content={c} reload={setReload} />)}</div>)
+    return (<div className={Rstyle.resourceList}>{list.map((c) => (c.branch.toLowerCase() == "all" || c.branch.toLowerCase() == user.branch.toLowerCase()) && <Event content={c} reload={setReload} />)}</div>)
 }
 
 export default React.memo(EventList);
