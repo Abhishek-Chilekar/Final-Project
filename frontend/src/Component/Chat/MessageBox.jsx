@@ -8,7 +8,6 @@ const MessageBox = (props) =>{
     let [hover,setHover] = React.useState(false);
     const msg = props.message;
     const m = msg.message;
-    console.log(m);
     const time = m.timeline.split(",")[1];
     const getName = async() =>{
         try{

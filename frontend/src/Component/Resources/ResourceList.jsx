@@ -7,8 +7,7 @@ const ResourceList = ({select,reload}) =>{
     const user = JSON.parse(localStorage.getItem("User"));
     let [list,setList] = useState([]);
 
-    useEffect(() => {
-       const fetchData = async()=>{
+    const fetchData = async()=>{
         try{
             const contentList = await axios.get("http://localhost:5000/Resources");
             console.log(contentList.data);
@@ -17,21 +16,18 @@ const ResourceList = ({select,reload}) =>{
          catch(e){
              console.log(e.message);
          }
-       }
+    }
+
+    useEffect(() => {
        fetchData();
     }, [])
 
+    useEffect(()=>{
+        const interval = setInterval(()=>{fetchData();},300000);
+        return ()=>clearInterval(interval);
+    },[])
+
     useEffect(() => {
-        const fetchData = async()=>{
-         try{
-             const contentList = await axios.get("http://localhost:5000/Resources");
-             console.log(contentList.data);
-             setList(contentList.data);
-          }
-          catch(e){
-              console.log(e.message);
-          }
-        }
         fetchData();
      }, [reload])
 

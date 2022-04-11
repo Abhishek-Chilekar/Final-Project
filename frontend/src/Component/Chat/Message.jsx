@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const Message = (props) =>{
     const [content,setContent] = React.useState({});
+    const [clickFlag,setClickFlag] = React.useState(false);
     const getContent=async()=>{
         const ruser = await axios.get("http://localhost:5000/UserDetails/"+props.chat.receiverId);
         const user = ruser.data[0];
@@ -33,7 +34,10 @@ const Message = (props) =>{
     
     const dispatch = useDispatch();
     return (
-        <div className={style.messageBox} onClick={()=>dispatch(chats(content.allDetails))}>
+        <div className={style.messageBox} onClick={()=>{
+            dispatch(chats(content.allDetails));
+            setClickFlag(true);
+        }}>
             <div className={style.header}>
                 <div className={style.senderProfile}>
                     <img  className={style.profilePic} src={content.photoUrl} alt="profile pic"/>

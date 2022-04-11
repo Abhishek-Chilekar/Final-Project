@@ -10,22 +10,27 @@ import {ref,uploadBytesResumable,getDownloadURL,deleteObject} from "@firebase/st
 const ChatDisplay = ({content}) =>{
     const {senderChat,receiverChat,receiver,reloadList} = content;
     const user = JSON.parse(localStorage.getItem("User"));
-    console.log(content);
     const date = new Date();
     let [reload,setReload] = React.useState(false);
     const [disabled,setDisabled] = React.useState(false);
     const [disabledButton,setDisabledButton] = React.useState(false);
     const [sendingStatus,setSendingStatus] = React.useState("");
-    const formatData = ()=>{
-        return {
+    const [data,setData] = React.useState({photoUrl:"",name:"",role:"",messages:[]});
+    const formatData = async()=>{
+        const res = await axios.get("http://localhost:5000/PrivateChat/"+senderChat.id);
+        console.log("h1");
+        setData({
             photoUrl:receiver.photoUrl?receiver.photoUrl:"/Images/avatardefault.png",
             name:receiver.FullName,
             role:receiver.role,
-            messages:senderChat.chats
-        }
+            messages:res.data.chats
+        });
     }
-
-    const current = formatData();
+    React.useEffect(()=>{
+        const interval = setInterval(()=>formatData(),3000);
+        return ()=>clearInterval(interval);
+    },[])
+    const current = data;
     React.useEffect(() => {
     },[reload])
     let [text,setText] = React.useState("");
@@ -112,7 +117,7 @@ const ChatDisplay = ({content}) =>{
             console.log(res.data.msg);
             setText("");
             setSendingStatus("");
-           {reloadList && reloadList();}
+            reloadList();
             setDisabledButton(false);
             setReload(!reload);
         }

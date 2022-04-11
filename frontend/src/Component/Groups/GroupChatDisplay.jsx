@@ -16,7 +16,7 @@ import { group_profiles } from '../../Actions/thirdScreenAction';
 const GroupChatDisplay = (props)=>{
     const user = JSON.parse(localStorage.getItem("User"));
     const dispatch = useDispatch();
-    const current = props.content.content;
+    console.log(props.content.content);
     const reloadList = props.content.reloadList;
     const [text,setText] = useState("");
     const [file,setFile] = useState(null);
@@ -30,17 +30,24 @@ const GroupChatDisplay = (props)=>{
     const [disabled,setDisabled] = useState(false);
     const [disableButton,setDisableButton] = useState(false);
     const [sendingStatus,setSendingStatus] = useState("");
+    const [data,setData] = useState({chat:[],member:[]});
+    const current = data;
 
     const date = new Date();
 
-    const getAdmin = ()=>{
-        const adminUser = current.member.filter((u)=>u.isAdmin == "true");
-        console.log(adminUser);
+    const getData = async()=>{
+        const res = await axios.get("http://localhost:5000/GroupChat/"+props.content.content.id);
+        console.log(res);
+        setData(res.data[0]);
+        const adminUser = res.data[0].member.filter((u)=>u.isAdmin == "true");
         setAdmin(adminUser[0].senderId);
     }
 
     React.useEffect(()=>{
-        getAdmin();
+        const interval = setInterval(()=>{
+            getData();
+        },3000);
+        return ()=>clearInterval(interval);
     },[]);
 
     const handleClick=()=>{

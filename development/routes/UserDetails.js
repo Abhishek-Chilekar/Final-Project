@@ -108,12 +108,14 @@ router.get("/",async (req,res)=>{
             else if(data.qualification != null && data.empCode != null){
                 data.qualification = textdecrypt(data.qualification);
                 data.empCode = textdecrypt(data.empCode);
+                data.role = textdecrypt(data.role);
             }
             else{
                 data.jobRole = textdecrypt(data.jobRole);
                 data.org = textdecrypt(data.org);
                 data.prn = textdecrypt(data.prn);
                 data.passout_year = textdecrypt(data.passout_year);
+                data.role = textdecrypt(data.role);
             }
            return {id:doc.id,...data}
         });
@@ -194,12 +196,14 @@ router.get("/:userId",async (req,res)=>{
             else if(data.qualification != null && data.empCode != null){
                 data.qualification = textdecrypt(data.qualification);
                 data.empCode = textdecrypt(data.empCode);
+                data.role = textdecrypt(data.role);
             }
             else{
                 data.jobRole = textdecrypt(data.jobRole);
                 data.org = textdecrypt(data.org);
                 data.prn = textdecrypt(data.prn);
                 data.passout_year = textdecrypt(data.passout_year);
+                data.role = textdecrypt(data.role);
             }
            return {id:doc.id,...data}
         });
@@ -357,6 +361,7 @@ router.post("/",async (req,res)=>{
                         }
                         data.qualification = textencrypt(data.qualification);
                         data.empCode = textencrypt(data.empCode);
+                        data.role = textencrypt(data.role);
                         const id = data.id;
                         delete data.id;
                         await userDetails.doc(id).set(data);
@@ -422,6 +427,7 @@ router.post("/",async (req,res)=>{
                         data.prn = textencrypt(data.prn);
                         data.passout_year = textencrypt(data.passout_year);
                         data.org = textencrypt(data.org);
+                        data.role = textencrypt(data.role);
                         const id = data.id;
                         delete data.id; 
                         await userDetails.doc(id).set(data);
