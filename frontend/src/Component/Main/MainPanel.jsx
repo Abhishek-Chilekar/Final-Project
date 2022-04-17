@@ -92,7 +92,7 @@ const MainPanel = () =>{
                 <input type="text" placeholder="Search...." id="searchbar" className={style.searchBar} onChange={e=> { setSearchText(e.target.value)}} />
                 <div className={style.searchIcon}><img src="/Images/Search icon.png" alt="Search" className={style.icon}/></div>
             </div>}
-            {(Nav.active == "Chats"?<MessageList select={select} reload={reload} setReload={()=>{}}/>:Nav.active == "Resources"?<ResourceList select={select} reload={reload}/>:Nav.active == "Events"?<EventList reload={reload} setReload={()=>{}}/>:Nav.active == "Notification"?<NotificationList />:Nav.active == "Search Chat"?<Search getText= {getText}/>:Nav.active === "Search Resource" ? <SearchResource getText={getText}/>:Nav.active == "Search Event" ?<SearchEvent getText={getText}/>:<AboutUs/>)}
+            {(Nav.active == "Chats"?<MessageList select={select} reload={reload} setReload={()=>{}}/>:Nav.active == "Resources"?<ResourceList select={select} reload={reload}/>:Nav.active == "Events"?<EventList reload={reload} setReload={()=>{setReload(!reload)}}/>:Nav.active == "Notification"?<NotificationList />:Nav.active == "Search Chat"?<Search getText= {getText}/>:Nav.active === "Search Resource" ? <SearchResource getText={getText}/>:Nav.active == "Search Event" ?<SearchEvent getText={getText}/>:<AboutUs/>)}
         </div>
     );
 }
