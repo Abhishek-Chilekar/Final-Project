@@ -1,11 +1,11 @@
-.overlay{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 1;
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }
 
 .success {
@@ -83,6 +83,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .rightside {
   display: flex;
   flex-direction: column;
@@ -90,12 +91,14 @@
   margin-left: 23%;
   margin-right: 10%;
 }
+
 .outerdiv {
   display: flex;
   flex-direction: row;
   margin-left: 10%;
   margin-right: 20%;
 }
+
 .lab1 {
   width: 10%;
   margin-left: 20%;
@@ -105,6 +108,7 @@
 
   white-space: nowrap;
 }
+
 .inp1 {
   margin-left: 20%;
   margin-right: 20%;
@@ -117,6 +121,9 @@
   background: #ffffff;
   border-radius: 14px;
   border: none;
+
+  padding-left: 10px;
+  outline: none;
 }
 
 .butto {
@@ -143,6 +150,7 @@
 
   border-radius: 50%;
 }
+
 .edit {
   position: relative;
   bottom: 23px;

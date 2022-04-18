@@ -1,11 +1,11 @@
-.overlay{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 1;
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }
 
 .success {
@@ -79,16 +79,19 @@
   display: flex;
   flex-direction: column;
 }
+
 .lowerdiv {
   display: flex;
   flex-direction: row;
 }
+
 .resourceImg {
   width: 20%;
   height: 20%;
   background-color: black;
   border-radius: 50%;
 }
+
 .lab1 {
   display: flex;
   margin-left: 20%;
@@ -96,6 +99,7 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
 .inp2 {
   display: flex;
   margin-left: 50%;
@@ -108,13 +112,16 @@
   border-radius: 14px;
 
   border: none;
+
 }
+
 .lab2 {
   display: flex;
   margin-left: 50%;
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
 .inp1 {
   display: flex;
   margin-left: 20%;
@@ -126,7 +133,10 @@
   border-radius: 14px;
   border: none;
   height: 25px;
+  padding-left: 20px;
+  outline: none;
 }
+
 .desc {
   display: flex;
   margin-left: 20%;
@@ -138,7 +148,10 @@
   background: #ffffff;
   border-radius: 14px;
   border: none;
+  padding-left: 20px;
+  outline: none;
 }
+
 .butto {
   margin: 30px;
   margin-left: 265px;

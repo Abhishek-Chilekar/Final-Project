@@ -13,6 +13,7 @@
   max-width: 80%;
   font-size: 16px;
 }
+
 .popupactive {
   position: fixed;
   top: 50%;
@@ -81,6 +82,7 @@
   align-items: center;
   color: white;
 }
+
 .overlay {
   position: fixed;
   top: 0;
@@ -90,10 +92,12 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
+
 .overlay.active {
   opacity: 1;
   pointer-events: all;
 }
+
 .titleImg {
   width: 20%;
   height: 20%;
@@ -101,13 +105,16 @@
   background-color: black;
   border-radius: 50%;
 }
+
 .content {
   display: flex;
   flex-direction: column;
 }
+
 .text {
   color: white;
 }
+
 .edit {
   position: relative;
   bottom: 28px;
@@ -123,6 +130,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .lab {
   display: flex;
   flex-direction: row;
@@ -132,6 +140,7 @@
 
   color: white;
 }
+
 .options {
   margin: 10px;
   color: white;
@@ -145,6 +154,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .inp {
   height: 30px;
   border: none;
@@ -155,6 +165,9 @@
 
   background: #ffffff;
   border-radius: 14px;
+
+  padding-left: 20px;
+  outline: none;
 }
 
 .butto {

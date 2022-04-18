@@ -49,9 +49,11 @@
   color: white;
   font-size: 16px;
 }
+
 .file {
   display: none;
 }
+
 .edit {
   position: relative;
   bottom: 23px;
@@ -67,6 +69,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .titleImg {
   display: flex;
   align-items: center;
@@ -77,6 +80,7 @@
   background-color: black;
   border-radius: 50%;
 }
+
 .close {
   cursor: pointer;
   border: none;
@@ -93,6 +97,7 @@
   transform: scale(2);
   color: white;
 }
+
 .butto {
   margin-top: 20px;
   margin-bottom: 10px;
@@ -115,6 +120,7 @@
   max-width: 60%;
   margin: auto;
 }
+
 .branchContainer {
   display: flex;
   flex-direction: column;
@@ -122,21 +128,25 @@
   align-items: flex-start;
   margin: auto;
 }
+
 .optiondiv {
   display: flex;
   flex-direction: row;
   margin: auto;
 }
+
 .lab {
   display: flex;
   margin-bottom: 5px;
   margin-top: 5px;
 }
+
 .submitbtn {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .inp {
   display: flex;
   height: 30px;
@@ -146,12 +156,17 @@
 
   background: #ffffff;
   border-radius: 14px;
+
+  padding-left: 20px;
+  outline: none;
 }
+
 .branchopt {
   display: flex;
   margin-bottom: 5px;
   margin-top: 5px;
 }
+
 .branch {
   background: #ffffff;
   border-radius: 14px;
@@ -159,7 +174,11 @@
   height: 30px;
   margin: 0;
   width: 100%;
+
+  padding-left: 10px;
+  outline: none;
 }
+
 .innerdivstyle {
   margin-right: 20px;
   height: 30px;
@@ -167,4 +186,7 @@
   border-radius: 14px;
   border: none;
   width: 90%;
+
+  padding-left: 10px;
+  outline: none;
 }

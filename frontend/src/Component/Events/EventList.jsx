@@ -20,9 +20,14 @@ const EventList = ({ reload, setReload }) => {
     let [outdatedEvents, setOutdatedEvents] = useState([]);
 
     const deleteOutdatedEvents = async () => {
-        outdatedEvents.map(async (event) => {
-            await axios.delete("http://localhost:5000/Events/" + event)
-        })
+        if (outdatedEvents.length > 0) {
+            outdatedEvents.map(async (event) => {
+                await axios.delete("http://localhost:5000/Events/" + event)
+            });
+        }
+        else {
+            return;
+        }
     }
     const fetchData = async () => {
         try {
@@ -32,16 +37,17 @@ const EventList = ({ reload, setReload }) => {
                 let startDate = new Date();
                 startDate.setHours(0, 0, 0, 0);
                 let tillDate = new Date(e.till);
-
                 if (startDate.toISOString() > tillDate.toISOString()) {
+                    console.log("Deleted");
                     setOutdatedEvents(...outdatedEvents, e.id);
+                    //outdatedEvents.push(e.id);
                     return false;
                 }
                 else {
                     return true;
                 }
             });
-            setList(contentList.data);
+            setList(newList);
             deleteOutdatedEvents();
         }
         catch (e) {
@@ -56,7 +62,7 @@ const EventList = ({ reload, setReload }) => {
     useEffect(() => {
         fetchData();
     }, [reload]);
-    return (<div className={Rstyle.resourceList}>{list.map((c) => (c.branch.toLowerCase() == "all" || c.branch.toLowerCase() == user.branch.toLowerCase()) && (c.id !== outdatedEvents.includes(c.id)) && <Event content={c} reload={setReload} />)}</div>)
+    return (<div className={Rstyle.resourceList}>{list.map((c) => (c.branch.toLowerCase() == "all" || c.branch.toLowerCase() == user.branch.toLowerCase()) && (!outdatedEvents.includes(c.id)) && <Event content={c} reload={setReload} />)}</div>)
 }
 
 export default React.memo(EventList);
