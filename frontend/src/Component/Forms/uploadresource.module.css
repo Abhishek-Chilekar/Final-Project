@@ -1,11 +1,11 @@
-.overlay{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 1;
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }
 
 .message{
@@ -97,12 +97,14 @@
   flex-direction: column;
   /* margin-left:  */
 }
+
 .resourceImg {
   width: 20%;
   height: 20%;
   background-color: black;
   border-radius: 50%;
 }
+
 .lab1 {
   display: flex;
   margin-left: 20%;
@@ -111,6 +113,7 @@
   margin-bottom: 5px;
   
 }
+
 .inp2 {
   display: flex;
   /* margin-left: 50%; */
@@ -124,13 +127,16 @@
   border-radius: 14px;
 
   border: none;
+
 }
+
 .lab2 {
   display: flex;
   /* margin-left: 50%; */
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
 .inp1 {
   /* margin-left: 10px; */
   display: flex;
@@ -145,6 +151,7 @@
   height: 25px;
   outline: none;
 }
+
 .desc {
   display: flex;
   padding-left: 10px;

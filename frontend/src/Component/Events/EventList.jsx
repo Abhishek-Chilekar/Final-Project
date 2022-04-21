@@ -29,19 +29,19 @@ const EventList = ({ reload, setReload }) => {
             return;
         }
     }
-
     const fetchData = async () => {
         try {
             const contentList = await axios.get("http://localhost:5000/Events");
             let newList = contentList.data;
-            newList.filter(async (e) => {
+            newList.filter((e) => {
                 let startDate = new Date();
                 startDate.setHours(0, 0, 0, 0);
                 let tillDate = new Date(e.till);
-
                 if (startDate.toISOString() > tillDate.toISOString()) {
-                    setOutdatedEvents(...outdatedEvents,e.id);
-                    //outdatedEvents.push(e.id);                    return false;
+                    console.log("Deleted");
+                    setOutdatedEvents(...outdatedEvents, e.id);
+                    //outdatedEvents.push(e.id);
+                    return false;
                 }
                 else {
                     return true;
@@ -55,10 +55,10 @@ const EventList = ({ reload, setReload }) => {
         }
     }
 
-    useEffect(()=>{
-        const interval = setInterval(()=>{fetchData();},300000);
-        return ()=>clearInterval(interval);
-    },[])
+    useEffect(() => {
+        const interval = setInterval(() => { fetchData(); }, 300000);
+        return () => clearInterval(interval);
+    }, [])
     useEffect(() => {
         fetchData();
     }, [reload]);
