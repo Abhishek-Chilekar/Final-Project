@@ -96,8 +96,10 @@ const UploadResource = ({popupstate,reload}) => {
             <img className={style.resourceImg} src="images/R.png" alt="Resources" />
             <h1>Resources</h1>
         </div>
-        <span className={style.success}> {success != "" && success} </span>
-        <span className={style.error}> {error!=""?error:errors.name?errors.name.message:""} </span>
+        <div className={style.message}>
+            <span className={style.success}> {success != "" && success} </span>
+            <span className={style.error}> {error!=""?error:errors.name?errors.name.message:""} </span>
+        </div>
         <form onSubmit={handleSubmit(async(data)=>{
            await upload(data)
         })}>
@@ -106,26 +108,22 @@ const UploadResource = ({popupstate,reload}) => {
                 <input {...register("name",{required:"Name is required",pattern:{value:/^([a-zA-Z1-9 ]*){2,}$/,message:"Invalid Name"}})} className={style.inp1} type="text" name="name" id="name" required />
 
                 <label className={style.lab1} for="description">Description: </label>
-                <input {...register("description")}className={style.desc} type="text" name="description" id="description" required />
+                <textarea {...register("description")}className={style.desc} name="description" id="description" required />
+                <label className={style.lab1} for="file">Upload File:</label>
+                <input className={style.upload} type="file" name="file" id="file" required onChange={(e)=>setFile(e.target.files[0])}/>
+                <label className={style.lab1} for="branch" required>Branch:</label>                   
+                <select {...register("branch")}className={style.inp1} name="branch" id="">
+                    <option value="All">All</option>
+                    <option value="computer">Computer</option>
+                    <option value="mechanical">Mechanical</option>
+                    <option value="information_technology">Information Technology</option>
+                    <option value="electrical">Electrical</option>
+                    <option value="electronics">Electronics</option>
+                </select>
             </div>
-            <div className={style.lowerdiv}>
-               <div className={style.innerdiv}>
-                <label className={style.lab2} for="file">Upload File:</label>
-                <input className={style.inp2} type="file" name="file" id="file" required onChange={(e)=>setFile(e.target.files[0])}/>
-               </div>
-               <div className={style.innerdiv}>
-                   <label className={style.lab2} for="branch" required>Branch:</label>                   
-                   <select {...register("branch")}className={style.inp2} name="branch" id="">
-                        <option value="All">All</option>
-                        <option value="computer">Computer</option>
-                        <option value="mechanical">Mechanical</option>
-                        <option value="information_technology">Information Technology</option>
-                        <option value="electrical">Electrical</option>
-                        <option value="electronics">Electronics</option>
-                    </select>
-               </div>
+            <div className={style.buttonCent}>
+                <button className = {style.butto}type="submit" disabled={disabled}>Add</button>
             </div>
-            <button className = {style.butto}type="submit" disabled={disabled}>Add</button>
         </form>
         </div>
     </div>

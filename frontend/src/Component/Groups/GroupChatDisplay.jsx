@@ -35,8 +35,8 @@ const GroupChatDisplay = (props)=>{
 
     const date = new Date();
 
-    const getData = async()=>{
-        const res = await axios.get("http://localhost:5000/GroupChat/"+props.content.content.id);
+    const getData = async(id)=>{
+        const res = await axios.get("http://localhost:5000/GroupChat/"+id);
         console.log(res);
         setData(res.data[0]);
         const adminUser = res.data[0].member.filter((u)=>u.isAdmin == "true");
@@ -44,11 +44,19 @@ const GroupChatDisplay = (props)=>{
     }
 
     React.useEffect(()=>{
+        getData(props.content.content.id);
+    },[]);
+
+    React.useEffect(()=>{
+        getData(props.content.content.id);
+    },[props.content.content])
+
+    React.useEffect(()=>{
         const interval = setInterval(()=>{
-            getData();
+            getData(props.content.content.id);
         },3000);
         return ()=>clearInterval(interval);
-    },[]);
+    },[props.content.content]);
 
     const handleClick=()=>{
         dispatch(group_profiles(current));
@@ -196,7 +204,7 @@ const GroupChatDisplay = (props)=>{
             </div>
             {add && <SearchMember popupstate={setAdd} groupDetails = {current}/>}
             {remove && <RemoveMembers popupstate={setRemove} groupDetails={current}/>} 
-            {makeAdmin && <MakeAdmin popupstate={setMakeAdmin} groupDetails={current}/>} 
+            {makeAdmin && <MakeAdmin popupstate={setMakeAdmin} groupDetails={current} reload={reloadList}/>} 
             {poll && <Poll  popupstate={setPoll} reload={()=>setReload(!reload)} reloadList = {reloadList} groupDetails={current}/>} 
             <div className={style.typingArea}>
                 <label className={style.imageBack} for="select"><img className={style.studentImage} src="/Images/image.png" alt="image"/></label>

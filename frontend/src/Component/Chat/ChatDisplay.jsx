@@ -27,9 +27,19 @@ const ChatDisplay = ({content}) =>{
         });
     }
     React.useEffect(()=>{
+        formatData();
+    },[]);
+
+    React.useEffect(()=>{
+        formatData();
+    },[senderChat]);
+
+    React.useEffect(()=>{
         const interval = setInterval(()=>formatData(),3000);
         return ()=>clearInterval(interval);
-    },[])
+    },[senderChat]);
+
+
     const current = data;
     React.useEffect(() => {
     },[reload])

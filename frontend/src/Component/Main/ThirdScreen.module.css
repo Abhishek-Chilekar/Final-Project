@@ -11,6 +11,7 @@
   }
 
 .ThirdScreen{
+  /* border: 1px solid black; */
     height:670px;
     width: 464px;
     margin: 40px 80px;
@@ -19,4 +20,38 @@
     box-shadow: 0px 4px 7px 3px rgba(0,0,0,0.2);
     margin-bottom:20px;
     background:linear-gradient(0deg, rgba(206, 225, 233, 0.2), rgba(206, 225, 233, 0.2)), url("../../BackgroundImages/mdapattern.png");
+}
+
+.image{
+  display: none;
+}
+
+@media all and (max-width: 1040px){
+  .ThirdScreen{
+    /* border: 1px solid red; */
+     
+      /* height: 112%;
+      width: 107.3%; */
+      height:670px;
+      width: 464px;
+      margin: auto;
+      margin-top: 10px;
+      background-color: #FFFBFB;
+      border-radius: 25px;
+      box-shadow: 0px 4px 7px 3px rgba(0,0,0,0.2);
+      margin-bottom:20px;
+      background:linear-gradient(0deg, rgba(206, 225, 233, 0.2), rgba(206, 225, 233, 0.2)), url("../../BackgroundImages/mdapattern.png");
+  }
+  
+  .image{
+    position: absolute;
+    top: 20px;
+    left: 65px;
+    height: 35px;
+    width: 25px;
+    height:25px;
+    display: block;
+    cursor: pointer;
+  }
+
 }

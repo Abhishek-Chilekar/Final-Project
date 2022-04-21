@@ -72,12 +72,12 @@ const AddEvent = ({popupstate,reload}) => {
                 // (await uploadTask).state("")
                 //event,UploadTask,Error,Complete
                 uploadTask.on("state_changed", (snapshot) => {
-                    console.log("Image uploading");
+                    setSuccess("Image uploading");
                 }, (err) => {
                     console.log(err.message);
                 }, () => {
                     try {
-                        console.log("Image uploaded");
+                        setSuccess("Image uploaded");
                         getDownloadURL(uploadTask.snapshot.ref).then(async (link) => {
                             const event = {
                                 eventName: props.name,
@@ -141,13 +141,15 @@ const AddEvent = ({popupstate,reload}) => {
         <div className={style.popup}>
             <div className={style.header}>
                 <button onClick={() => popupstate(false)} className={style.close}>&times;</button>
-                <img className={style.eventImg} src="/Images/E.png" alt="Event" />
+                <img className={file?style.img:style.eventImg} src={file?URL.createObjectURL(file):"/Images/E.png"} alt="Event" />
                 <label className={style.edit} for="file"><img src="/Images/edit icon.png" alt="edit" /></label>
                 <input required type="file" name="file" id="file" className={style.file} onChange={(e) => { setFile(e.target.files[0]) }} />
                 <h1>Events</h1>
             </div>
-            <span className={style.success}> {success != "" && success} </span>
-            <span className={style.error}> {error != "" ? error : errors.name ? errors.name.message : errors.from ? errors.from.message : errors.till ? errors.till.message : errors.link ? errors.link.message : ""} </span>
+            <div className={style.message}>
+                <span className={style.success}> {success != "" && success} </span>
+                <span className={style.error}> {error != "" ? error : errors.name ? errors.name.message : errors.from ? errors.from.message : errors.till ? errors.till.message : errors.link ? errors.link.message : ""} </span>
+            </div>            
             <form onSubmit={handleSubmit(async (data) => {
                 await upload(data);
             })}>
@@ -180,7 +182,9 @@ const AddEvent = ({popupstate,reload}) => {
                         <input {...register("description")} className={style.inp1} type="text" name="description" id="description" required />
                     </div>
                 </div>
-                <button className={style.butto} type="submit">Add Event</button>
+                <div className={style.buttonCent}>
+                    <button className={style.butto} type="submit">Add Event</button>
+                </div>
             </form>
         </div>
     </div>)

@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React,{useState,useEffect} from 'react';
 import style from './Search.module.css';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { chats } from '../../Actions/thirdScreenAction';
+import { updateWindow } from '../../Actions/windowAction';
 
 const Search = ({getText})=>{
     const name = getText();
+    const {width} = useSelector(state=>state.UpdateWindow);
     let [search,setSearch] = useState({
         role:"All",
         skill:"All",
@@ -30,7 +32,7 @@ const Search = ({getText})=>{
         setData(res.data);
     }
     useEffect(()=>{},[reload]);
-
+    console.log(data);
     const handleOnChange = (target)=>{
         switch(target.name){
             case "role":
@@ -118,7 +120,10 @@ const Search = ({getText})=>{
                     reloadList : func
                 }
             }
-            dispatch(chats(obj))
+            dispatch(chats(obj));
+            if(width < 1040){
+                dispatch(updateWindow(true));
+            }
         }
         catch(e){
             console.log(e.message);

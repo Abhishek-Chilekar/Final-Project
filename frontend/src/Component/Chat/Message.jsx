@@ -1,12 +1,14 @@
 import React from 'react';
 import style from './Message.module.css';
-import { useDispatch } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { chats } from '../../Actions/thirdScreenAction';
+import { updateWindow } from '../../Actions/windowAction';
 import axios from 'axios';
 
 const Message = (props) =>{
     const [content,setContent] = React.useState({});
     const [clickFlag,setClickFlag] = React.useState(false);
+    const {width} = useSelector(state => state.UpdateWindow);
     const getContent=async()=>{
         const ruser = await axios.get("http://localhost:5000/UserDetails/"+props.chat.receiverId);
         const user = ruser.data[0];
@@ -37,6 +39,9 @@ const Message = (props) =>{
         <div className={style.messageBox} onClick={()=>{
             dispatch(chats(content.allDetails));
             setClickFlag(true);
+            if(width < 1040){
+                dispatch(updateWindow(true));
+            }
         }}>
             <div className={style.header}>
                 <div className={style.senderProfile}>

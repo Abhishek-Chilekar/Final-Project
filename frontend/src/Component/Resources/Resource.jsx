@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React,{useState} from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import {resources} from '../../Actions/thirdScreenAction'
+import { updateWindow } from '../../Actions/windowAction';
 import style from './Resource.module.css';
 
-const Resource = ({content}) =>{
+const Resource = ({content,reload}) =>{
     const [name,setName] = useState("");
+    const {width} = useSelector(state=>state.UpdateWindow);
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem("User"));
 
@@ -24,7 +26,10 @@ const Resource = ({content}) =>{
             description:content.description,
             url:content.url
             
-        }))
+        }));
+        if(width < 1040){
+            dispatch(updateWindow(true));
+        }
     }
 
     const handleDelete = async() =>{
@@ -33,6 +38,13 @@ const Resource = ({content}) =>{
             console.log(delres.data.msg); 
             const res = await axios.delete("http://localhost:5000/Resources/"+content.id);
             console.log(res.data.msg);
+            const notires = await axios.get("http://localhost:5000/Notification/");
+            const notifications = notires.data;
+            if(notifications){
+                const notitobedel = notifications.filter((n)=>{return n.contentId == content.id});
+                notitobedel.length > 0 && await axios.delete("http://localhost:5000/Notification/"+notitobedel[0].id);
+            }
+            reload();
         }
         catch(e){
             console.log(e.message);
@@ -45,8 +57,8 @@ const Resource = ({content}) =>{
     }
     getUserName(content.owner.senderId);
     return(
-    <div className={style.resourceBox} onClick={()=>handleOnClick()}>
-        <div className={style.details}>
+    <div className={style.resourceBox}>
+        <div className={style.details} onClick={()=>handleOnClick()}>
             <img className={style.resourceLogo} src={content.type == "pdf" ? "/Images/pdf.png" : content.type == "docx" ? "/Images/docx.png" : content.type == "xlsx" && "/Images/xlsx.png" } alt="type logo"/>
             <div className={style.resourceDetails}>
                 <h1 className={style.name}>{content.resourceName}</h1>

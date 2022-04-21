@@ -1,9 +1,10 @@
 import axios from 'axios';
-import React,{useState} from 'react';
-import { useDispatch } from 'react-redux';
+import React,{useState,useEffect} from 'react';
+import { useSelector,useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { eventAction, resourceAction } from '../../Actions/navActions';
 import { events, resources } from '../../Actions/thirdScreenAction';
+import { updateWindow } from '../../Actions/windowAction';
 import style from './Notification.module.css';
 
 
@@ -20,8 +21,10 @@ import style from './Notification.module.css';
 */
 const Notification = (props) =>{
     const content = props.content;
+    const {width} = useSelector(state=>state.UpdateWindow);
     const [reload,setReload] = props.reload;
     const [username,setUsername] = React.useState("");
+    const [isMember,setIsMember] = React.useState(false);
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem("User"));
 
@@ -79,18 +82,41 @@ const Notification = (props) =>{
                 }
                 dispatch(resources(obj));
                 dispatch(resourceAction());
+                if(width < 1040){
+                    dispatch(updateWindow(true));
+                }
                 break;
             case "event":
                 const r = await axios.get("http://localhost:5000/Events/"+content.contentId);
                 const u = await axios.get("http://localhost:5000/UserDetails/"+r.data[0].owner.senderId);
                 dispatch(events({...r.data[0],owner:{...r.data[0].owner,senderName:u.data[0].FullName}}));
                 dispatch(eventAction());
+                if(width < 1040){
+                    dispatch(updateWindow(true));
+                }
                 break;
             default:
                 break;
         }
     }
+    const onLoad = async() => {
+        if(content.purpose == "group")
+        {
+            const data = await axios.get("http://localhost:5000/GroupChat/"+content.contentId);
+            if(data.data.length != 0){
+                console.log(data.data[0]);
+                const group = data.data[0];
 
+                const member = group.member.filter((m)=>{return m.senderId == user.id});
+                if(member.length != 0){
+                    setIsMember(true);
+                }
+            }
+        }
+    }
+    useEffect(() => {
+        onLoad();
+    }, []);
     return (
     <div className={style.Notification}>
        <div className={style.main}>
@@ -102,7 +128,7 @@ const Notification = (props) =>{
             </div>
         </div>
         <div className={style.buttonContainer}>
-            {content.type == "All"&&<span className={style.button} onClick={()=>handleView()}>{(content.purpose == "group")?"Join":(content.purpose=="resource"||content.purpose=="event")&&"View"}</span>}
+            {content.type == "All"&& !isMember &&<span className={style.button} onClick={()=>handleView()}>{(content.purpose == "group")?"Join":(content.purpose=="resource"||content.purpose=="event")&&"View"}</span>}
             {content.type != "All"&&<span className={style.button} onClick={()=>handleDelete()}>Delete</span>}
             {content.type == "All"&&<span className={style.button} onClick={()=>handleIgnore()}>Ignore</span>}
         </div>

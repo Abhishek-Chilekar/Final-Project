@@ -6,9 +6,11 @@ import {chatAction,resourceAction,eventAction,aboutAction,notificationAction,pro
 import {logout} from '../../Actions/userAction';
 import { useNavigate } from 'react-router-dom';
 import { reset , profiles } from '../../Actions/thirdScreenAction';
+import { updateWindow } from '../../Actions/windowAction';
 
 const Navigation = () => {
     const user = JSON.parse(localStorage.getItem("User"));
+    const {width} = useSelector(state=>state.UpdateWindow);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [chat , setChat] = useState(true);
@@ -61,6 +63,9 @@ const Navigation = () => {
 
     const handleClick =() =>{
         dispatch(profiles(user))
+        if(width < 1040){
+            dispatch(updateWindow(true));
+        }
     }
     return (<div className={style.container}>
         <div className={style.container1} onClick={()=>handleClick()}>

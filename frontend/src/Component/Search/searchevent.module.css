@@ -53,6 +53,7 @@
     height: 80px;
     margin: 10px 10px 10px 10px;
     border-radius: 50px;
+    object-fit:cover;
 }
 .request {
     outline: none;

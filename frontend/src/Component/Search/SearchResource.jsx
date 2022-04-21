@@ -4,12 +4,14 @@ import { useEffect } from "react";
 import { useState } from "react";
 import style from "./searchresource.module.css";
 import ResourceList from "../Resources/ResourceList";
-import { useDispatch } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { resources } from "../../Actions/thirdScreenAction";
+import { updateWindow } from "../../Actions/windowAction";
 
 const SearchResource = ({ getText }) => {
     const name = getText();
     const dispatch = useDispatch();
+    const {width} = useSelector(state=>state.UpdateWindow);
     let [search, setSearch] = useState({
         type: "All",
         branch: "All",
@@ -61,6 +63,9 @@ const SearchResource = ({ getText }) => {
             description: resource.description,
             url: resource.url
         }));
+        if(width < 1040){
+            dispatch(updateWindow(true));
+        }
     }
     useEffect(() => {
         getData();
@@ -87,7 +92,7 @@ const SearchResource = ({ getText }) => {
                 {/* {resource.resourceName} {resource.type} {resource.branch} */}
                 <div className={style.list}>
                     <div className={style.details}>
-                        <img src={resource.type === "pdf" ? "/Images/pdf.png" : resource.type === "word" ? "Images/word.png" : "Images/xlsx.png"} alt="default" />
+                        <img src={"/Images/"+resource.type+".png"} alt="default" />
                         <div className={style.inner}>
                             <h1 className={style.name}>{resource.resourceName}</h1>
                             <div className={style.role}>

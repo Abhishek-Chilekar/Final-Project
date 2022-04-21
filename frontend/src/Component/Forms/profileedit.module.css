@@ -52,6 +52,21 @@
 .file {
   display: none;
 }
+
+.message{
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.img{
+  width:150px;
+  height:150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 .edit {
   position: relative;
   bottom: 23px;

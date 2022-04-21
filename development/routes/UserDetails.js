@@ -195,7 +195,7 @@ router.get("/:userId",async (req,res)=>{
             }
             else if(data.qualification != null && data.empCode != null){
                 data.qualification = textdecrypt(data.qualification);
-                data.empCode = textdecrypt(data.empCode);
+                data.empCode = textdecrypt(data.empCoo0de);
                 data.role = textdecrypt(data.role);
             }
             else{

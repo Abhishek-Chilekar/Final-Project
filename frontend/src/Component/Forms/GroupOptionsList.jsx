@@ -3,6 +3,7 @@ import React from "react";
 import style from "./groupoptionslist.module.css";
 import { useDispatch } from "react-redux";
 import { reset } from "../../Actions/thirdScreenAction";
+import {chatAction} from "../../Actions/navActions";
 
 const GroupOptionsList = (prop) => {
     const user = JSON.parse(localStorage.getItem("User"));
@@ -14,6 +15,7 @@ const GroupOptionsList = (prop) => {
             prop.makeAdmin(true);
         }
         else{
+            dispatch(reset());
             prop.groupDetails.member = prop.groupDetails.member.filter((m)=>{return m.senderId != user.id});
             let res = await axios.patch("http://localhost:5000/GroupChat/"+prop.groupDetails.id,prop.groupDetails);
             console.log(res);
@@ -21,20 +23,34 @@ const GroupOptionsList = (prop) => {
                 user.groupId = user.groupId.filter((id)=>{return id != prop.groupDetails.id});
                 res = await axios.patch("http://localhost:5000/UserDetails/"+user.id,user);
                 localStorage.setItem("User",JSON.stringify(user));
-                console.log(res)
+                console.log(res);
                 prop.reload();
-                dispatch(reset());
             }
         }
     }
 
     const handleDelete = async ()=>{
-        const res = await axios.delete("http://localhost:5000/GroupChat/"+prop.groupDetails.id);
-        if(res.data.msg == "group deleted"){
-            user.groupId = user.groupId.filter((id)=>{return id != prop.groupDetails.id});
-            res = await axios.patch("http://localhost:5000/UserDetails/"+user.id,user);
-            prop.reload();
+        try{
             dispatch(reset());
+            const res = await axios.delete("http://localhost:5000/GroupChat/"+prop.groupDetails.id);
+            if(res.data.msg == "group deleted"){
+                const notires = await axios.get("http://localhost:5000/Notification/");
+                const notifications = notires.data;
+                if(notifications){
+                    const notitobedel = notifications.filter((n)=>{return n.contentId == prop.groupDetails.id});
+                    notitobedel.length > 0 && await axios.delete("http://localhost:5000/Notification/"+notitobedel[0].id);
+                }
+                user.groupId = user.groupId.filter((id)=>{return id != prop.groupDetails.id});
+                console.log(user);
+                const userres = await axios.patch("http://localhost:5000/UserDetails/"+user.id,user);
+                if(userres.data.msg == "data updated"){
+                    localStorage.setItem('User',JSON.stringify(user));
+                    prop.reload();
+                }
+            }
+        }
+        catch(e){
+            console.log(e.message);
         }
     }
     

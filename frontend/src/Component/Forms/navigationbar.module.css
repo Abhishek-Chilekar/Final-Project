@@ -11,19 +11,20 @@
 .popup {
   position: fixed;
   top: 50%;
-  left: 11%;
+  left: 125px;
   transform: translate(-50%, -50%) scale(1);
   transition: 200ms ease-in-out;
   border: 1px solid black;
   border-radius: 0px 10px 10px 0px;
   z-index: 10;
   background-color: rgb(41, 41, 41);
-  width: 22%;
+  width: 250px;
   max-width: 80%;
   color: white;
-  height: 100%;
+  height: 99%;
+  overflow:auto;
 
-  background-image: url("D:/nikhil/Web/react/forms/public/images/popup_pattern.png");
+  background-image: url("../../BackgroundImages/popup_pattern.png");
 }
 
 .close {
@@ -58,7 +59,7 @@
 .profileImg {
   width: 60px;
   height: 60px;
-  margin-top: 40px;
+  margin-top: 30px;
   border-radius: 50px;
 }
 .mainIcons {
@@ -85,4 +86,71 @@
   width: 30px;
   height: 30px;
   margin-top: 50px;
+}
+
+.container1{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+}
+
+.container2{
+  display: flex;
+  align-self: flex-start;
+  padding-top: 40px;
+  padding-left:40px;
+  flex-direction: column;
+}
+.container3{
+  display: flex;
+  align-self: flex-start;
+  padding-left:40px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  flex-direction: column;
+}
+.logout{
+  display: flex;
+}
+.logout:hover{
+  display: flex;
+  color: #009CDC;
+}
+.tab{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  left: 0px;
+  margin-bottom: 45px;
+}
+.tab:hover{
+  color: #009CDF;
+}
+.avatar{
+  position: relative;
+  margin-top: 10px;
+  margin-bottom:10px;
+  width: 120px;
+  height: 120px;
+  border-radius:70px;
+}
+.name{
+  font-size: 17.92px;
+  font-weight:600;
+}
+.text{
+  padding-left: 20px;
+  font-size: large;
+  font-family: Poppins;
+  font-size:19.2px;
+  font-weight: 400;
+}
+
+.image{
+  width:27px;
+  height: 27px;
+  object-fit:cover;
 }

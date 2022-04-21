@@ -12,10 +12,14 @@ const MessageList = ({select,reload,setReload}) =>{
     const [user,setUser] = React.useState({groupId:[],request:[]});
     const getPrivateChats = async()=>{
         setPdata([]);
+        setUser({groupId:[],request:[]});
         let {data} = await axios.get("http://localhost:5000/PrivateChat");
         setPdata(data.filter((d)=>{return d.senderId == currentUser.id}));
         const res = await axios.get("http://localhost:5000/UserDetails/"+currentUser.id);
         setUser(res.data[0]);
+        if(res.data[0].groupId.length !=  currentUser.groupId.length || res.data[0].request.length != currentUser.request.length){
+            localStorage.setItem("User",JSON.stringify(res.data[0]));
+        }
     }
     const handleAccept=async(data,setDisabled,disabled)=>{
         try{

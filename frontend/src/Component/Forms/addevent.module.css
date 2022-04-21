@@ -1,36 +1,52 @@
-.overlay{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 1;
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .success {
   height: min-content;
   position: relative;
-  bottom: 5px;
-  left: 300px;
+  /* bottom: 5px;
+  left: 300px; */
   font-family: Poppins;
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
-  max-width: 200px;
+  max-width: 300px;
   color: rgb(13, 240, 13);
 }
 
+.message {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
 .error {
+  /* border: 1px blue solid; */
+  text-align: center;
   height: min-content;
   position: relative;
-  bottom: 5px;
-  left: 300px;
+  /* bottom: 5px; */
+  /* left: 300px; */
   font-family: Poppins;
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
-  max-width: 200px;
+  max-width: 300px;
   color: red;
 }
 
@@ -121,7 +137,7 @@
 
 .butto {
   margin: 30px;
-  margin-left: 265px;
+  /* margin-left: 265px; */
   height: 40px;
   width: 150px;
 
@@ -157,4 +173,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.buttonCent {
+  /* border: 1px solid red; */
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  /* align-items: center; */
 }

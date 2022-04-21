@@ -1,16 +1,18 @@
 import React from "react";
 import style from "./eventitem.module.css";
-import { useDispatch } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { events } from "../../Actions/thirdScreenAction";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import {updateWindow} from "../../Actions/windowAction";
 
 const EventItem = (prop) => 
 {
     const event = prop.event
     const dispatch = useDispatch();
     let [ownerName,setOwnerName] = useState("");
+    const {width} = useSelector(state=>state.UpdateWindow);
 
     const userName = async() => {
         console.log(event.id);
@@ -35,6 +37,9 @@ const EventItem = (prop) =>
             image:event.image,
             registeredUser:events.registeredUser
         }));
+        if(width < 1040){
+            dispatch(updateWindow(true));
+        }
     }
     return <div className={style.list}>
                 <div className={style.details}>

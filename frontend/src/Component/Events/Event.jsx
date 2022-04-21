@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React,{useState,useEffect} from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import {events} from '../../Actions/thirdScreenAction'
+import { updateWindow } from '../../Actions/windowAction';
 import style from './Event.module.css';
 
 /*
@@ -18,6 +19,7 @@ import style from './Event.module.css';
 */
 const Event = (props) =>{
     const content = props.content;
+    const {width} = useSelector(state=>state.UpdateWindow);
     const [name,setName] = useState("");
     const dispatch = useDispatch();
     const handleOnClick=()=>{
@@ -34,8 +36,12 @@ const Event = (props) =>{
             description:content.description,
             image:content.image,
             registeredUser:content.registeredUser,
+            url:content.url,
             reload:props.reload
-        }))
+        }));
+        if(width < 1040){
+            dispatch(updateWindow(true));
+        }
     }
 
 //    useEffect(() => {

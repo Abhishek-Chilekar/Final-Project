@@ -20,6 +20,7 @@
     height:200px;
     width:200px;
     border-radius: 170px;
+    object-fit:cover;
 }
 
 .name{

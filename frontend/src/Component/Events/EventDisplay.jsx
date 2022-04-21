@@ -5,6 +5,8 @@ import axios from 'axios';
 import {storage} from '../firebaseConfig';
 import {ref,deleteObject} from "@firebase/storage";
 import { reset } from '../../Actions/thirdScreenAction';
+import { Link } from 'react-router-dom';
+import { ExternalLink } from 'react-external-link';
 
 /*
     [{
@@ -30,12 +32,22 @@ const EventDisplay = ({content}) =>{
             await deleteObject(storageRef);
             const res = await axios.delete("http://localhost:5000/Events/"+current.id);
             console.log(res.data.msg);
+            const notires = await axios.get("http://localhost:5000/Notification/");
+            const notifications = notires.data;
+            if(notifications){
+                const notitobedel = notifications.filter((n)=>{return n.contentId == current.id});
+                notitobedel.length > 0 && await axios.delete("http://localhost:5000/Notification/"+notitobedel[0].id);
+            }
             current.reload();
             dispatch(reset());
         }
         catch(e){
             console.log(e.message);
         }
+    }
+
+    const open=()=>{
+        window.open(current.url,"_blank");
     }
 
     return (
@@ -57,7 +69,7 @@ const EventDisplay = ({content}) =>{
                 <p className={style.value}> {current.description} </p>
                 <div className={style.buttonContainer}>
                    {content.owner.senderId == currentUser.id &&<button className={style.button} onClick={()=>handleOnClick()}> Delete </button>}
-                    <button className={style.button}> Register </button>
+                    <ExternalLink href={current.url} className={style.link}> Register </ExternalLink>
                 </div>
             </div>
         </div>

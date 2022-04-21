@@ -172,13 +172,15 @@ const Popup = ({popupstate,reload}) =>{
         <div className={style.popup}>
             <div className={style.header}>
                 <button onClick={() => popupstate(false)} className={style.close}>&times;</button>
-                <img className={style.eventImg} src="/Images/G.png" alt="Event" />
+                <img className={file?style.img:style.eventImg} src={file?URL.createObjectURL(file):"/Images/G.png"} alt="Event" />
                 <label className={style.edit} for="file"><img src="/Images/edit icon.png" alt="edit" /></label>
                 <input type="file" name="file" id="file" className={style.file} onChange={(e)=>{setFile(e.target.files[0])}}/>
                 <h1>Groups</h1>
             </div>
-            <span className={style.success}> {success != "" && success} </span>
-            <span className={style.error}> {error!=""&& error} </span>
+            <div className={style.message}>
+                <span className={style.success}> {success != "" && success} </span>
+                <span className={style.error}> {error!=""&& error} </span>
+            </div>
             <form className={style.formcont} onSubmit={handleSubmit((data)=>{upload(data)})}>
                 <div className={style.content}>
                     

@@ -4,6 +4,8 @@ import Bookmark from './Bookmark';
 import ProfileEdit from '../Forms/ProfileEdit';
 import AddSkill from '../Forms/AddSkill';
 import axios from 'axios';
+import { profiles } from '../../Actions/thirdScreenAction';
+import { useDispatch } from 'react-redux';
 /*
     {
         common :
@@ -35,8 +37,27 @@ const UserProfile = ({content})=>{
     let [click,setClick] = useState(false);
     let [addSkill,setAddSkill] = useState(false);
     let [reload,setReload] = useState(false);
+    const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem("User"));
     console.log(user);
+
+    const removeBookmark = async(id)=>{
+        user.myDoc = user.myDoc.filter((doc)=>{
+            return doc != id;
+        })
+
+        try{
+            const res = await axios.patch("http://localhost:5000/UserDetails/"+user.id,user);
+            console.log(res.data.msg);
+            if(res.data.msg == "data updated"){
+                localStorage.setItem("User",JSON.stringify(user));
+                dispatch(profiles(user));
+            }
+        }
+        catch(e){
+            console.log(e.message)
+        }
+    }
 
     const remove = async(skill)=>{
         content.skillset = content.skillset.filter((s)=>{return s!=skill});
@@ -103,12 +124,12 @@ const UserProfile = ({content})=>{
             <span className={style.skillLabel}>Bookmarked Documents</span>
             <div className={style.skillContainer}>
               {content.myDoc.map((doc)=>(
-                  <Bookmark id={doc} content={content} reload={()=>setReload(!reload)}/>
+                  <Bookmark id={doc} content={content} remove={(id)=>removeBookmark(id)}/>
               ))}
             </div>
         </div>
         {content.id == user.id && <div className={style.buttonContainer}><button className={style.update} onClick={()=>setClick(true)}>Update</button></div>}
-        {click && <ProfileEdit popupstate={setClick}/>}
+        {click && <ProfileEdit popupstate={setClick} reload={()=>setReload(!reload)}/>}
     </div>
     );
 }

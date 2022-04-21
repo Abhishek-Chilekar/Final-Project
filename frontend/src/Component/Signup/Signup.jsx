@@ -28,7 +28,7 @@ const Signup = ()=>{
             return false;
         }
         else if(!studentData.FullName.match(/^([a-zA-Z ]*){2,}$/)){
-            setError("Invalid value for name , Must contain atleast 2 characters");
+            setError("Invalid value for name");
             return false;
         }
         else if(studentData.branch == ""){
@@ -60,10 +60,11 @@ const Signup = ()=>{
             return false;
         }
         else if(studentData.password == "" || studentData.cpassword == "" || !studentData.password.match(/^(?=(.*[a-z]){3,})(?=(.*[A-Z]){2,})(?=(.*[0-9]){2,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,}$/) || !studentData.cpassword.match(/^(?=(.*[a-z]){3,})(?=(.*[A-Z]){2,})(?=(.*[0-9]){2,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,}$/)){
-            setError("Invalid password");
+            setError("Password must be atleast 8 characters long and should have atleast 3 lower case letter, 2 upper case letter, 2 number and 1 special character");
             return false;
         }
         else if(studentData.password != studentData.cpassword){
+            setError("Password and Confirm password doesn't match");
             return false;
         }
         else{
@@ -78,7 +79,7 @@ const Signup = ()=>{
         }
         else if(!teacherData.FullName.match(/^([a-zA-Z ]*){2,}$/))
         {
-            setError("Invalid value for name, Must contain atleast 2 characters");
+            setError("Invalid value for name");
             return false;
         }
         else if(teacherData.empCode == "")
@@ -86,7 +87,7 @@ const Signup = ()=>{
             setError("Employee code required");
             return false;
         }
-        else if(!teacherData.empCode.match(/^([0-9]*)$/))
+        else if(!teacherData.empCode.match(/^([0-9][0-9]\/[A-Z]\/[0-9][0-9][0-9][0-9]\/[0-9][0-9][0-9][0-9][0-9])$/))
         {
             setError("Invalid Employee Code");
             return false;
@@ -133,7 +134,7 @@ const Signup = ()=>{
         }
         else if(!alumniData.FullName.match(/^([a-zA-Z ]*){2,}$/))
         {
-            setError("Invalid value for name, Must contain atleast 2 characters");
+            setError("Invalid value for name");
             return false;
         }
         else if(alumniData.prn == "")
@@ -323,14 +324,21 @@ const Signup = ()=>{
         }
     }
     return(
-        <div className={loginStyle.login}>
+        <div className={style.login}>
             <div className={style.signup}>
 
                 <img className={style.signupImage} src="Images/Login_Art.png" alt="Login" />
 
                 <div className={style.Content}>
                     <span className={style.title}>SIGN <span className={style.titleBlue}>UP</span></span>
-                    <span className={loginStyle.error}> {error != "" && error } </span>
+                    <div className={style.buttonSet1}>
+                            <div className={style.linkSet}>
+                                <span className={student ? style.activeText1 : style.link1} onClick={()=>{handleOnClick(0)}}>S</span>
+                                <span className={teacher ? style.activeText1 : style.link1} onClick={()=>{handleOnClick(1)}}>T</span>
+                                <span className={alumini ? style.activeText1 : style.link1} onClick={()=>{handleOnClick(2)}}>A</span>
+                            </div>
+                    </div>
+                    <span className={style.error}> {error != "" && error } </span>
                     <span className={style.success}> {success != "" && success} </span>
                         {student?<>
                         <div className={style.signupForm}>
@@ -433,6 +441,9 @@ const Signup = ()=>{
                                 <span className={alumini ? style.activeText : style.link} onClick={()=>{handleOnClick(2)}}>Alumni</span>
                             </div>
                         </div>
+                        <center>
+                        <input className={style.submit1} type="button" name="Register" value="Register" onClick={()=>handleClick()}/>
+                        </center>
                     <Link to="/Login" className={style.text}>Already have an Account?</Link>
                 </div>
             </div>

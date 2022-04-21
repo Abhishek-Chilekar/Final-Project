@@ -9,6 +9,25 @@
   font-family: poppins;
 }
 
+.inner{
+  margin-top:10px;
+  margin-left:40px;
+  margin-right:10px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 600;
+  padding:none;
+  margin:none;
+}
+
+.img{
+  display: none;
+}
+
+
+
 @media all and (max-width: 1400px) {
   .main {
     width:70%;
@@ -19,6 +38,14 @@
     width:100%;
     font-family: poppins;
   }
+
+  .img{
+    display:block;
+    width:25px;
+    height:25px;
+    margin:0;
+    padding:0;
+  }
 }
 
 @media all and (max-width: 1040px) {
@@ -26,16 +53,6 @@
     width:100%;
     font-family: poppins;
   }
-}
-
-.title {
-  font-size: 48px;
-  font-weight: 600;
-  padding: 0;
-  margin: 0;
-  padding-left: 40px;
-  padding-top: 40px;
-  margin-right:10px;
 }
 
 .button {
@@ -91,7 +108,6 @@
 .dropdown {
   position: relative;
   bottom: 60px;
-  padding-left: 40px;
 }
 
 .dropdownText {

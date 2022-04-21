@@ -1,24 +1,9 @@
 import axios from "axios";
 import React from "react";
 import style from "./removemembers.module.css";
+import Member from "./Member";
 const RemoveMembers = ({popupstate,groupDetails}) => {
-
-    const [memberDetails,setMemberDetails] = React.useState([]);
     const user = JSON.parse(localStorage.getItem("User"));
-
-    const getMemberDetails = ()=>{
-        groupDetails.member.map(async(m)=>{
-            if(m.senderId != user.id){
-                const res = await axios.get("http://localhost:5000/UserDetails/"+m.senderId);
-                setMemberDetails([...memberDetails,res.data[0]]);
-            }
-
-        });
-    }
-
-    React.useEffect(()=>{getMemberDetails();},[]);
-
-    console.log(memberDetails);
 
     const handleClick = async(user)=>{
         groupDetails.member = groupDetails.member.filter((m)=>{return m.senderId != user.id});
@@ -40,24 +25,7 @@ const RemoveMembers = ({popupstate,groupDetails}) => {
         </div>
             
             <div className={style.members}>
-                {memberDetails.map((user) => {
-                    return <>
-                        <div className={style.container}>
-                            <div className={style.innercontainer}>
-                            <img className={style.profileImg} src={user.photoUrl} alt="Profile" />
-                            <div className={style.username}>
-                                <h1 className={style.Name}>{user.FullName}</h1>
-                                <div className={style.role}>
-                                    <div className={(user.role === "Student") ? style.student : (user.role === "Teacher") ? style.teacher: style.alumni}></div>
-                                    <span className={style.roleName}>{user.role}</span>
-                                </div>
-                            
-                            </div>
-                            </div>
-                            <button className={style.butto} onClick={()=>handleClick(user)}>Remove</button>
-                        </div>
-                    </>
-                })}
+                {groupDetails.member.map((u) => (user.id != u.senderId) && <Member member={u} click={(user)=>handleClick(user)} remove={true}/>)}
 
             </div>
         </div>

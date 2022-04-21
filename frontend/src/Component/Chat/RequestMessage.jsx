@@ -3,6 +3,8 @@ import React from 'react';
 import style from './RequestMessage.module.css';
 import { useDispatch } from 'react-redux';
 import { profiles } from '../../Actions/thirdScreenAction';
+import { useSelector } from 'react-redux';
+import { updateWindow } from '../../Actions/windowAction';
 
 // {
 //     requestId:"1",
@@ -14,6 +16,7 @@ const RequestMessage = (props) =>{
     const dispatch = useDispatch();
     const [content,setContent] = React.useState({});
     const currentUser = JSON.parse(localStorage.getItem("User"));
+    const {width} = useSelector(state=>state.UpdateWindow);
     const [disabled,setDisabled] = React.useState(false);
     const formatData = async(data)=>{
         const res = await axios.get("http://localhost:5000/UserDetails/"+data.senderId);
@@ -31,6 +34,9 @@ const RequestMessage = (props) =>{
     const show =async(id)=>{
         const {data} = await axios.patch("http://localhost:5000/UserDetails/"+id);
         dispatch(profiles(data[0]));
+        if(width < 1040){
+            dispatch(updateWindow(true));
+        }
     }
 
 

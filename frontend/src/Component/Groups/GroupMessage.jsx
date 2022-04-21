@@ -1,13 +1,15 @@
 import React from 'react';
 import m_style from '../Chat/Message.module.css';
 import style from './GroupMessage.module.css';
-import { useDispatch } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { group_chats } from '../../Actions/thirdScreenAction';
 import axios from 'axios';
+import { updateWindow } from '../../Actions/windowAction';
 
 const GroupMessage = (props) =>{
     const dispatch = useDispatch();
     const [content,setContent] = React.useState({});
+    const {width} = useSelector(state => state.UpdateWindow);
     // const content = props.content;
     // console.log(props.content);
     // const messages = content.chat;
@@ -30,6 +32,9 @@ const GroupMessage = (props) =>{
     
     const handleClick = ()=>{
         dispatch(group_chats({content,reloadList:props.reload[1]}));
+        if(width < 1040){
+            dispatch(updateWindow(true));
+        }
     }
     let messages = [];
     let length = 0;

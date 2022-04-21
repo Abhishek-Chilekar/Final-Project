@@ -3,7 +3,7 @@ import Resource from './Resource';
 import style from './ResourceList.module.css';
 import axios from 'axios';
 
-const ResourceList = ({select,reload}) =>{
+const ResourceList = ({select,reload,setReload}) =>{
     const user = JSON.parse(localStorage.getItem("User"));
     let [list,setList] = useState([]);
 
@@ -32,7 +32,7 @@ const ResourceList = ({select,reload}) =>{
      }, [reload])
 
     return(<div className={style.resourceList}>{list.map((c)=>{
-        return (select == "All" || select == c.type) && (c.branch.toLowerCase() == "all" ||c.branch.toLowerCase() == user.branch.toLowerCase()) && <Resource content={c}/>
+        return (select == "All" || select == c.type) && (c.branch.toLowerCase() == "all" ||c.branch.toLowerCase() == user.branch.toLowerCase()) && <Resource content={c} reload={()=>setReload()}/>
     })}</div>)
 }
 

@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { events } from "../../Actions/thirdScreenAction";
 import EventItem from "./EventItem";
 import style from "./searchevent.module.css";

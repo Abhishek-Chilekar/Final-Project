@@ -1,21 +1,14 @@
 import React from "react";
 import style from "./makeadmin.module.css";
 import axios from "axios";
+import Member from "./Member";
+import { useDispatch } from "react-redux";
+import { reset } from "../../Actions/thirdScreenAction";
 
-const MakeAdmin = ({popupstate,groupDetails}) => {
-    
-    const [memberDetails,setMemberDetails] = React.useState([]);
+const MakeAdmin = ({popupstate,groupDetails,reload}) => {
+
     const user = JSON.parse(localStorage.getItem("User"));
-
-    const getMemberDetails = ()=>{
-        groupDetails.member.map(async(m)=>{
-            if(m.senderId != user.id){
-                const res = await axios.get("http://localhost:5000/UserDetails/"+m.senderId);
-                setMemberDetails([...memberDetails,res.data[0]]);
-            }
-
-        });
-    }
+    const dispatch = useDispatch();
 
     const handleClick = async(u)=>{
         groupDetails.member = groupDetails.member.map((m)=>{
@@ -35,13 +28,14 @@ const MakeAdmin = ({popupstate,groupDetails}) => {
             res = await axios.patch("http://localhost:5000/UserDetails/"+user.id,user);
             localStorage.setItem("User",JSON.stringify(user));
             console.log(res);
+            dispatch(reset());
+            reload();
+            popupstate(false);
         }
     }
 
-    React.useEffect(()=>{getMemberDetails();},[]);
-
     return <div className={style.overlay}>
-        <div className={style.popup}>
+    <div className={style.popup}>
         <button onClick={() => popupstate(false)} className={style.close}>&times;</button>
         <div className={style.header}>
             <img className={style.image} src="images/M.png" alt="A" />
@@ -49,27 +43,9 @@ const MakeAdmin = ({popupstate,groupDetails}) => {
         </div>
             
         <div className={style.members}>
-                {memberDetails.map((user) => {
-                    return <>
-                        <div className={style.container}>
-                            <div className={style.innercontainer}>
-                            <img className={style.profileImg} src={user.photoUrl} alt="Profile" />
-                            <div className={style.username}>
-                                <h1 className={style.Name}>{user.FullName}</h1>
-                                <div className={style.role}>
-                                    <div className={(user.role === "Student") ? style.student : (user.role === "Teacher") ? style.teacher: style.alumni}></div>
-                                    <span className={style.roleName}>{user.role}</span>
-                                </div>
-                            
-                            </div>
-                            </div>
-                            <button className={style.butto} onClick={()=>handleClick(user)}>Choose</button>
-                        </div>
-                    </>
-                })}
-
-            </div>
+            {groupDetails.member.map((m)=>(m.senderId != user.id)&&<Member member={m} click={(user)=>handleClick(user)} remove={false}/>)}
         </div>
+    </div>
     </div>
 }
 

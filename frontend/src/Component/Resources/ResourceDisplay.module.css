@@ -16,6 +16,20 @@
     height:200px;
 }
 
+.link{
+    text-decoration: none;
+    border:none;
+    outline:none;
+    color:white;
+    background-color: #009CDF;
+    padding: 15px 25px;
+    font-size: 20px;
+    margin:20px;
+    border-radius: 30px;
+    font-weight: 600;
+    z-index:0;
+}
+
 .image{
     height:100px;
     width:100px;
