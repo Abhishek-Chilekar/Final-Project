@@ -82,7 +82,7 @@ route.get('/:id',async(req,res)=>{
                     }
                 })
             }
-            res.send(data)
+            res.send({...data,id:doc.id});
         }
         else{
             return res.json({msg:"data not found"});

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import style from "./removemembers.module.css";
-import Member from "./Member";
+import Member from "../Groups/Member";
 const RemoveMembers = ({popupstate,groupDetails}) => {
     const user = JSON.parse(localStorage.getItem("User"));
 

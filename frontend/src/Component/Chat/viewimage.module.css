@@ -1,0 +1,84 @@
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.popup{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 200ms ease-in-out;
+    border: none;
+    border-radius: 10px;
+    z-index: 10;
+    background-color: whitesmoke;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    background-color: rgba(255, 255, 255, 0);
+}
+.menuButton{
+    font-size: 35px;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.menu{
+    display: flex;
+    width: 100%;
+    font-size: larger;
+    justify-content: space-between;
+}
+.imageContainer{
+    width: 700px;
+    height: 700px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+.image{
+    width: 700px;
+    height: 700px;
+    image-rendering: crisp-edges;
+    image-rendering: auto;
+    object-fit: scale-down;
+    transform: scale(1);
+    transition: 200ms ease-in-out;
+
+}
+.imageZoom{
+    width: 700px;
+    height: 700px;
+    image-rendering: crisp-edges;
+    image-rendering: auto;
+    object-fit: scale-down;
+    padding: 0%;
+    transform: scale(1.7);
+    transition: 200ms ease-in-out;
+
+    transform-origin: 0% 0% 0px;
+}
+.close{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+    display: flex;
+    margin-left: 94%;
+    margin-top: 1%;
+    background-color: #0067DF;
+    border-radius: 50%;
+    transform: scale(2);
+}

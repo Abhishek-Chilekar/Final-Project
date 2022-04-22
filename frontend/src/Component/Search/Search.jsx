@@ -98,11 +98,13 @@ const Search = ({getText})=>{
                 }
                 obj = {
                     senderChat:{
+                        id:currentUser.id+user.id,
                         senderId:currentUser.id,
                         receiverId:user.id,
                         chats:[]
                     },
                     receiverChat:{
+                        id:user.id+currentUser.id,
                         receiverId:currentUser.id,
                         senderId:user.id,
                         chats:[]

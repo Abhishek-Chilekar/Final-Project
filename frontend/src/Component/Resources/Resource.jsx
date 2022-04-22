@@ -10,7 +10,6 @@ const Resource = ({content,reload}) =>{
     const {width} = useSelector(state=>state.UpdateWindow);
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem("User"));
-
     const handleOnClick = ()=>{
         dispatch(resources({
             id:content.id,

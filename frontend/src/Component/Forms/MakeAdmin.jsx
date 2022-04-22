@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./makeadmin.module.css";
 import axios from "axios";
-import Member from "./Member";
+import Member from "../Groups/Member";
 import { useDispatch } from "react-redux";
 import { reset } from "../../Actions/thirdScreenAction";
 

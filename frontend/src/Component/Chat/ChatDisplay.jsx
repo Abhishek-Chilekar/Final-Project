@@ -219,11 +219,12 @@ const ChatDisplay = ({content}) =>{
             <img className={style.menu} src="/Images/menu icon.png" alt="menu" onClick={()=>handleClear()}/>
         </div> 
         <div className={style.mda}>
+            {console.log(current.messages)}
             {current.messages.map((m)=><MessageBox message={m} delete={handleDelete}/>)}
         </div>  
         <div className={style.typingArea}>
             <label for="select"><img className={content.receiver.role == "Student"?style.studentImage:content.receiver.role == "Teacher"?style.teacherImage:content.receiver.role == "Alumini"&&style.aluminiImage} src="/Images/image.png" alt="image"/></label>
-            <input type="file" name="select" id="select" className={style.select} onChange={(e)=>setFile(e.target.files[0])}/>
+            <input type="file" name="select" accept='image/png,image/jpg,image/jpeg' id="select" className={style.select} onChange={(e)=>setFile(e.target.files[0])}/>
             <input className={style.input} type="text" id="text" name="text" placeholder='Type Here...' value={text} onChange={(e)=>{setText(e.target.value)}}/>
             <span className={content.receiver.role == "Student"?style.studentSendBack:content.receiver.role == "Teacher"?style.teacherSendBack:style.aluminiSendBack}><img className={style.send} src="/Images/send icon.png" alt="send icon" onClick={()=>handleSend()}/><span>{sendingStatus}</span></span>
         </div> 

@@ -30,9 +30,9 @@ const ResourceList = ({select,reload,setReload}) =>{
     useEffect(() => {
         fetchData();
      }, [reload])
-
+     console.log(user);
     return(<div className={style.resourceList}>{list.map((c)=>{
-        return (select == "All" || select == c.type) && (c.branch.toLowerCase() == "all" ||c.branch.toLowerCase() == user.branch.toLowerCase()) && <Resource content={c} reload={()=>setReload()}/>
+        return (select == "All" || select == c.type) && (c.branch == "all" ||c.branch == user.branch) && <Resource content={c} reload={()=>setReload()}/>
     })}</div>)
 }
 

@@ -8,8 +8,10 @@ import axios from 'axios';
 import {login,logout} from '../../Actions/userAction';
 import {useSelector,useDispatch} from 'react-redux';
 const Login = ()=>{
+        //localStorage.removeItem("User");
+
+    console.log(localStorage.getItem("User"));
     const user = JSON.parse(localStorage.getItem("User"));
-   // console.log(JSON.parse(user));
     const navigate = useNavigate();
     useEffect(() => {
         if(user){
@@ -55,7 +57,7 @@ const Login = ()=>{
                             setError("Please verify your account");
                         }
                     })
-                    .catch((error)=>{console.log(error);setError(error.message.split("/")[1].split(")")[0])});
+                    .catch((error)=>{console.log(error);setError(error)});
                 })}>
                       <label className={style.label} for="email">Email</label>
                      <input {...register("email",{required:"Email is required",pattern:{value:/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/,message:"Enter a valid email id"}})} className={style.box} type="text"  id="email" onChange={(e)=>setEmail(e.target.value)}/>
