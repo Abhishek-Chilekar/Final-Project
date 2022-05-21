@@ -3,6 +3,8 @@ import style from './UserProfile.module.css';
 import Bookmark from './Bookmark';
 import ProfileEdit from '../Forms/ProfileEdit';
 import AddSkill from '../Forms/AddSkill';
+import {db} from '../firebaseConfig';
+import { collection, query, where, getDocs } from "firebase/firestore";
 import axios from 'axios';
 import { profiles } from '../../Actions/thirdScreenAction';
 import { useDispatch } from 'react-redux';
@@ -37,6 +39,7 @@ const UserProfile = ({content})=>{
     let [click,setClick] = useState(false);
     let [addSkill,setAddSkill] = useState(false);
     let [reload,setReload] = useState(false);
+    let [check,setCheck] = useState(false);
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem("User"));
     console.log(user);
@@ -59,6 +62,82 @@ const UserProfile = ({content})=>{
         }
     }
 
+    const checkAlumini = async(prn,role)=>{
+        //alert(prn+","+role);
+        if(role != "Student"){
+            setCheck(false);
+        }
+        else{
+            const Ref = collection(db, "Alumini");
+            let q = query(Ref, where("prn", "==", prn));
+            const querySnapshot = await getDocs(q);
+            if(querySnapshot.size == 0){
+                setCheck(false);
+            }
+            else{
+                setCheck(true);
+            }
+        }
+    }
+
+    const convert =async()=>{
+        const newData = {};
+        let string = prompt("Enter your passout year");
+        if(string == "" || string == null || !string.match(/^([0-9]){4}$/))
+        {
+            alert("Please enter the valid value");
+        }
+        else{
+            newData.passout_year = string;
+            string = prompt("Enter your job role");
+            if(string == "" || string == null || !string.match(/^[a-zA-Z ]*$/))
+            {
+                alert("Job role must not contain any thing other than alphabets and space");
+            }
+            else{
+                newData.jobRole = string;
+                string = prompt("Enter your organization name");
+                if(string == "" || string == null || !string.match(/^[a-zA-Z ]*$/))
+                {
+                    alert("Organization name must not contain any thing other than alphabets and space");
+                }
+                else{
+                    newData.org = string;
+                    const new_user = {
+                        id:user.id,
+                        FullName:user.FullName,
+                        email:user.email,
+                        prn:user.prn,
+                        photoUrl:user.photoUrl,
+                        skillset:user.skillset,
+                        request:user.request,
+                        requestAccepted:user.requestAccepted,
+                        groupId:user.groupId,
+                        myDoc:user.myDoc,
+                        role:"Alumini",
+                        jobRole:newData.jobRole,
+                        org:newData.org,
+                        passout_year:newData.passout_year,
+                    }
+                    try{
+                        const del = await axios.delete("http://localhost:5000/UserDetails/"+user.id);
+                        if(del.data.msg == "data deleted"){
+                            const res = await axios.post("http://localhost:5000/UserDetails/",new_user);
+                            console.log(res.data.msg);
+                            if(res.data.msg == "user details saved"){
+                                localStorage.setItem("User",JSON.stringify(new_user));
+                                dispatch(profiles(new_user));
+                            }
+                        }
+                    }
+                    catch(e){
+                        console.log(e.message)
+                    }
+                }
+            }
+        }
+    }
+
     const remove = async(skill)=>{
         content.skillset = content.skillset.filter((s)=>{return s!=skill});
         try{
@@ -76,6 +155,7 @@ const UserProfile = ({content})=>{
     }
 
     useEffect(()=>{},[reload]);
+    useEffect(()=>{checkAlumini(content.prn,content.role)},[]);
     return(
     <div className={style.outerContainer}>
        {content.role == "Student" && <div><div className={style.header}>
@@ -130,6 +210,7 @@ const UserProfile = ({content})=>{
         </div>
         {content.id == user.id && <div className={style.buttonContainer}><button className={style.update} onClick={()=>setClick(true)}>Update</button></div>}
         {click && <ProfileEdit popupstate={setClick} reload={()=>setReload(!reload)}/>}
+        {check && <p className={style.text} onClick={()=>convert()}>Change to Alumini</p>}
     </div>
     );
 }

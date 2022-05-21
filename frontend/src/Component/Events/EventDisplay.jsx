@@ -70,7 +70,7 @@ const EventDisplay = ({content}) =>{
                 <p className={style.value}> {current.description} </p>
                 <div className={style.buttonContainer}>
                    {content.owner.senderId == currentUser.id &&<button className={style.button} onClick={()=>handleOnClick()}> Delete </button>}
-                    <ExternalLink href={current.url} className={style.link}> Register </ExternalLink>
+                    <ExternalLink href={current.url} className={style.link}> Visit </ExternalLink>
                 </div>
             </div>
         </div>

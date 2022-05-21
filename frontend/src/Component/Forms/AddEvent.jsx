@@ -114,7 +114,7 @@ const AddEvent = ({popupstate,reload}) => {
                                         contentId:res.id,
                                         url:event.url,
                                         branch:event.branch,
-                                        viewedList:[]
+ 		                                viewedList:[]
                                     }
                                     console.log(notification);
                                     const {data} = await axios.post("http://localhost:5000/Notification",notification);
@@ -185,7 +185,7 @@ const AddEvent = ({popupstate,reload}) => {
                         <label className={style.lab1} for="till">Till:</label>
                         <input {...register("till", { required: "Event End Date is required"})} className={style.inp1} type="date" name="till" id="till" onChange={e => validateEndDate(e.target.value)} required />
 
-                        <label className={style.lab1} for="link">Registration Link:</label>
+                        <label className={style.lab1} for="link">Website/Registration Link:</label>
                         <input {...register("link", { required: "Event Link is required", pattern: { value: /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/, message: "Invalid Link" } })} className={style.inp1} type="text" name="link" id="link" required />
 
                         <label className={style.lab1} for="description">Description:</label>

@@ -125,3 +125,13 @@
 .bookmark{
     margin:20px 55px;
 }
+
+.text{
+    font-size:15px;
+    font-weight: 500;
+    margin-top:5px;
+    margin-left:160px;
+    color:blue;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
