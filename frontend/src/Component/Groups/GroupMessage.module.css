@@ -1,0 +1,82 @@
+.profilePic{
+    width:85px;
+    height:85px;
+    padding-top:15px;
+    padding-left:10px;
+    object-fit:cover;
+    border-radius:50%;
+}
+
+.profilePic1{
+    width:85px;
+    height:85px;
+    padding:10px;
+    padding-left:10px;
+    object-fit: cover;
+    border-radius:50%;
+}
+
+.imgIndicator{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 100px;
+    margin-top:15px;
+    margin-bottom:20px;
+    position: relative;
+    bottom: 30px;
+}
+
+.imgIndicator img{
+    height: 20px;
+    width:20px;
+}
+
+.imgIndicator p{
+    font-size: 14px;
+    font-weight: 400;
+    margin-left:10px;
+}
+
+.select{
+    display:none;
+}
+
+.name{
+    font-size:28px;
+    font-weight: 600;
+    padding-top: 35px;
+    padding-left: 10px;
+}
+
+.name1{
+    font-size:28px;
+    font-weight: 600;
+    padding-top:25px;
+    padding-left: 10px;
+}
+
+.extraInfo{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding-top:10px;
+}
+
+.body{
+    font-size: 19px;
+    font-weight: 400;
+    width:350px;
+    max-height: 70px;
+    min-height: fit-content;
+    position:relative;
+    left:106px;
+    bottom:16px;
+    padding-bottom: 30px;
+    /* border:2px solid black; */
+}
+
+.senderName{
+    color:#09CDF0;
+}
+

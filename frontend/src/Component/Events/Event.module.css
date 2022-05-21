@@ -1,0 +1,50 @@
+.eventBox {
+  max-width: 85%;
+  max-height: 200px;
+  background-color: white;
+  border-radius: 25px;
+  font-family: poppins;
+  margin: auto;
+  margin-left: 60px;
+  margin-top: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 14px;
+}
+
+.eventLogo {
+  width: 80px;
+  height: 80px;
+  margin: 10px 10px 10px 10px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.eventDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin: 15px 0px;
+}
+
+.moreDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+.name {
+  font-weight: 400;
+}
+
+.till {
+  margin-right: 20px;
+  font-weight: 400;
+}

@@ -1,0 +1,164 @@
+.outerContainer {
+  font-family: poppins;
+  overflow: auto;
+  height: 100%;
+  background-image: url("../../BackgroundImages/resourceBack.png");
+  border-radius: 25px;
+  overflow: auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 30px;
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.update{
+  border:none;
+  outline:none;
+  background-color: #09cdf0;
+  color:white;
+  font-size: 24px;
+  font-weight: 600;
+  padding:20px 30px;
+  border-radius: 25px;
+  margin-bottom:20px;
+}
+
+.profilePic {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  border-radius:50%;
+}
+
+.name {
+  font-size: 40px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.basicInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: 20px;
+  margin-left: 35px;
+  margin-top: 15px;
+}
+
+.label {
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.value {
+  font-size: 17px;
+}
+
+.memberList {
+  margin: 5px 35px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.listContainer {
+  background-color: white;
+  box-shadow: -4px 2px 15px -7px rgba(0, 0, 0, 0.75);
+  font-size: 14px;
+  font-weight: 700;
+  margin: 15px 0px;
+  max-height: 200px;
+  overflow: auto;
+}
+
+.member {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.details{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  
+}
+
+.image {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit:cover;
+}
+
+.memberName{
+    font-size: 16px;
+    padding-left: 5px;
+    font-weight: 600;
+}
+
+.role{
+    background-color: red;
+    color:white;
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+
+.studentRole{
+    background-color: #009CDF;
+    color:white;
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+
+.teacherRole{
+    background-color: #2ACD1C;
+    color:white;
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+
+.aluminiRole{
+    background-color: #DC5407;
+    color:white;
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accept{
+    background-color: green;
+    width:10px;
+    height:10px;
+    padding: 10px;
+    border-radius: 25px;
+    margin-right: 10px;
+}
+
+.decline{
+    color:white;
+    background-color: red;
+    padding: 5px 10px;
+    border-radius: 25px;
+    font-size: 12px;
+    text-align: center;
+}

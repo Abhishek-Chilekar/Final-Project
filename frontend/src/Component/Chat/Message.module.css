@@ -1,0 +1,141 @@
+.messageBox{
+    max-width:85%;
+    max-height: 200px;
+    min-height:100px;
+    background-color: white;
+    border-radius: 25px;
+    font-family: poppins;
+    margin:auto;
+    margin-top:20px;
+    margin-left:53px;
+    box-sizing: border-box;
+}
+
+
+
+.header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.senderProfile{
+    display:flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.name{
+    font-size:24px;
+    font-weight: 600;
+    padding-top: 25px;
+    padding-left: 10px;
+}
+
+.role{
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.timeline{
+    font-size: 14px;
+    font-weight: 400;
+    padding-right: 20px;
+}
+
+.count{
+    font-size: 14px;
+    font-weight: 400;
+    background-color: #F21B1B;
+    padding:5px 12px;
+    border-radius:25px;
+    color:white;
+    margin-right: 20px;
+}
+
+.body{
+    font-size: 14px;
+    font-weight: 400;
+    width:400px;
+    max-height: 70px;
+    position:relative;
+    left:90px;
+    bottom: 5px;
+    top:5px;
+    padding-bottom: 30px;
+}
+
+.imgIndicator{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 90px;
+    margin-top:15px;
+    margin-bottom:20px;
+    position: relative;
+    bottom: 10px;
+}
+
+.imgIndicator img{
+    height: 20px;
+    width:20px;
+}
+
+.imgIndicator p{
+    font-size: 14px;
+    font-weight: 400;
+    margin-left:10px;
+}
+
+.profilePic{
+    width:75px;
+    height:75px;
+    margin-top:15px;
+    margin-left: 10px;
+    border-radius: 50%;
+    object-fit:cover;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.studentIndicator{
+    height:15px;
+    width:15px;
+    background-color: #009CDF;
+    border-radius:25px;
+    margin-right: 5px;
+}
+
+.teacherIndicator{
+    height:15px;
+    width:15px;
+    background-color: #2ACD1C;
+    border-radius:25px;
+    margin-right: 5px;
+}
+
+.aluminiIndicator{
+    height:15px;
+    width:15px;
+    background-color: #DC5407;
+    border-radius:25px;
+    margin-right: 5px;
+}
+
+.roleIndicator{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.extraInfo{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}

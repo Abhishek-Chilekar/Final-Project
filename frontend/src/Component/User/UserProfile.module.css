@@ -1,0 +1,127 @@
+.outerContainer{
+    font-family: poppins;
+    overflow: auto;
+    height: 100%;
+    background-image: url('../../BackgroundImages/resourceBack.png');
+    border-radius:25px;
+    overflow: auto;
+}
+
+.header{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+
+    margin-top:30px;
+}
+
+.profilePic{
+    height:200px;
+    width:200px;
+    border-radius: 170px;
+    object-fit:cover;
+}
+
+.name{
+    font-size: 40px;
+    font-weight: 600;
+    margin-top:10px;
+    text-align: center;
+}
+
+.prn{
+    font-size:20px;
+    font-weight: 600;
+    margin-top:5px;
+}
+
+.basicInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size:20px;
+    margin-left:55px;
+    margin-top:15px;
+}
+
+.label{
+    font-weight: 600;
+    margin-top:5px;
+}
+
+.value{
+    font-size: 17px;
+}
+
+.skillSet{
+    margin:20px 55px;
+    margin-bottom: 0px;
+}
+
+.skillHeader{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.update{
+    border:none;
+    outline:none;
+    background-color: #09cdf0;
+    color:white;
+    font-size: 24px;
+    font-weight: 600;
+    padding:20px 30px;
+    border-radius: 25px;
+    margin-bottom:20px;
+}
+
+.add{
+    color:white;
+    background-color: #09cdf0;
+    padding: 10px 20px;
+    border-radius:25px;
+    font-size: 20px;
+    font-weight: 600;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.skillLabel{
+    font-size: 20px;
+    font-weight:600;
+}
+
+.plus{
+    font-size: 30px;
+}
+
+.skillContainer{
+    background-color: white;
+    box-shadow: -4px 2px 15px -7px rgba(0,0,0,0.75);
+    font-size: 14px;
+    font-weight: 700;
+    margin: 15px 0px;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.skill{
+    padding:15px 20px;
+    border-bottom:1px solid rgba(164, 164, 164,0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bookmark{
+    margin:20px 55px;
+}

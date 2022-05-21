@@ -1,0 +1,192 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: 200ms ease-in-out;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 10;
+  background-color: rgb(41, 41, 41);
+  width: 750px;
+  max-width: 80%;
+  color: white;
+  font-size: 16px;
+  background-image: url("../../BackgroundImages/popup_pattern.png");
+}
+
+.close {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 96%;
+  margin-top: 0;
+  background-color: #0067df;
+  padding: 5px 10px 3px 10px;
+  border-radius: 25px;
+  transform: scale(2);
+  color: white;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.outerdiv {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.lab1 {
+  width: 50%;
+
+  margin-top: 10px;
+}
+
+label {
+  margin-bottom: 5px;
+}
+.inp1 {
+  width: 290px;
+  height: 25px;
+  margin-top: 0px;
+  outline: none;
+  border-radius: 50px;
+  border: none;
+  height: 30px;
+  padding-left: 15px;
+  padding-right: 5px;
+}
+.opt {
+  width: 250px;
+  margin-top: 10px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  outline: none;
+  border-radius: 50px;
+  border: none;
+  height: 30px;
+  padding-left: 15px;
+  padding-right: 5px;
+}
+.optionstxt {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 15px;
+}
+.cross {
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 20px;
+}
+
+.element {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.rimage {
+  width: 45px;
+  height: 45px;
+  margin-left: 20px;
+  border-radius: 50%;
+}
+.outeroptionsbutton {
+  background-color: rgba(0, 0, 0, 0.4);
+  margin-left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow: auto;
+}
+.optionsbutton {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add {
+  background-color: #0067df;
+  border: none;
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-size: 26px;
+  padding: 0px 10px 0px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.butto {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  align-self: center;
+  background: #0067df;
+  border-radius: 21px;
+  color: white;
+
+  font-size: larger;
+  font: bold;
+}
+.skills {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 7px;
+}
+
+.element {
+  padding: 10px 0px;
+  display: flex;
+  align-items: center;
+}
+
+.elementText {
+  font-size: 14px;
+  font-weight: 600px;
+}
+
+.elementNo {
+  margin-left: 10px;
+}
+
+.elementName {
+  margin-left: 15px;
+}

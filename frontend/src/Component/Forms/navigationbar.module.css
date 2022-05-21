@@ -1,0 +1,156 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 125px;
+  transform: translate(-50%, -50%) scale(1);
+  transition: 200ms ease-in-out;
+  border: 1px solid black;
+  border-radius: 0px 10px 10px 0px;
+  z-index: 10;
+  background-color: rgb(41, 41, 41);
+  width: 250px;
+  max-width: 80%;
+  color: white;
+  height: 99%;
+  overflow:auto;
+
+  background-image: url("../../BackgroundImages/popup_pattern.png");
+}
+
+.close {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  margin-left: 97%;
+  margin-top: 0%;
+  background-color: #0067df;
+  border-radius: 50%;
+  transform: scale(2);
+}
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+.backIcon {
+  display: flex;
+  cursor: pointer;
+  margin-left: 1%;
+  margin-top: 1%;
+  width: 30px;
+  height: 30px;
+}
+.profileImg {
+  width: 60px;
+  height: 60px;
+  margin-top: 30px;
+  border-radius: 50px;
+}
+.mainIcons {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+}
+.icon {
+  width: 25px;
+  height: 150%;
+
+  margin-top: 0%;
+  margin-bottom: 100%;
+}
+.icon:hover {
+  width: 150%;
+  height: 150%;
+
+  margin-top: 0%;
+  margin-bottom: 100%;
+  color: #0067df;
+}
+.logoutCont {
+  width: 30px;
+  height: 30px;
+  margin-top: 50px;
+}
+
+.container1{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+}
+
+.container2{
+  display: flex;
+  align-self: flex-start;
+  padding-top: 40px;
+  padding-left:40px;
+  flex-direction: column;
+}
+.container3{
+  display: flex;
+  align-self: flex-start;
+  padding-left:40px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  flex-direction: column;
+}
+.logout{
+  display: flex;
+}
+.logout:hover{
+  display: flex;
+  color: #009CDC;
+}
+.tab{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  left: 0px;
+  margin-bottom: 45px;
+}
+.tab:hover{
+  color: #009CDF;
+}
+.avatar{
+  position: relative;
+  margin-top: 10px;
+  margin-bottom:10px;
+  width: 120px;
+  height: 120px;
+  border-radius:70px;
+}
+.name{
+  font-size: 17.92px;
+  font-weight:600;
+}
+.text{
+  padding-left: 20px;
+  font-size: large;
+  font-family: Poppins;
+  font-size:19.2px;
+  font-weight: 400;
+}
+
+.image{
+  width:27px;
+  height: 27px;
+  object-fit:cover;
+}

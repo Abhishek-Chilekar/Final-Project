@@ -1,0 +1,100 @@
+.messageBox {
+  max-width: 85%;
+  /* max-height: 250px; */
+  background-color: white;
+  border-radius: 25px;
+  font-family: poppins;
+  margin: auto;
+  margin-top: 20px;
+  margin-left: 53px;
+  /* box-sizing: border-box; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.profilePic {
+  width: 80px;
+  height: 80px;
+  margin-top: 15px;
+  margin-left: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name {
+  padding-top: 15px;
+  font-size: 26px;
+}
+
+.skillContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 5px;
+}
+
+.container {
+  margin: none;
+  padding: none;
+}
+
+.skill {
+  font-size: 14px;
+  background-color: brown;
+  padding: 10px 20px;
+  color: white;
+  margin-right: 5px;
+  border-radius: 25px;
+}
+
+.message {
+  font-size: 12px;
+  padding-top: 10px;
+}
+
+.info {
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  /* max-height: 190px; */
+}
+
+.buttonContainer {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.accept {
+  background-color: #44e036;
+  padding: 5px 30px;
+  margin-right: 20px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.decline {
+  background-color: #f11515;
+  padding: 5px 30px;
+  margin-left: 20px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  height: 15px;
+  width: 15px;
+  padding-right: 5px;
+}

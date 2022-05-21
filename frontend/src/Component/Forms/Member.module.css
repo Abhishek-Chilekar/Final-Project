@@ -1,0 +1,87 @@
+  .student {
+    width: 23px;
+    height: 15px;
+    background-color: #0067df;
+    border-radius: 50px;
+  }
+  .teacher {
+    width: 23px;
+    height: 15px;
+    background-color: #2acd1c;
+    border-radius: 50px;
+  }
+  .alumni {
+    width: 23px;
+    height: 15px;
+  
+    background-color: #dc5407;
+    border-radius: 50px;
+  }
+  .container {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  .innercontainer {
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .role {
+    margin: 0;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .Name {
+    margin: 0;
+  
+    max-width: 4000px;
+    font-size: 20px;
+  }
+  .butto {
+    padding: 10px 20px;
+  
+    margin-right: 20px;
+  
+    border: none;
+  
+    background: #ff0000;
+    border-radius: 21px;
+    color: white;
+  
+    font-size: medium;
+    font: bold;
+  }
+  .username {
+    margin: 0;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 20px;
+  }
+  .buttoncontainer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+  .roleName {
+    margin-left: 10%;
+  }
+  .profileImg {
+    width: 55px;
+    height: 55px;
+    margin-left: 20px;
+    border-radius: 50%;
+  }
+  
+
+

@@ -1,0 +1,169 @@
+.main {
+  width: 41.5%;
+  font-family: poppins;
+  margin-right:10px;
+}
+
+.mainLarge {
+  width: 80%;
+  font-family: poppins;
+}
+
+.inner{
+  margin-top:10px;
+  margin-left:40px;
+  margin-right:10px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 600;
+  padding:none;
+  margin:none;
+}
+
+.img{
+  display: none;
+}
+
+
+
+@media all and (max-width: 1400px) {
+  .main {
+    width:70%;
+    font-family: poppins;
+  }
+
+  .mainLarge{
+    width:100%;
+    font-family: poppins;
+  }
+
+  .img{
+    display:block;
+    width:25px;
+    height:25px;
+    margin:0;
+    padding:0;
+  }
+}
+
+@media all and (max-width: 1040px) {
+  .main {
+    width:100%;
+    font-family: poppins;
+  }
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #009cdf;
+  color: white;
+  font-size: 19.2px;
+  font-weight: 600;
+  padding: 10px 25px;
+  border-radius: 25px;
+  margin-top: 45px;
+  margin-right: 10px;
+  height: fit-content;
+}
+
+.buttonLarge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #009cdf;
+  color: white;
+  font-size: 19.2px;
+  font-weight: 600;
+  padding: 20px 25px;
+  border-radius: 25px;
+  margin-top: 45px;
+  margin-right: 10px;
+  height: fit-content;
+}
+
+.select {
+  background: none;
+  border: none;
+  outline: none;
+  width: none;
+}
+
+.plus {
+  font-size: 35px;
+  padding-right: 5px;
+}
+
+.header {
+  width: 100%;
+  height: 130px;
+  display: flex;
+  justify-content: space-between;
+  /* border: 2px solid black; */
+}
+
+.dropdown {
+  position: relative;
+  bottom: 60px;
+}
+
+.dropdownText {
+  font-size: 17.92px;
+  font-weight: 400;
+}
+
+.image {
+  padding-left: 3px;
+}
+
+.search{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    margin-top: 10px;
+    /* border: 2px solid black; */
+}
+
+.searchBar {
+  height: 40px;
+  padding-left:20px;
+  margin-left: 20px;
+  border: none;
+  outline: none;
+  border-radius: 30px 0px 0px 30px; 
+  width:90%;
+}
+
+.searchIcon{
+    height: 40px;
+    background-color: white;
+    border: none;
+    border-radius: 0px 30px 30px 0px;
+}
+
+.icon{
+    position: relative;
+    bottom: 40px;
+    right: 30px;
+    height: 20px;
+    width: 20px;
+}
+
+.selector{
+  font-size: 14px;
+  position: relative;
+  top:60px;
+  left:0.1px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.tick{
+  width:20px;
+  height:20px;
+  padding-left: 10px;
+}
