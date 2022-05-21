@@ -102,7 +102,6 @@ const Notification = (props) =>{
         }
     }
     const onLoad = async() => {
-
         if(content.purpose == "group")
         {
             const data = await axios.get("http://localhost:5000/GroupChat/"+content.contentId);

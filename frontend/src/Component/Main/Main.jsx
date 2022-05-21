@@ -15,7 +15,6 @@ const Chat = () =>{
     //localStorage.removeItem("User");
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem("User"));
-
     if(!user){
         navigate("/Login");
     }

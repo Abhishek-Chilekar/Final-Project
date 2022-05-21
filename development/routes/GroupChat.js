@@ -180,7 +180,7 @@ router.patch("/:groupId",async(req,res)=>{
         const id = req.params.groupId;
         const data = req.body;
         if(data.groupName != null && data.groupDescription != null && data.member != null ){
-            data.groupName = textencrypt(data.groupName);
+            data.groupName = textencrypt(data.groupName);``
             data.groupDescription = textencrypt(data.groupDescription);
             data.photoUrl = textencrypt(data.photoUrl);
             if(data.chat != null){
